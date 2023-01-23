@@ -1,2 +1,2 @@
-# SOEN442Project
+# COMP442Project
 Compiler Creation
