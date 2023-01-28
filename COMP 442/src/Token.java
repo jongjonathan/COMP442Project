@@ -1,7 +1,7 @@
 public class Token {
     private TokenType tokenType;
     private String lexeme;
-    private int location;
+    private Position line;
 
     public void setTokenType(TokenType tokenType){
         this.tokenType = tokenType;
@@ -15,6 +15,12 @@ public class Token {
     }
     public String getLexeme(){
         return this.lexeme;
+    }
+    public Token (String lexeme, TokenType type,  Position line){
+        this.lexeme = lexeme;
+        this.tokenType = type;
+        this.line = line;
+
     }
 
 }

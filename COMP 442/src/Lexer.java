@@ -1,13 +1,17 @@
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Lexer {
 
-    private ArrayList<String> tokenSequence;
+    private ArrayList<Token> tokenSequence;
+    public static String [] resWords = {"integer", "float", "void", "class", "self", "isa", "while", "if", "then", "else", "read", "write", "return", "localvar", "constructor",
+    "attribute", "function", "public", "private"};
+    public static String[] opWords = {"and", "not", "or"};
 
     public Lexer(FileInputStream Fin ){
         try {
-
+            int countLinePos = 1;
             int charPoint;
             int nextCharPoint;
             String prevCharPoint = "";
@@ -114,6 +118,9 @@ public class Lexer {
                         while(endComment == false){
 
                             nextCharPoint = Fin.read();
+                            if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r'){
+                                countLinePos ++;
+                            }
 
                             if((char)nextCharPoint == '*'){
                                 prevCharPoint += '*';
@@ -181,6 +188,11 @@ public class Lexer {
                 }
                 else if((char)charPoint ==';'){
                     //validate token before, if good then create token for before, create token for semicolon
+                    if(prevCharPoint!=""){
+                        addALEToken(prevCharPoint, countLinePos);
+                    }
+                    tokenSequence.add(new Token(";", TokenType.SEMICOLON, new Position(countLinePos)));
+                    prevCharPoint =""; //reset
                     System.out.println("semicolon");
                 }
                 else if((char)charPoint =='('){
@@ -207,14 +219,31 @@ public class Lexer {
                     //validate token before, if good then create token for before, create token for curly open bracket
                     System.out.println("close square bracket");
                 }
+                //alphanum checker for ID, float, reserve word
+                else if((charPoint >= 65 && charPoint <= 90) || (charPoint >= 97 && charPoint <=122) ||
+                        (charPoint >= 48 && charPoint <=57) || (char)charPoint == '_'){
+
+                    prevCharPoint += (char)charPoint;
+
+                }
+                else if((char)charPoint == ' ' || (char)charPoint == '\n' || (char)charPoint == '\r'){
+
+                    if((char)charPoint == '\n' || (char)charPoint == '\r'){
+                        countLinePos ++;
+                    }
+                    if(prevCharPoint!= ""){
+                        addALEToken(prevCharPoint, countLinePos);
+
+
+                    }
+                }
+
 
                 //for last remaining closing character
                 if(prevCharPoint.equals(';') || prevCharPoint.equals(')') || prevCharPoint.equals('}')|| prevCharPoint.equals(']')){
                     //make token for it
                     prevCharPoint = "";
                 }
-
-
 
 
             }
@@ -226,6 +255,11 @@ public class Lexer {
         }
 
 
+
+    }
+    public void addALEToken(String prevCharPoint, int position){
+        TokenType tok = isValidToken();
+        tokenSequence.add(new Token(prevCharPoint, tok, new Position(position)));
 
     }
     public boolean isTokenID(String ID){
@@ -244,6 +278,13 @@ public class Lexer {
     public boolean isResWord(String res){
         Boolean b = false;
         return b;
+    }
+    public boolean isOpWord(){
+        Boolean b = false;
+        return b;
+    }
+    public TokenType isValidToken(){
+        return TokenType.ERRORTOKEN;
     }
 
 

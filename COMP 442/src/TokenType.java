@@ -1,12 +1,7 @@
 public enum TokenType {
     ID,
-    ALPHANUM,
     INTEGER,
     FLOAT,
-    FRACTION,
-    LETTER,
-    DIGIT,
-    NONZERO,
     DOUBLEEQUAL,
     ANGLEBRACKETS,
     LESSTHAN,
@@ -51,5 +46,6 @@ public enum TokenType {
     ATTRIBUTEKEYWORD,
     FUNCTIONKEYWORD,
     PUBLICKEYWORD,
-    PRIVATEKEYWORD
+    PRIVATEKEYWORD,
+    ERRORTOKEN
 }
