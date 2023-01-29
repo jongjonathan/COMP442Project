@@ -11,10 +11,12 @@ public class Lexer {
     public static ArrayList<String> resWords = new ArrayList<>(Arrays.asList("integer", "float", "void", "class", "self", "isa", "while", "if", "then", "else", "read", "write", "return", "localvar", "constructor",
             "attribute", "function", "public", "private"));
     public static ArrayList<String> opWords = new ArrayList<>(Arrays.asList("and", "not", "or"));
+    private PrintWriter pwErrors;
 
-    public Lexer(FileInputStream Fin, PrintWriter pwTokens){
+    public Lexer(FileInputStream Fin, PrintWriter pwErrors){
         try {
             tokenSequence = new ArrayList<>(10);
+            this.pwErrors = pwErrors;
             tokenCount = 0;
             int countLinePos = 1;
             int charPoint;
@@ -244,6 +246,7 @@ public class Lexer {
                             }
                         }
                         else{
+                            printErrorToken(prevCharPoint, "number", countLinePos); //for errors
 //                            System.out.println("this is not valid float or id "+prevCharPoint);
                             if((char)nextCharPoint != ' '&& (char)nextCharPoint != '\n'&&(char)nextCharPoint!= '\r'){// && (char)nextCharPoint == '\r' && nextCharPoint == 10 ){ //and not new line
                                 prevCharPoint = ""+(char)nextCharPoint; //ex: 123.0;, nextCharPoint is ;
@@ -355,6 +358,7 @@ public class Lexer {
                 //invalid character
                 else if((char)charPoint =='$' || (char)charPoint == '\\' || (char)charPoint =='~' ||
                         (char)charPoint =='!' || (char)charPoint =='@'|| (char)charPoint =='#' || (char)charPoint =='\''){
+
                     if(prevCharPoint!=""){
                         addALEToken(prevCharPoint, countLinePos);
                     }
@@ -362,6 +366,7 @@ public class Lexer {
 //                    System.out.println("Invalid Char: " + charPoint+ " at line " + countLinePos);
                     //NO CREATION OF INVALID TOKEN
                     // call method to print into hello$hello
+                    printErrorToken(""+(char)charPoint, "character", countLinePos); //for errors of invalid char
                 }
                 //alphanum checker for ID, float, integer (this is for the 3 valid tokens)
                 else if((charPoint >= 65 && charPoint <= 90) || (charPoint >= 97 && charPoint <=122) ||
@@ -407,6 +412,7 @@ public class Lexer {
 
 
             //Fin.close();
+            pwErrors.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -417,11 +423,20 @@ public class Lexer {
     }
     public void addALEToken(String prevCharPoint, int position){
         TokenType tok = isValidToken(prevCharPoint);
-        if(tok!= TokenType.ERRORTOKEN){
+        if(tok!= TokenType.INVALIDCHAR && tok!= TokenType.INVALIDNUM && tok!= TokenType.INVALIDID){
             tokenSequence.add(new Token(prevCharPoint, tok, new Position(position)));
         }
         else{
-//            System.out.println("Invalid char " + prevCharPoint);
+            if(tok== TokenType.INVALIDCHAR){
+                printErrorToken(prevCharPoint, "character", position);
+            }
+            if(tok== TokenType.INVALIDNUM){
+                printErrorToken(prevCharPoint, "number", position);
+            }
+            if(tok== TokenType.INVALIDID){
+                printErrorToken(prevCharPoint, "identifier", position);
+            }
+
         }
 
     }
@@ -539,17 +554,18 @@ public class Lexer {
         if(isOpWord(prevCharPoint) == true){
             return TokenType.valueOf(prevCharPoint.toUpperCase());
         }
+        if(isTokenID(prevCharPoint) == true){
+            return TokenType.ID;
+        }
         if(isTokenInt(prevCharPoint) == true){
             return TokenType.INTEGER;
         }
         if(isTokenFloat(prevCharPoint) == true){
             return TokenType.FLOAT;
         }
-        if(isTokenID(prevCharPoint) == true){
-            return TokenType.ID;
-        }
+
         else{
-            return TokenType.ERRORTOKEN;
+            return TokenType.INVALIDNUM; //SINCE CHECK INT AND FLOAT LAST
         }
 
     }
@@ -563,9 +579,20 @@ public class Lexer {
         else{
             return tok;
         }
-
-
     }
+    public void printErrorToken(String invLexeme, String type, int lineNum){
+        if(type.equals("character")){
+            this.pwErrors.write("Lexical error: Invalid character: \"" + invLexeme+"\": line " + lineNum +".\n");
+        }
+        else if(type.equals("number")){
+            this.pwErrors.write("Lexical error: Invalid number: \"" + invLexeme+"\": line " + lineNum+".\n");
+        }
+        else if(type.equals("identifier")){
+            this.pwErrors.write("Lexical error: Invalid identifier: \"" + invLexeme+"\": line " + lineNum+".\n");
+
+        }
+    }
+
 
 
 
