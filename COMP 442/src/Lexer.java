@@ -1,4 +1,5 @@
 import java.io.FileInputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,13 +12,16 @@ public class Lexer {
             "attribute", "function", "public", "private"));
     public static ArrayList<String> opWords = new ArrayList<>(Arrays.asList("and", "not", "or"));
 
-    public Lexer(FileInputStream Fin ){
+    public Lexer(FileInputStream Fin, PrintWriter pwTokens){
         try {
             tokenSequence = new ArrayList<>(10);
             tokenCount = 0;
             int countLinePos = 1;
             int charPoint;
             int nextCharPoint;
+            boolean alreadyCount = false;
+            boolean lastCharNL = false;
+            int counted = 0;
             String prevCharPoint = "";
             //reading character of the file
             while ((charPoint = Fin.read()) != -1) {
@@ -147,10 +151,15 @@ public class Lexer {
                         prevCharPoint = "//";
                        //while loop for the comment section
 
-                        while((char)(nextCharPoint = Fin.read())!= '\n' && (char)(nextCharPoint)!= '\r' && nextCharPoint != 10 ){
+                        while((char)(nextCharPoint = Fin.read())!= '\n'){// && nextCharPoint != 10 ){
+                            if((char)(nextCharPoint)== '\r'){
+                                continue;
+                            }
                             prevCharPoint +=(char)nextCharPoint;
                         }
+
                         tokenSequence.add(new Token(prevCharPoint, TokenType.INLINECOMMENT, new Position(countLinePos)));
+                        countLinePos++;
 
 //                        System.out.println("inline comment " + prevCharPoint);
                         prevCharPoint =""; //reset
@@ -162,10 +171,16 @@ public class Lexer {
                     else if((char)nextCharPoint == '*'){
                         prevCharPoint = "/*";
                         boolean endComment = false;
+                        //initial comment line
+                        int firstRowCom = countLinePos;
                         while(endComment == false){
 
                             nextCharPoint = Fin.read();
-                            if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+                            if((char)(nextCharPoint)== '\r'){
+                                continue;
+                            }
+                            if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+//                            if((char)nextCharPoint == '\r'){
                                 countLinePos ++;
                             }
 
@@ -183,7 +198,7 @@ public class Lexer {
                             prevCharPoint+=(char)nextCharPoint;
 
                         }
-                        tokenSequence.add(new Token(prevCharPoint, TokenType.BLOCKCOMMENT, new Position(countLinePos)));
+                        tokenSequence.add(new Token(prevCharPoint, TokenType.BLOCKCOMMENT, new Position(firstRowCom)));
 //                        System.out.println("Block comment " + prevCharPoint);
                         prevCharPoint = "";
                     }
@@ -218,18 +233,19 @@ public class Lexer {
                         boolean isFloat = isTokenFloat(prevCharPoint); //checks for multiple e, +, -
                         if(isFloat == true){
                             tokenSequence.add(new Token(prevCharPoint, TokenType.FLOAT, new Position(countLinePos)));
-                            if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' && (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
+                            if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' &&(char)nextCharPoint!= '\r'){//&& (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
                                 prevCharPoint = ""+(char)nextCharPoint; //if 123.123; then prevCharPoint = ';'
                                 //create token with prevCharPoint as it's now the full float ex: 123.123
                                 //reset prevCharPoint
                             }
-                            else if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+                            else if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+//                            else if((char)nextCharPoint == '\r'){
                                 countLinePos ++;
                             }
                         }
                         else{
 //                            System.out.println("this is not valid float or id "+prevCharPoint);
-                            if((char)nextCharPoint == '\n' && (char)nextCharPoint == '\r' && nextCharPoint == 10 ){ //and not new line
+                            if((char)nextCharPoint != ' '&& (char)nextCharPoint != '\n'&&(char)nextCharPoint!= '\r'){// && (char)nextCharPoint == '\r' && nextCharPoint == 10 ){ //and not new line
                                 prevCharPoint = ""+(char)nextCharPoint; //ex: 123.0;, nextCharPoint is ;
                             }
 
@@ -354,8 +370,8 @@ public class Lexer {
                     prevCharPoint += (char)charPoint; //append the alphanum string
 
                 }
-                else if((char)charPoint == ' ' || (char)charPoint == '\n' || (char)charPoint == '\r'|| charPoint == 10 ){
-                    if((char)charPoint == '\n' || (char)charPoint == '\r' || charPoint == 10){
+                else if((char)charPoint == ' ' || (char)charPoint == '\n'){// || (char)charPoint == '\r'|| charPoint == 10 ){
+                    if((char)charPoint == '\n'){ //|| (char)charPoint == '\r' || charPoint == 10){
                         countLinePos ++;
 
                     }
@@ -365,7 +381,7 @@ public class Lexer {
                     }
                 }
                 //for last remaining closing character
-                if(prevCharPoint.equals(';') || prevCharPoint.equals(')') || prevCharPoint.equals('}')|| prevCharPoint.equals(']') || prevCharPoint.equals(',')){
+                if(prevCharPoint.equals(";") || prevCharPoint.equals(")") || prevCharPoint.equals("}")|| prevCharPoint.equals("]") || prevCharPoint.equals(",")){
                     if(prevCharPoint.equals(";")){
                         tokenSequence.add(new Token(";", TokenType.SEMICOLON, new Position(countLinePos)));
                     }
@@ -384,6 +400,9 @@ public class Lexer {
                     //make token for it
                     prevCharPoint = "";
                 }
+            }
+            if(prevCharPoint!=""){
+                addALEToken(prevCharPoint,countLinePos);
             }
 
 
@@ -431,6 +450,7 @@ public class Lexer {
             }
             else if(fl.contains("e")){
                 if(fl.charAt((fl.indexOf('e')+1)) == ('+')|| (fl.charAt(fl.indexOf('e')+1)) == ('-')){
+                    //l side
                     for(int i =0; i<fl.indexOf('e'); i++){
                         if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
                         {
@@ -438,10 +458,9 @@ public class Lexer {
                         }
                         return false;
                     }
-
-                    // right side of e
+                    //r side
                     for(int i =fl.indexOf('e')+2; i< fl.length()-fl.indexOf('e'); i++){
-                        if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
+                        if(Character.isDigit(fl.charAt(i)))
                         {
                             continue;
                         }

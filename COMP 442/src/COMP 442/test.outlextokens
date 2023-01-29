@@ -1,0 +1,3 @@
+[FLOAT, 123.123, 1] [SEMICOLON, ;, 1]
+[ID, dsfasdf, 2] [SEMICOLON, ;, 2]
+[ID, sadfashjfk, 3] [SEMICOLON, ;, 3] [ID, ajsdhfgl, 3] [SEMICOLON, ;, 3]
