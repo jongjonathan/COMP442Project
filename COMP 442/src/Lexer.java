@@ -13,6 +13,7 @@ public class Lexer {
 
     public Lexer(FileInputStream Fin ){
         try {
+            tokenSequence = new ArrayList<>(10);
             tokenCount = 0;
             int countLinePos = 1;
             int charPoint;
@@ -39,22 +40,22 @@ public class Lexer {
 
                     if((char)nextCharPoint == '='){
                         tokenSequence.add(new Token("==", TokenType.DOUBLEEQUAL, new Position(countLinePos)));
-                        System.out.println("Double equals");
+//                        System.out.println("Double equals");
 
                     }
-                    else if((char)charPoint == '>'){
+                    else if((char)nextCharPoint == '>'){
                         tokenSequence.add(new Token("=>", TokenType.LAMDAEXPRESSION, new Position(countLinePos)));
-                        System.out.println("lambda");
+//                        System.out.println("lambda");
                     }
                     else if((char)nextCharPoint == ' '){
                         //validate if prev token is good and create the normal equals
                         tokenSequence.add(new Token("=", TokenType.EQUAL, new Position(countLinePos)));
-                        System.out.println("Normal equals");
+//                        System.out.println("Normal equals");
                     }
                     else{
                         tokenSequence.add(new Token("=", TokenType.EQUAL, new Position(countLinePos)));
                         prevCharPoint +=(char)nextCharPoint; //reset ex: x=5, nextCharPoint is 5, save into prevCharPoint to be read next iteration
-                        System.out.println("Normal equals no space");
+//                        System.out.println("Normal equals no space");
                     }
 
 
@@ -69,18 +70,18 @@ public class Lexer {
                     nextCharPoint = Fin.read();
                     if((char)nextCharPoint == ':' ){
                         tokenSequence.add(new Token("::", TokenType.DOUBLECOLON, new Position(countLinePos)));
-                        System.out.println("Double colon");
+//                        System.out.println("Double colon");
 
                     }
                     else if((char)nextCharPoint == ' '){
                         tokenSequence.add(new Token(":", TokenType.COLON, new Position(countLinePos)));
-                        System.out.println("Single colon");
+//                        System.out.println("Single colon");
 
                     }
                     else{
                         tokenSequence.add(new Token(":", TokenType.COLON, new Position(countLinePos)));
                         prevCharPoint +=(char)nextCharPoint; //reset
-                        System.out.println("Single colon no space");
+//                        System.out.println("Single colon no space");
                     }
                 }
                 //---------- LESS THAN  -----------
@@ -92,21 +93,21 @@ public class Lexer {
                     nextCharPoint = Fin.read();
                     if((char)nextCharPoint == '>'){
                         tokenSequence.add(new Token("<>", TokenType.ANGLEBRACKETS, new Position(countLinePos)));
-                        System.out.println("Angle brackets");
+//                        System.out.println("Angle brackets");
                     }
                     else if((char)nextCharPoint == '='){
                         tokenSequence.add(new Token("<=", TokenType.LESSTHANEQUAL, new Position(countLinePos)));
-                        System.out.println("less than equal");
+//                        System.out.println("less than equal");
                     }
                     else if ((char)nextCharPoint == ' '){
                         tokenSequence.add(new Token("<", TokenType.LESSTHAN, new Position(countLinePos)));
-                        System.out.println("less than");
+//                        System.out.println("less than");
 
                     }
                     else{
                         tokenSequence.add(new Token("<", TokenType.LESSTHAN, new Position(countLinePos)));
                         prevCharPoint +=(char)nextCharPoint;
-                        System.out.println("less than no space");
+//                        System.out.println("less than no space");
 
                     }
 
@@ -120,18 +121,18 @@ public class Lexer {
                     nextCharPoint = Fin.read();
                     if((char)nextCharPoint == '='){
                         tokenSequence.add(new Token("=>", TokenType.GREATERTHANEQUAL, new Position(countLinePos)));
-                        System.out.println("greater than equal");
+//                        System.out.println("greater than equal");
 
                     }
                     else if((char)nextCharPoint == ' '){
                         tokenSequence.add(new Token(">", TokenType.GREATERTHAN, new Position(countLinePos)));
-                        System.out.println("normal greater than");
+//                        System.out.println("normal greater than");
 
                     }
                     else{
                         tokenSequence.add(new Token(">", TokenType.GREATERTHAN, new Position(countLinePos)));
                         prevCharPoint +=(char)nextCharPoint;
-                        System.out.println("greater than no space");
+//                        System.out.println("greater than no space");
                     }
 
                 }
@@ -146,12 +147,12 @@ public class Lexer {
                         prevCharPoint = "//";
                        //while loop for the comment section
 
-                        while((char)(nextCharPoint = Fin.read())!= '\n' && (char)(nextCharPoint)!= '\r'){
+                        while((char)(nextCharPoint = Fin.read())!= '\n' && (char)(nextCharPoint)!= '\r' && nextCharPoint != 10 ){
                             prevCharPoint +=(char)nextCharPoint;
                         }
                         tokenSequence.add(new Token(prevCharPoint, TokenType.INLINECOMMENT, new Position(countLinePos)));
 
-                        System.out.println("inline comment " + prevCharPoint);
+//                        System.out.println("inline comment " + prevCharPoint);
                         prevCharPoint =""; //reset
 
                         //create token for inline comment to add to arraylist
@@ -164,7 +165,7 @@ public class Lexer {
                         while(endComment == false){
 
                             nextCharPoint = Fin.read();
-                            if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r'){
+                            if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
                                 countLinePos ++;
                             }
 
@@ -183,17 +184,17 @@ public class Lexer {
 
                         }
                         tokenSequence.add(new Token(prevCharPoint, TokenType.BLOCKCOMMENT, new Position(countLinePos)));
-                        System.out.println("Block comment " + prevCharPoint);
+//                        System.out.println("Block comment " + prevCharPoint);
                         prevCharPoint = "";
                     }
                     else if((char)nextCharPoint == ' '){
                         tokenSequence.add(new Token("/", TokenType.DIVIDE, new Position(countLinePos)));
-                        System.out.println("normal forward slash");
+//                        System.out.println("normal forward slash");
                     }
                     else{
                         tokenSequence.add(new Token("/", TokenType.DIVIDE, new Position(countLinePos)));
                         prevCharPoint +=(char)nextCharPoint;
-                        System.out.println("normal forward slash no space");
+//                        System.out.println("normal forward slash no space");
                     }
                 }
                 //---------- PERIOD -----------
@@ -217,18 +218,21 @@ public class Lexer {
                         boolean isFloat = isTokenFloat(prevCharPoint); //checks for multiple e, +, -
                         if(isFloat == true){
                             tokenSequence.add(new Token(prevCharPoint, TokenType.FLOAT, new Position(countLinePos)));
-                            if((char)nextCharPoint!= ' '|| (char)nextCharPoint!= '\n' || (char)nextCharPoint!= '\r'){
+                            if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' && (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
                                 prevCharPoint = ""+(char)nextCharPoint; //if 123.123; then prevCharPoint = ';'
                                 //create token with prevCharPoint as it's now the full float ex: 123.123
                                 //reset prevCharPoint
                             }
-                            else if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r'){
+                            else if((char)nextCharPoint == '\n' || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
                                 countLinePos ++;
                             }
                         }
                         else{
-                            System.out.println("this is not valid float or id "+prevCharPoint);
-                            prevCharPoint = ""+(char)nextCharPoint; //ex: 123.0;, nextCharPoint is ;
+//                            System.out.println("this is not valid float or id "+prevCharPoint);
+                            if((char)nextCharPoint == '\n' && (char)nextCharPoint == '\r' && nextCharPoint == 10 ){ //and not new line
+                                prevCharPoint = ""+(char)nextCharPoint; //ex: 123.0;, nextCharPoint is ;
+                            }
+
                         }
                     }
                 }
@@ -240,7 +244,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("*", TokenType.MULTIPLY, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("multiply");
+//                    System.out.println("multiply");
                 }
                 else if((char)charPoint =='+'){
                     //validate token before, if good then create token for before, create token for add
@@ -249,7 +253,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("+", TokenType.ADD, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("add");
+//                    System.out.println("add");
                 }
                 else if((char)charPoint =='-'){
                     //validate token before, if good then create token for before, create token for subtract
@@ -258,7 +262,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("-", TokenType.SUBTRACT, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("subtract");
+//                    System.out.println("subtract");
                 }
                 else if((char)charPoint ==','){
                     //validate token before, if good then create token for before, create token for comma
@@ -267,7 +271,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token(",", TokenType.COMMA, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("comma");
+//                    System.out.println("comma");
                 }
                 else if((char)charPoint ==';'){
                     //validate token before, if good then create token for before, create token for semicolon
@@ -276,7 +280,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token(";", TokenType.SEMICOLON, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("semicolon");
+//                    System.out.println("semicolon");
                 }
                 else if((char)charPoint =='('){
                     //validate token before, if good then create token for before, create token for openbracket
@@ -285,7 +289,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("(", TokenType.OPENBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("open bracket");
+//                    System.out.println("open bracket");
                 }
                 else if((char)charPoint ==')'){
                     //validate token before, if good then create token for before, create token for closed bracket
@@ -294,7 +298,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token(")", TokenType.CLOSEDBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("close bracket");
+//                    System.out.println("close bracket");
                 }
                 else if((char)charPoint =='{'){
                     //validate token before, if good then create token for before, create token for curly open bracket
@@ -303,7 +307,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("{", TokenType.CURLYOPENBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("curly open bracket");
+//                    System.out.println("curly open bracket");
                 }
                 else if((char)charPoint =='}'){
                     //validate token before, if good then create token for before, create token for curly CLOSE bracket
@@ -312,7 +316,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("}", TokenType.CURLYCLOSEDBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("curly close bracket");
+//                    System.out.println("curly close bracket");
                 }
                 else if((char)charPoint =='['){
                     //validate token before, if good then create token for before, create token for SQUARE open bracket
@@ -321,7 +325,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("[", TokenType.SQUAREOPENBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("open square bracket");
+//                    System.out.println("open square bracket");
                 }
                 else if((char)charPoint ==']'){
                     //validate token before, if good then create token for before, create token for SQUARE CLOSE bracket
@@ -330,7 +334,7 @@ public class Lexer {
                     }
                     tokenSequence.add(new Token("]", TokenType.SQUARECLOSEDBRACKET, new Position(countLinePos)));
                     prevCharPoint =""; //reset
-                    System.out.println("close square bracket");
+//                    System.out.println("close square bracket");
                 }
                 //invalid character
                 else if((char)charPoint =='$' || (char)charPoint == '\\' || (char)charPoint =='~' ||
@@ -339,7 +343,7 @@ public class Lexer {
                         addALEToken(prevCharPoint, countLinePos);
                     }
                     prevCharPoint =""; //reset
-                    System.out.println("Invalid Char: " + charPoint+ " at line " + countLinePos);
+//                    System.out.println("Invalid Char: " + charPoint+ " at line " + countLinePos);
                     //NO CREATION OF INVALID TOKEN
                     // call method to print into hello$hello
                 }
@@ -350,9 +354,10 @@ public class Lexer {
                     prevCharPoint += (char)charPoint; //append the alphanum string
 
                 }
-                else if((char)charPoint == ' ' || (char)charPoint == '\n' || (char)charPoint == '\r'){
-                    if((char)charPoint == '\n' || (char)charPoint == '\r'){
+                else if((char)charPoint == ' ' || (char)charPoint == '\n' || (char)charPoint == '\r'|| charPoint == 10 ){
+                    if((char)charPoint == '\n' || (char)charPoint == '\r' || charPoint == 10){
                         countLinePos ++;
+
                     }
                     if(prevCharPoint!= ""){
                         addALEToken(prevCharPoint, countLinePos);
@@ -381,6 +386,7 @@ public class Lexer {
                 }
             }
 
+
             //Fin.close();
 
         } catch (Exception e) {
@@ -396,10 +402,8 @@ public class Lexer {
             tokenSequence.add(new Token(prevCharPoint, tok, new Position(position)));
         }
         else{
-            System.out.println("Invalid char " + prevCharPoint);
+//            System.out.println("Invalid char " + prevCharPoint);
         }
-
-
 
     }
     public boolean isTokenID(String ID){
@@ -422,13 +426,47 @@ public class Lexer {
         float validFloat;
         try{
             //invalid number assignment here
-            if(fl.startsWith("0") || fl.endsWith("0") || fl.contains("e0")){ //return false if leading or trailing zeros or eo
+            if(fl.startsWith("0") || fl.endsWith("0")){ //return false if leading or trailing zeros or eo
                 return false;
             }
-            else{
-                validFloat = Float.parseFloat(fl+"f"); //check if valid float (one e, +, -)
-                return true; //if valid float then return true
+            else if(fl.contains("e")){
+                if(fl.charAt((fl.indexOf('e')+1)) == ('+')|| (fl.charAt(fl.indexOf('e')+1)) == ('-')){
+                    for(int i =0; i<fl.indexOf('e'); i++){
+                        if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
+                        {
+                            continue;
+                        }
+                        return false;
+                    }
+
+                    // right side of e
+                    for(int i =fl.indexOf('e')+2; i< fl.length()-fl.indexOf('e'); i++){
+                        if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
+                        {
+                            continue;
+                        }
+                        return false;
+                    }
+                    return true;
+                }
+                else{
+                    return false;
+                }
             }
+            else{
+                for(int i = 0; i<fl.length() ;i++){
+                    if(Character.isDigit(fl.charAt(i))  || fl.charAt(i) == '.')
+                    {
+                        continue;
+                    }
+                    return false;
+                }
+                return true;
+            }
+//            else{
+//                validFloat = Float.parseFloat(fl+"f"); //check if valid float (one e, +, -)
+//                return true; //if valid float then return true
+//            }
 
         }
         catch(Exception e){
@@ -436,16 +474,22 @@ public class Lexer {
 
         }
     }
-    public boolean isTokenInt(String i){
+    public boolean isTokenInt(String it){
 
         int validInt;
         try{
             //invalid number assignment here
-            if(i.startsWith("0")){ //return false if leading zeros
+            if(it.startsWith("0") && it.length()!=1){ //return false if leading zeros
                 return false;
             }
             else{
-                validInt = Integer.parseInt(i); //check if valid int
+                for(int i = 0; i<it.length() ;i++){
+                    if(Character.isDigit(it.charAt(i)) || it.charAt(i) == '.')
+                    {
+                        continue;
+                    }
+                    return false;
+                }
                 return true; //if valid int then return true
             }
 
