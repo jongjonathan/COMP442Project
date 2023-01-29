@@ -240,16 +240,29 @@ public class Lexer {
                                 //create token with prevCharPoint as it's now the full float ex: 123.123
                                 //reset prevCharPoint
                             }
-                            else if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+                            else{
+                                prevCharPoint = "";
+                                if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
 //                            else if((char)nextCharPoint == '\r'){
-                                countLinePos ++;
+                                    countLinePos ++;
+                                }
                             }
+
                         }
                         else{
                             printErrorToken(prevCharPoint, "number", countLinePos); //for errors
 //                            System.out.println("this is not valid float or id "+prevCharPoint);
-                            if((char)nextCharPoint != ' '&& (char)nextCharPoint != '\n'&&(char)nextCharPoint!= '\r'){// && (char)nextCharPoint == '\r' && nextCharPoint == 10 ){ //and not new line
-                                prevCharPoint = ""+(char)nextCharPoint; //ex: 123.0;, nextCharPoint is ;
+                            if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' &&(char)nextCharPoint!= '\r'){//&& (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
+                                prevCharPoint = ""+(char)nextCharPoint; //if 123.123; then prevCharPoint = ';'
+                                //create token with prevCharPoint as it's now the full float ex: 123.123
+                                //reset prevCharPoint
+                            }
+                            else{
+                                prevCharPoint = "";
+                                if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+//                            else if((char)nextCharPoint == '\r'){
+                                    countLinePos ++;
+                                }
                             }
 
                         }
@@ -497,10 +510,6 @@ public class Lexer {
                 }
                 return true;
             }
-//            else{
-//                validFloat = Float.parseFloat(fl+"f"); //check if valid float (one e, +, -)
-//                return true; //if valid float then return true
-//            }
 
         }
         catch(Exception e){
@@ -513,12 +522,12 @@ public class Lexer {
         int validInt;
         try{
             //invalid number assignment here
-            if(it.startsWith("0") && it.length()!=1){ //return false if leading zeros
+            if((it.startsWith("0") && it.length()!=1) || it.contains(".")){ //return false if leading zeros
                 return false;
             }
             else{
                 for(int i = 0; i<it.length() ;i++){
-                    if(Character.isDigit(it.charAt(i)) || it.charAt(i) == '.')
+                    if(Character.isDigit(it.charAt(i)))
                     {
                         continue;
                     }

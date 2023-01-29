@@ -1,0 +1,5 @@
+[SEMICOLON, ;, 1]
+[ID, hello, 2] [ID, bye, 2] [SEMICOLON, ;, 2]
+[SEMICOLON, ;, 3]
+[ID, sadfashjfk, 4] [SEMICOLON, ;, 4] [ID, ajsdhfgl, 4] [SEMICOLON, ;, 4]
+[ID, I, 5] [ID, like, 5] [ID, c, 5] [ID, ding, 5]

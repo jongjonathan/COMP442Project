@@ -8,13 +8,13 @@ public class lexDriver {
 //            FileInputStream fin = new FileInputStream("COMP 442/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/example-polynomial.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/test.txt");
-            FileInputStream fin = new FileInputStream("COMP 442/" + args[0]);
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/" + args[0]);
             String readingFile = args[0];
             int noExtensionNameIndex = readingFile.indexOf(".");
             String fileName = readingFile.substring(0,noExtensionNameIndex);
 
-            PrintWriter pwError = new PrintWriter(new File("COMP 442/"+fileName + ".outlexerrors"));
-            PrintWriter pwTokens = new PrintWriter(new File("COMP 442/"+fileName + ".outlextokens"));
+            PrintWriter pwError = new PrintWriter(new File("COMP 442/inputOutput/"+fileName + ".outlexerrors"));
+            PrintWriter pwTokens = new PrintWriter(new File("COMP 442/inputOutput/"+fileName + ".outlextokens"));
             Token tok;
             int rowCount = 1;
             boolean firstLine = true;
