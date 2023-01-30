@@ -27,21 +27,13 @@ public class Lexer {
             String prevCharPoint = "";
             //reading character of the file
             while ((charPoint = Fin.read()) != -1) {
-
-//                System.out.println((char) charPoint);
-//                evalChar +=(char)(charPoint);
-//                System.out.print(evalChar);
-                //for operator/punctuation
-
-
-
                 //---------- EQUALS -----------
-
                 if((char)charPoint == '='){
                     if(prevCharPoint!=""){
                         addALEToken(prevCharPoint, countLinePos); //token before =
+                        prevCharPoint =""; //reset
                     }
-                    prevCharPoint =""; //reset
+
                     nextCharPoint = Fin.read(); //READ NEXT CHAR
 
                     if((char)nextCharPoint == '='){
@@ -60,12 +52,9 @@ public class Lexer {
                     }
                     else{
                         tokenSequence.add(new Token("=", TokenType.EQUAL, new Position(countLinePos)));
-                        prevCharPoint +=(char)nextCharPoint; //reset ex: x=5, nextCharPoint is 5, save into prevCharPoint to be read next iteration
+                        prevCharPoint = ""+(char)nextCharPoint; //reset ex: x=5, nextCharPoint is 5, save into prevCharPoint to be read next iteration
 //                        System.out.println("Normal equals no space");
                     }
-
-
-
                 }
                 //---------- COLON  -----------
                 else if((char)charPoint == ':'){
@@ -86,7 +75,7 @@ public class Lexer {
                     }
                     else{
                         tokenSequence.add(new Token(":", TokenType.COLON, new Position(countLinePos)));
-                        prevCharPoint +=(char)nextCharPoint; //reset
+                        prevCharPoint = "" + (char)nextCharPoint; //reset
 //                        System.out.println("Single colon no space");
                     }
                 }
@@ -112,11 +101,9 @@ public class Lexer {
                     }
                     else{
                         tokenSequence.add(new Token("<", TokenType.LESSTHAN, new Position(countLinePos)));
-                        prevCharPoint +=(char)nextCharPoint;
+                        prevCharPoint = ""+ (char)nextCharPoint;
 //                        System.out.println("less than no space");
-
                     }
-
                 }
                 //---------- GREATER THAN -----------
                 else if((char)charPoint == '>'){
@@ -137,10 +124,9 @@ public class Lexer {
                     }
                     else{
                         tokenSequence.add(new Token(">", TokenType.GREATERTHAN, new Position(countLinePos)));
-                        prevCharPoint +=(char)nextCharPoint;
+                        prevCharPoint = "" + (char)nextCharPoint;
 //                        System.out.println("greater than no space");
                     }
-
                 }
                 //---------- FORWARD SLASH -----------
                 else if((char)charPoint == '/'){
@@ -162,12 +148,8 @@ public class Lexer {
 
                         tokenSequence.add(new Token(prevCharPoint, TokenType.INLINECOMMENT, new Position(countLinePos)));
                         countLinePos++;
-
 //                        System.out.println("inline comment " + prevCharPoint);
                         prevCharPoint =""; //reset
-
-                        //create token for inline comment to add to arraylist
-
                     }
                     //block comment
                     else if((char)nextCharPoint == '*'){
@@ -184,6 +166,8 @@ public class Lexer {
                             if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
 //                            if((char)nextCharPoint == '\r'){
                                 countLinePos ++;
+                                prevCharPoint+="\\n";
+                                continue;
                             }
 
                             if((char)nextCharPoint == '*'){
@@ -210,7 +194,7 @@ public class Lexer {
                     }
                     else{
                         tokenSequence.add(new Token("/", TokenType.DIVIDE, new Position(countLinePos)));
-                        prevCharPoint +=(char)nextCharPoint;
+                        prevCharPoint = ""+ (char)nextCharPoint;
 //                        System.out.println("normal forward slash no space");
                     }
                 }
@@ -389,13 +373,12 @@ public class Lexer {
 
                 }
                 else if((char)charPoint == ' ' || (char)charPoint == '\n'){// || (char)charPoint == '\r'|| charPoint == 10 ){
-                    if((char)charPoint == '\n'){ //|| (char)charPoint == '\r' || charPoint == 10){
-                        countLinePos ++;
-
-                    }
                     if(prevCharPoint!= ""){
                         addALEToken(prevCharPoint, countLinePos);
                         prevCharPoint = "";
+                    }
+                    if((char)charPoint == '\n'){ //|| (char)charPoint == '\r' || charPoint == 10){
+                        countLinePos ++;
                     }
                 }
                 //for last remaining closing character
@@ -473,10 +456,11 @@ public class Lexer {
         float validFloat;
         try{
             //invalid number assignment here
-            if(fl.startsWith("0") || fl.endsWith("0")){ //return false if leading or trailing zeros or eo
+            if((fl.startsWith("0") && fl.charAt(1)!= '.')|| fl.endsWith("0") && fl.charAt(fl.length()-2) !='.' && !fl.contains("e")){ //return false if leading or trailing zeros or eo
                 return false;
             }
             else if(fl.contains("e")){
+
                 if(fl.charAt((fl.indexOf('e')+1)) == ('+')|| (fl.charAt(fl.indexOf('e')+1)) == ('-')){
                     //l side
                     for(int i =0; i<fl.indexOf('e'); i++){
@@ -496,20 +480,41 @@ public class Lexer {
                     }
                     return true;
                 }
-                else{
-                    return false;
+                if(fl.length() == fl.indexOf('e') + 1){
+                    return false; //if e last
                 }
-            }
-            else{
-                for(int i = 0; i<fl.length() ;i++){
-                    if(Character.isDigit(fl.charAt(i))  || fl.charAt(i) == '.')
-                    {
-                        continue;
+                if (fl.charAt((fl.indexOf('e') + 1)) == '+' || fl.charAt((fl.indexOf('e') + 1)) == '-' || Character.isDigit(fl.charAt(fl.indexOf('e')+1))) {
+                    // bad case of e+ or e-
+                    if (fl.charAt((fl.indexOf('e') + 1)) == '+' || fl.charAt((fl.indexOf('e') + 1)) == '-') {
+                        if (fl.length() == fl.indexOf('e') + 2 ) {
+                            return false;
+                        }
                     }
-                    return false;
+                    // double check trailing zero before e
+                    if (fl.charAt((fl.indexOf('e') - 1)) == '0' && fl.charAt((fl.indexOf('e') - 2)) != '.') {
+                        return false;
+                    }
+                    // double check leading zero
+                    if (fl.charAt((fl.indexOf('e') + 1)) == '0' && fl.length() != (fl.indexOf('e') + 2)) {
+                        return false;
+                    }
+                    return true;
+
                 }
-                return true;
+                else{
+                    return true;
+                }
+
+            } //botom of e
+            //
+            for(int i =0; i<fl.length(); i++){
+                if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
+                {
+                    continue;
+                }
+                return false;
             }
+           return true;
 
         }
         catch(Exception e){
@@ -519,10 +524,9 @@ public class Lexer {
     }
     public boolean isTokenInt(String it){
 
-        int validInt;
         try{
             //invalid number assignment here
-            if((it.startsWith("0") && it.length()!=1) || it.contains(".")){ //return false if leading zeros
+            if((it.startsWith("0") && it.length()!=1)){ //return false if leading zeros
                 return false;
             }
             else{
@@ -574,7 +578,7 @@ public class Lexer {
         }
 
         else{
-            return TokenType.INVALIDNUM; //SINCE CHECK INT AND FLOAT LAST
+            return IDorNum(prevCharPoint); //check if ID or NUM error
         }
 
     }
@@ -600,6 +604,17 @@ public class Lexer {
             this.pwErrors.write("Lexical error: Invalid identifier: \"" + invLexeme+"\": line " + lineNum+".\n");
 
         }
+    }
+    public TokenType IDorNum (String prevCharPoint){
+        if (prevCharPoint.charAt(0) == '_') {
+            return TokenType.INVALIDID;
+        }
+        for(int i=0;i<prevCharPoint.length();i++){
+            if((int)prevCharPoint.charAt(i) >=65 && (int)prevCharPoint.charAt(i) <=90 || (int)prevCharPoint.charAt(i) >=97 && (int)prevCharPoint.charAt(i) <122){
+                return TokenType.INVALIDID;
+            }
+        }
+        return TokenType.INVALIDNUM;
     }
 
 

@@ -30,8 +30,9 @@ public class lexDriver {
                     pwTokens.write(" "+tok);
                 } else {
 //                    System.out.print("\n" + tok);
+                    rowCount = tok.getPosition().getLineNum();
                     pwTokens.write("\n"+tok);
-                    rowCount++;
+
                 }
             }
             lex.getNextToken();

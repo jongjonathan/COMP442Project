@@ -1,5 +1,5 @@
-0123.123;
-hello$bye;
-123.0 ;
-sadfashjfk;ajsdhfgl;
-I like c@ding
+123.e5
+123.e0
+123.e0123
+123.e+1
+123.e-1
