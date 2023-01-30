@@ -456,6 +456,9 @@ public class Lexer {
         float validFloat;
         try{
             //invalid number assignment here
+            if(fl.contains("_")){
+                return false;
+            }
             if((fl.startsWith("0") && fl.charAt(1)!= '.')|| fl.endsWith("0") && fl.charAt(fl.length()-2) !='.' && !fl.contains("e")){ //return false if leading or trailing zeros or eo
                 return false;
             }

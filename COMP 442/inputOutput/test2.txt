@@ -1,0 +1,22 @@
+// bad space
+float z=8;
+float z= 8;
+float z= 8;
+
+int[] z=[7,23,5]
+int[] z = [ 123 , 123 , 123]
+
+// bad space cont
+public int foo(x=8){x=2; return foo(x);}
+
+// id.id
+ ilike.code;
+ float z =ilike.code();
+
+//good space
+public int foo(x=8){
+    x = 2;
+    return foo(x);}
+
+
+
