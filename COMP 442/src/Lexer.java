@@ -465,6 +465,10 @@ public class Lexer {
             else if(fl.contains("e")){
 
                 if(fl.charAt((fl.indexOf('e')+1)) == ('+')|| (fl.charAt(fl.indexOf('e')+1)) == ('-')){
+                        if (fl.length() == fl.indexOf('e') + 2 ) {
+                            return false;
+                        }
+
                     //l side
                     for(int i =0; i<fl.indexOf('e'); i++){
                         if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
@@ -488,11 +492,7 @@ public class Lexer {
                 }
                 if (fl.charAt((fl.indexOf('e') + 1)) == '+' || fl.charAt((fl.indexOf('e') + 1)) == '-' || Character.isDigit(fl.charAt(fl.indexOf('e')+1))) {
                     // bad case of e+ or e-
-                    if (fl.charAt((fl.indexOf('e') + 1)) == '+' || fl.charAt((fl.indexOf('e') + 1)) == '-') {
-                        if (fl.length() == fl.indexOf('e') + 2 ) {
-                            return false;
-                        }
-                    }
+
                     // double check trailing zero before e
                     if (fl.charAt((fl.indexOf('e') - 1)) == '0' && fl.charAt((fl.indexOf('e') - 2)) != '.') {
                         return false;
@@ -599,12 +599,15 @@ public class Lexer {
     public void printErrorToken(String invLexeme, String type, int lineNum){
         if(type.equals("character")){
             this.pwErrors.write("Lexical error: Invalid character: \"" + invLexeme+"\": line " + lineNum +".\n");
+            tokenSequence.add(new ErrorToken(invLexeme,TokenType.INVALIDCHAR, new Position(lineNum)));
         }
         else if(type.equals("number")){
             this.pwErrors.write("Lexical error: Invalid number: \"" + invLexeme+"\": line " + lineNum+".\n");
+            tokenSequence.add(new ErrorToken(invLexeme,TokenType.INVALIDNUM, new Position(lineNum)));
         }
         else if(type.equals("identifier")){
             this.pwErrors.write("Lexical error: Invalid identifier: \"" + invLexeme+"\": line " + lineNum+".\n");
+            tokenSequence.add(new ErrorToken(invLexeme,TokenType.INVALIDID, new Position(lineNum)));
 
         }
     }
