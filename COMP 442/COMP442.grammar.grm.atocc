@@ -9,7 +9,8 @@ addOp -> '+'
 addOp -> '-' 
 addOp -> 'or' 
 
-arithExpr -> term rightrec-arithExpr 
+arithExpr -> arithExpr1
+arithExpr1 -> term rightrec-arithExpr
 
 arraySize -> '[' arraySize1
 arraySize1 -> 'intLit' ']'
@@ -24,8 +25,9 @@ classDecl -> 'class' 'id' opt-classDecl2 '{' rept-classDecl4 '}' ';'
 classDeclOrFuncDef -> classDecl 
 classDeclOrFuncDef -> funcDef 
 
-expr -> arithExpr 
-expr -> relExpr 
+expr -> arithExpr expr1
+expr1 -> relOp arithExpr
+expr1 -> EPSILON
 
 fParams -> 'id' ':' type rept-fParams3 rept-fParams4 
 fParams -> EPSILON 
