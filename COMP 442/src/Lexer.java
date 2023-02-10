@@ -27,6 +27,7 @@ public class Lexer {
             String prevCharPoint = "";
             //reading character of the file
             while ((charPoint = Fin.read()) != -1) {
+                prevCharPoint = prevCharPoint.replaceAll("\\s", ""); //remove spaces
                 //---------- EQUALS -----------
                 if((char)charPoint == '='){
                     if(prevCharPoint!=""){
@@ -234,20 +235,27 @@ public class Lexer {
 
                         }
                         else{
-                            printErrorToken(prevCharPoint, "number", countLinePos); //for errors
-//                            System.out.println("this is not valid float or id "+prevCharPoint);
-                            if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' &&(char)nextCharPoint!= '\r'){//&& (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
-                                prevCharPoint = ""+(char)nextCharPoint; //if 123.123; then prevCharPoint = ';'
-                                //create token with prevCharPoint as it's now the full float ex: 123.123
-                                //reset prevCharPoint
+                            if(prevCharPoint.equals(".")){
+                                tokenSequence.add(new Token(prevCharPoint, TokenType.PERIOD, new Position(countLinePos)));
+                                prevCharPoint = "";
                             }
                             else{
-                                prevCharPoint = "";
-                                if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
+                                printErrorToken(prevCharPoint, "number", countLinePos); //for errors
+//                            System.out.println("this is not valid float or id "+prevCharPoint);
+                                if((char)nextCharPoint!= ' '&& (char)nextCharPoint!= '\n' &&(char)nextCharPoint!= '\r'){//&& (char)nextCharPoint!= '\r'&& nextCharPoint!= 10 ){
+                                    prevCharPoint = ""+(char)nextCharPoint; //if 123.123; then prevCharPoint = ';'
+                                    //create token with prevCharPoint as it's now the full float ex: 123.123
+                                    //reset prevCharPoint
+                                }
+                                else{
+                                    prevCharPoint = "";
+                                    if((char)nextCharPoint == '\n'){// || (char)nextCharPoint == '\r' || nextCharPoint == 10 ){
 //                            else if((char)nextCharPoint == '\r'){
-                                    countLinePos ++;
+                                        countLinePos ++;
+                                    }
                                 }
                             }
+
 
                         }
                     }
@@ -366,13 +374,13 @@ public class Lexer {
                     printErrorToken(""+(char)charPoint, "character", countLinePos); //for errors of invalid char
                 }
                 //alphanum checker for ID, float, integer (this is for the 3 valid tokens)
-                else if((charPoint >= 65 && charPoint <= 90) || (charPoint >= 97 && charPoint <=122) ||
-                        (charPoint >= 48 && charPoint <=57) || (char)charPoint == '_'){
+                else if(((charPoint >= 65 && charPoint <= 90) || (charPoint >= 97 && charPoint <=122) ||
+                        (charPoint >= 48 && charPoint <=57) || (char)charPoint == '_')){
 
                     prevCharPoint += (char)charPoint; //append the alphanum string
 
                 }
-                else if((char)charPoint == ' ' || (char)charPoint == '\n'){// || (char)charPoint == '\r'|| charPoint == 10 ){
+                else if((char)charPoint == ' ' || (char)charPoint == '\n'|| (char)charPoint == '\t'){// || (char)charPoint == '\r'|| charPoint == 10 ){
                     if(prevCharPoint!= ""){
                         addALEToken(prevCharPoint, countLinePos);
                         prevCharPoint = "";
@@ -440,7 +448,8 @@ public class Lexer {
         //alphanum
         try{
             //if starts with digit or underscore
-            if(Character.isDigit(ID.charAt(0)) || (char)(ID.charAt(0)) == '_'){
+            if(Character.isDigit(ID.charAt(0)) || (ID.charAt(0)) == '_' ||ID.charAt(0) =='$' || ID.charAt(0) == '\\' || ID.charAt(0) =='~' ||
+                    ID.charAt(0) =='!' || ID.charAt(0) =='@'|| ID.charAt(0) =='#' || ID.charAt(0) =='\''||ID.charAt(0) =='\''){
                 return false;
             }
             else{
@@ -511,7 +520,7 @@ public class Lexer {
             } //botom of e
             //
             for(int i =0; i<fl.length(); i++){
-                if(Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')
+                if((Character.isDigit(fl.charAt(i)) || fl.charAt(i) == '.')&& !(fl.charAt(0) == '.'))
                 {
                     continue;
                 }
@@ -622,10 +631,6 @@ public class Lexer {
         }
         return TokenType.INVALIDNUM;
     }
-
-
-
-
 
 
 }
