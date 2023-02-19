@@ -22,7 +22,7 @@ CLASSDECL -> class id OPTCLASSDECL2 lcurbr REPTCLASSDECL4 rcurbr semi  .
 CLASSDECLORFUNCDEF -> CLASSDECL  . 
 CLASSDECLORFUNCDEF -> FUNCDEF  . 
 
-EXPR -> ARITHEXPR  EXPR1.
+EXPR -> ARITHEXPR EXPR1.
 EXPR1 -> RELOP ARITHEXPR .
 EXPR1 ->    .
 
@@ -44,7 +44,7 @@ FUNCBODY -> lcurbr REPTFUNCBODY1 rcurbr  .
 FUNCDEF -> FUNCHEAD FUNCBODY  . 
 
 FUNCHEAD -> function OPTFUNCHEAD1 id lpar FPARAMS rpar arrow RETURNTYPE  . 
-FUNCHEAD -> function id sr constructor lpar FPARAMS rpar  . 
+FUNCHEAD -> function id sr constructor lpar FPARAMS rpar  .
 
 FUNCTIONCALL -> REPTFUNCTIONCALL0 id lpar APARAMS rpar  . 
 
