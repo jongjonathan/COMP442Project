@@ -54,6 +54,6 @@ public enum TokenType {
     INVALIDCHAR,
     INVALIDNUM,
     EPSILON,
-    EMPTY,
+    ENDOFFILE,
 
 }
