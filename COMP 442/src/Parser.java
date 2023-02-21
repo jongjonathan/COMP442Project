@@ -13,8 +13,9 @@ public class Parser {
     Stack<String> s1= new Stack<>();
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
-    String filename="example-bubblesort";
-//    String filename="parsetest";
+//    String filename="example-polynomial";
+//    String filename="example-bubblesort";
+    String filename="parsetest";
     PrintWriter pwError;
 
     Lexer lex;
@@ -102,9 +103,10 @@ public class Parser {
     {
         try {
             //System.out.println("test");
-
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
-            pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename+ ".outerrors"));
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
+            pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename+ ".outsyntaxerrors"));
             PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename+ ".outderivation"));
             lex = new Lexer(fin, pwError);
 
