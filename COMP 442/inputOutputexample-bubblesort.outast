@@ -1,0 +1,5 @@
+LOCAL VAR DECL
+|  [ID, arr, 43]
+|  [INTEGERKEYWORD, integer, 43]
+|  ARR SIZE
+|  |  [INTEGER, 7, 43]

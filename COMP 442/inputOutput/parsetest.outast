@@ -1,0 +1,16 @@
+[LOCAL VAR DECL
+|  [ID, arr, 3]
+|  [INTEGERKEYWORD, integer, 3]
+|  ARR SIZE
+|  |  [INTEGER, 7, 3]
+, LOCAL VAR DECL
+|  [ID, arr, 4]
+|  [INTEGERKEYWORD, integer, 4]
+|  ARR SIZE
+|  |  [INTEGER, 6, 4]
+, LOCAL VAR DECL
+|  [ID, arr, 5]
+|  [INTEGERKEYWORD, integer, 5]
+|  ARR SIZE
+|  |  [INTEGER, 2, 5]
+]

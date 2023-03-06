@@ -1,0 +1,36 @@
+[[INTEGERKEYWORD, integer, 2]
+, [EPSILON, EPSILON, 2]
+, [INTEGERKEYWORD, integer, 2]
+, LOCAL VAR DECL
+|  [ID, n, 4]
+|  [INTEGERKEYWORD, integer, 4]
+|  ARR SIZE
+, LOCAL VAR DECL
+|  [ID, i, 5]
+|  [INTEGERKEYWORD, integer, 5]
+|  ARR SIZE
+, LOCAL VAR DECL
+|  [ID, j, 6]
+|  [INTEGERKEYWORD, integer, 6]
+|  ARR SIZE
+, LOCAL VAR DECL
+|  [ID, temp, 7]
+|  [INTEGERKEYWORD, integer, 7]
+|  ARR SIZE
+, [INTEGERKEYWORD, integer, 28]
+, [EPSILON, EPSILON, 28]
+, [INTEGERKEYWORD, integer, 28]
+, LOCAL VAR DECL
+|  [ID, n, 30]
+|  [INTEGERKEYWORD, integer, 30]
+|  ARR SIZE
+, LOCAL VAR DECL
+|  [ID, i, 31]
+|  [INTEGERKEYWORD, integer, 31]
+|  ARR SIZE
+, LOCAL VAR DECL
+|  [ID, arr, 43]
+|  [INTEGERKEYWORD, integer, 43]
+|  ARR SIZE
+|  |  [INTEGER, 7, 43]
+]

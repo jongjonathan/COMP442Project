@@ -1,0 +1,11 @@
+function printArray() => void
+{
+  localvar n: integer;
+  localvar i: integer;
+  n = size;
+  i = 0;
+  while (i<n) {
+    write(arr[i]);
+      i = i+1;
+  };
+}

@@ -2,21 +2,25 @@ import java.io.*;
 import java.util.*;
 
 public class Parser {
-     HashMap<String, String[]> hm = new HashMap<String, String[]>();
+    HashMap<String, String[]> hm = new HashMap<String, String[]>();
     private Map<String, ArrayList<TokenType>> followSet = new HashMap<>();
     private Map<String, ArrayList<TokenType>> firstSet = new HashMap<>();
-     ArrayList<TokenType> Term = new ArrayList<>();
-     ArrayList<String> nonTerm = new ArrayList<>();
-     Map<String, String> hash = new HashMap();
-     String output = "";
-     boolean hasError = false;
-    Stack<String> s1= new Stack<>();
+    ArrayList<TokenType> Term = new ArrayList<>();
+    ArrayList<String> nonTerm = new ArrayList<>();
+    Map<String, String> hash = new HashMap();
+    String output = "";
+    boolean hasError = false;
+    Stack<String> s1 = new Stack<>();
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
-//    String filename="example-polynomial";
-//    String filename="example-bubblesort";
-    String filename="parsetest";
+    //    String filename="example-polynomial";
+    String filename = "example-bubblesort";
+//    String filename="parsetest";
+    // String filename="parse2";
     PrintWriter pwError;
+    FileWriter astOutput;
+    Iterator iter = AST.semStack.iterator();
+
 
     Lexer lex;
     String[] terminals = {
@@ -70,16 +74,25 @@ public class Parser {
             "PRIVATEKEYWORD",
             "INLINECOMMENT",
             "BLOCKCOMMENT",
-          };
+    };
 
 
     public void Parser() {
 
         addFirstFollow();
 
-        String table = "COMP 442/parsingTable.csv";
+//        String table = "COMP 442/parsingTable.csv";
+//        String table = "COMP 442/ll1parsingtable.csv";
+//        String table = "COMP 442/parsingTableSem.csv";
+        String table = "COMP 442/parsingTableVar.csv";
         String line = "";
         String commaDel = ",";
+        try{
+            this.astOutput = new FileWriter("COMP 442/inputOutput/" + filename + ".outast");
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
 
         try (BufferedReader br = new BufferedReader(new FileReader(table))) {
             int row = 0;
@@ -99,125 +112,152 @@ public class Parser {
 
     }
 
-    public boolean parse()
-    {
+    public void parse() {
         try {
-            //System.out.println("test");
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
-//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
-            pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename+ ".outsyntaxerrors"));
-            PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename+ ".outderivation"));
+            pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outsyntaxerrors"));
+            PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outderivation"));
             lex = new Lexer(fin, pwError);
 
             s1.push("$");//
             s1.push("START");
 
             Token token = lex.getNextToken();
+            Token previousToken = token;
             String top;
             String[] lookahead;
-            //System.out.println(token);
 
             var line = "START";
-            while (!s1.peek().equals("$")) {
+            while (!s1.peek().equals("$") && !s1.peek().equals("eof")) {
                 //System.out.println(s1);
                 while (token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT) {
                     token = lex.getNextToken();
+                    previousToken = token;
                 }
 
                 top = s1.peek();
+
 
                 if (top.equals("EPSILON")) {
                     s1.pop();
                     top = s1.peek();
                 }
 
-                if(top.equals("$")){
+                if (top.equals("$") || top.equals("eof")) {
                     System.out.println("end of file");
                     break;
                 }
+
+                if (top.startsWith("SEMACT")) {
+                    switch (top) {
+                        case "SEMACT0" -> AST.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
+                        case "SEMACT1" -> AST.makeNode(previousToken);
+                        case "SEMACT2" -> AST.makeNode();
+                        case "SEMACT3" -> AST.makeFamily("ARR SIZE", -1);
+                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL", 3);
+                    }
+                    s1.pop();
+                    top = s1.peek();
+                }
 //gets value of the key in the parsing table and stores it in templookahead for the not terminal
-                var tempLookahead = hash.get(top +"," + token.getTokenType());
+                var tempLookahead = hash.get(top + "," + token.getTokenType());
 
 
-                if(tempLookahead != null){
+                if (tempLookahead != null) {
                     lookahead = tempLookahead.split("→")[1].trim().split(" ");
 
-                }else {
+                } else {
 
                     lookahead = new String[]{};
                 }
 
                 //System.out.println( lookahead.length > 0);
 
-                if(Arrays.asList(terminals).contains(top)){
-                    if(top.equals(token.getTokenType().name())){
+                if (Arrays.asList(terminals).contains(top)) {
+                    if (top.equals(token.getTokenType().name())) {
 
                         s1.pop();
-
+                        previousToken = token;
                         token = lex.getNextToken();
 
+
                         while (token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT) {
+                            previousToken = token;
                             token = lex.getNextToken();
+
                         }
-                    }else {
+                    } else {
 
                         // handle error
                         System.out.println("error");
                         skipError(token);
                         hasError = true;
-                        return false;
+//                        return false;
 
                     }
 
-                }else if(lookahead.length > 0){
+                } else if (lookahead.length > 0) {
 
                     var nT = s1.pop(); //pop nonterminal
 
 
                     Collections.reverse(Arrays.asList(lookahead));
                     //System.out.println(lookahead.length);
-                    for(var i : lookahead){
+                    for (var i : lookahead) {
                         s1.push(convertTerminals(i));
 
                     }
 
                     Collections.reverse(Arrays.asList(lookahead));
 
-                    if(nT == null){
+                    if (nT == null) {
                         nT = "!";
                     }
 
                     var tempLine = "";
 
-                    for(var i: lookahead){
+                    for (var i : lookahead) {
                         tempLine += " " + i;
 
                     }
 
-                    line = line.replace(nT , tempLine).replace("&epsilon","");
+                    line = line.replace(nT, tempLine).replace("&epsilon", "");
                     //write to file
 
                     output += "START => " + line + "\n";
                     pwDerivations.write(output);
-                }else {
+                } else {
                     // handle error
 //                    System.out.println(token.getTokenType().name());
                     System.out.println("Error:" + top);
                     skipError(token);
                     hasError = true;
-                    return false;
+//                    return false;
 
                 }
 
             }
             pwError.close();
             pwDerivations.close();
+        } catch (Exception e) {
+        }
+        try{
+            while(iter.hasNext()){
+                astOutput.write(AST.treeToString());
+                astOutput.close();
+            }
+
+
         }
         catch(Exception e){
+            System.out.println(e.getMessage());
         }
 
-        return true;
+
+//        return true;
     }
 
     public String convertTerminals(String value) {
@@ -332,7 +372,7 @@ public class Parser {
                 case "ATTRIBUTE" -> {
                     return "ATTRIBUTEKEYWORD";
                 }
-                case "CONSTRUCTOR" -> {
+                case "CONSTRUCTORKEYWORD" -> {
                     return "CONSTRUCTORKEYWORD";
                 }
                 case "FUNCTION" -> {
@@ -360,6 +400,7 @@ public class Parser {
 
         return "";
     }
+
     private Token skipError(Token lookahead) {
         System.out.println("syntax error at " + lookahead.getPosition() + "\n");
         pwError.write("syntax error at " + lookahead.getPosition() + "\n");
@@ -379,8 +420,10 @@ public class Parser {
 
         return token;
     }
+
     private void addFirstFollow() {
-        String firstSetFile = "COMP 442/firstFollow.csv";
+//        String firstSetFile = "COMP 442/firstFollow.csv";
+        String firstSetFile = "COMP 442/ll1convertcsv.csv";
         String line = "";
 
         try (BufferedReader br = new BufferedReader(new FileReader(firstSetFile))) {
@@ -399,7 +442,7 @@ public class Parser {
 
                 ArrayList<TokenType> firstVal = new ArrayList<>();
                 for (int i = 0; i < firstSplit.length; i++) {
-                    if (firstSplit[i].contains("∅")) {
+                    if (firstSplit[i].contains("∅") || firstSplit[i].contains("eof")) {
                         firstVal.add(TokenType.EPSILON);
                     } else {
                         String valueToAdd = firstSplit[i].toUpperCase();
@@ -498,7 +541,7 @@ public class Parser {
 
                 ArrayList<TokenType> followVal = new ArrayList<>();
                 for (int i = 0; i < followSplit.length; i++) {
-                    if (followSplit[i].contains("∅")) {
+                    if (followSplit[i].contains("∅") || followSplit[i].contains("eof")) {
                         followVal.add(TokenType.EPSILON);
                     } else {
                         String valueToAdd = followSplit[i].toUpperCase();
@@ -588,13 +631,12 @@ public class Parser {
                             case " " -> followVal.add(TokenType.EPSILON);
 
                             default -> followVal.add(TokenType.valueOf(valueToAdd.toUpperCase()));
+                        }
                     }
+                    followSet.put(key, followVal);
                 }
-                followSet.put(key, followVal);
             }
-        }
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
         }
     }
 
@@ -603,7 +645,6 @@ public class Parser {
         p.Parser();
         p.parse();
         System.out.println(p.output);
-
 
 
     }
