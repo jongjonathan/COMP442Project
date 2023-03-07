@@ -1,3 +1,14 @@
+class QUADRATIC isa POLYNOMIAL {
+};
+class LINEAR isa POLYNOMIAL {
+  private attribute a: float[];
+};
+class LINEAR isa POLYNOMIAL {
+  private attribute a: float[6];
+};
+class QUADRATIC isa POLYNOMIAL {
+};
+
 function main() => void
 {
   localvar arr: integer[7];

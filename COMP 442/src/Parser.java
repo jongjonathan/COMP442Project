@@ -14,8 +14,8 @@ public class Parser {
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
     //    String filename="example-polynomial";
-    String filename = "example-bubblesort";
-//    String filename="parsetest";
+//    String filename = "example-bubblesort";
+    String filename="parsetest";
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
@@ -115,8 +115,8 @@ public class Parser {
     public void parse() {
         try {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
-//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
             pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outsyntaxerrors"));
             PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outderivation"));
@@ -134,8 +134,9 @@ public class Parser {
             while (!s1.peek().equals("$") && !s1.peek().equals("eof")) {
                 //System.out.println(s1);
                 while (token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT) {
-                    token = lex.getNextToken();
                     previousToken = token;
+                    token = lex.getNextToken();
+
                 }
 
                 top = s1.peek();
@@ -151,13 +152,20 @@ public class Parser {
                     break;
                 }
 
-                if (top.startsWith("SEMACT")) {
+                while (top.startsWith("SEMACT")) {
                     switch (top) {
                         case "SEMACT0" -> AST.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
                         case "SEMACT1" -> AST.makeNode(previousToken);
-                        case "SEMACT2" -> AST.makeNode();
+                        case "SEMACT2" -> AST.makeNode(); //null separator
                         case "SEMACT3" -> AST.makeFamily("ARR SIZE", -1);
-                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL", 3);
+                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL", -1);
+                        case "SEMACT5" -> AST.makeFamily("CLASS DECL", -1);
+                        case "SEMACT6" -> AST.makeFamily("MEMBER DECL", -1);
+                        case "SEMACT7" -> AST.makeFamily("INHERLIST", -1);
+                        case "SEMACT8" -> AST.makeFamily("FUNC DECL", -1);
+                        case "SEMACT9" -> AST.makeFamily("MEMBER VAR", -1);
+
+
                     }
                     s1.pop();
                     top = s1.peek();
@@ -243,13 +251,11 @@ public class Parser {
             pwError.close();
             pwDerivations.close();
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         try{
-            while(iter.hasNext()){
                 astOutput.write(AST.treeToString());
                 astOutput.close();
-            }
-
 
         }
         catch(Exception e){

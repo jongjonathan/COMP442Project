@@ -1,16 +1,42 @@
-[LOCAL VAR DECL
-|  [ID, arr, 3]
-|  [INTEGERKEYWORD, integer, 3]
-|  ARR SIZE
-|  |  [INTEGER, 7, 3]
+[CLASS DECL
+|    [ID, QUADRATIC, 1]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 1]
+, CLASS DECL
+|    [ID, LINEAR, 3]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 3]
+|    MEMBER VAR
+|    |    [ID, a, 4]
+|    |    [FLOATKEYWORD, float, 4]
+|    |    ARR SIZE
+|    |    |    [EPSILON, EPSILON, 4]
+, CLASS DECL
+|    [ID, LINEAR, 6]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 6]
+|    MEMBER VAR
+|    |    [ID, a, 7]
+|    |    [FLOATKEYWORD, float, 7]
+|    |    ARR SIZE
+|    |    |    [INTEGER, 6, 7]
+, CLASS DECL
+|    [ID, QUADRATIC, 9]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 9]
 , LOCAL VAR DECL
-|  [ID, arr, 4]
-|  [INTEGERKEYWORD, integer, 4]
-|  ARR SIZE
-|  |  [INTEGER, 6, 4]
+|    [ID, arr, 14]
+|    [INTEGERKEYWORD, integer, 14]
+|    ARR SIZE
+|    |    [INTEGER, 7, 14]
 , LOCAL VAR DECL
-|  [ID, arr, 5]
-|  [INTEGERKEYWORD, integer, 5]
-|  ARR SIZE
-|  |  [INTEGER, 2, 5]
+|    [ID, arr, 15]
+|    [INTEGERKEYWORD, integer, 15]
+|    ARR SIZE
+|    |    [INTEGER, 6, 15]
+, LOCAL VAR DECL
+|    [ID, arr, 16]
+|    [INTEGERKEYWORD, integer, 16]
+|    ARR SIZE
+|    |    [INTEGER, 2, 16]
 ]

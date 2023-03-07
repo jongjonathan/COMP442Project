@@ -1,5 +1,4 @@
 [[INTEGERKEYWORD, integer, 2]
-, [EPSILON, EPSILON, 2]
 , [INTEGERKEYWORD, integer, 2]
 , LOCAL VAR DECL
 |  [ID, n, 4]
@@ -18,7 +17,6 @@
 |  [INTEGERKEYWORD, integer, 7]
 |  ARR SIZE
 , [INTEGERKEYWORD, integer, 28]
-, [EPSILON, EPSILON, 28]
 , [INTEGERKEYWORD, integer, 28]
 , LOCAL VAR DECL
 |  [ID, n, 30]

@@ -43,18 +43,12 @@ public class AST {
 
     static public AST makeFamily(Object concept, int pops){
         ArrayList<AST> childNodes = new ArrayList<>();
-        //pop for concept node creation
-        if(pops != -1){
-            for(int i = 0; i < pops; i++){
-                childNodes.add(semStack.pop());
-            }
-        }
-        else {
+
             while(semStack.peek() != null){
                 childNodes.add(semStack.pop());
             }
-            semStack.pop();
-        }
+            semStack.pop(); //pop null node
+
         AST parentNode = new AST(null, childNodes, concept,  0);
 
         for (var child: parentNode.childNodes){
@@ -88,7 +82,7 @@ public class AST {
     public String toString() {
         StringBuilder tree = new StringBuilder();
         for(int i=0;i<depth; i++){
-            tree.append("|  ");
+            tree.append("|    ");
         }
         tree.append(concept).append("\n");
         if(childNodes != null){
