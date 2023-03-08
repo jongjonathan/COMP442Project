@@ -19,6 +19,7 @@ public class Parser {
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
+    Stack<AST> semStack = new Stack<>();
 
 
     Lexer lex;
@@ -153,18 +154,17 @@ public class Parser {
 
                 while (top.startsWith("SEMACT")) {
                     switch (top) {
-                        case "SEMACT0" -> AST.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
-                        case "SEMACT1" -> AST.makeNode(previousToken);
-                        case "SEMACT2" -> AST.makeNode(); //null separator
-                        case "SEMACT3" -> AST.makeFamily("ARR SIZE");
-                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL");
-                        case "SEMACT5" -> AST.makeFamily("CLASS DECL");
-                        case "SEMACT6" -> AST.makeFamily("MEMBER DECL");
-                        case "SEMACT7" -> AST.makeFamily("INHERLIST");
-                        case "SEMACT8" -> AST.makeFamily("FUNC DECL");
-                        case "SEMACT9" -> AST.makeFamily("MEMBER VAR");
-                        case "SEMACT10" -> AST.makeFamily("FPARAMS");
-                        case "SEMACT11" -> AST.makeFamily("RETURN TYPE");
+                        case "SEMACT0" -> this.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
+                        case "SEMACT1" -> this.makeNode(previousToken);
+                        case "SEMACT2" -> this.makeNode(); //null separator
+                        case "SEMACT3" -> this.makeFamily("ARR SIZE");
+                        case "SEMACT4" -> this.makeFamily("LOCAL VAR DECL");
+                        case "SEMACT5" -> this.makeFamily("CLASS DECL");
+                        case "SEMACT6" -> this.makeFamily("MEMBER DECL");
+                        case "SEMACT7" -> this.makeFamily("INHERLIST");
+                        case "SEMACT8" -> this.makeFamily("FUNC DECL");
+                        case "SEMACT9" -> this.makeFamily("MEMBER VAR");
+                        case "SEMACT10" -> this.makeFamily("FPARAMS");
 
 
 
@@ -256,7 +256,7 @@ public class Parser {
             System.out.println(e.getMessage());
         }
         try{
-                astOutput.write(AST.treeToString());
+                astOutput.write(this.treeToString());
                 astOutput.close();
 
         }
@@ -646,6 +646,45 @@ public class Parser {
             }
         } catch (Exception e) {
         }
+    }
+
+    //null node
+    public AST makeNode(){
+        semStack.push(null);
+        return null;
+    }
+
+    public AST makeNode(Token concept){
+        AST node = new AST(null, null, concept,  0);
+        semStack.push(node);
+        return node;
+    }
+
+    public AST makeFamily(Object concept){
+        ArrayList<AST> childNodes = new ArrayList<>();
+
+        while(semStack.peek() != null){
+            childNodes.add(semStack.pop());
+        }
+        semStack.pop(); //pop null node
+
+        AST parentNode = new AST(null, childNodes, concept,  0);
+
+        for (var child: parentNode.childNodes){
+            child.setParentNode(parentNode);
+        }
+        parentNode.updateDepth();
+
+        Collections.reverse(childNodes);
+
+        semStack.push(parentNode);
+
+        return parentNode;
+    }
+
+    public String treeToString(){
+        //returns ast node in the tree format
+        return semStack.toString();
     }
 
     public static void main(String[] args) {

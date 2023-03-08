@@ -1,14 +1,10 @@
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Stack;
 
 public class AST {
     Object concept;
     AST parentNode;
     ArrayList<AST> childNodes;
     int depth;
-
-    static Stack<AST> semStack = new Stack<>();
 
     public void setParentNode(AST parentNode) {
         this.parentNode = parentNode;
@@ -29,40 +25,6 @@ public class AST {
         this.depth = depth;
     }
 
-    //null node
-    static public AST makeNode(){
-        semStack.push(null);
-        return null;
-    }
-
-    static public AST makeNode(Token concept){
-        AST node = new AST(null, null, concept,  0);
-        semStack.push(node);
-        return node;
-    }
-
-    static public AST makeFamily(Object concept){
-        ArrayList<AST> childNodes = new ArrayList<>();
-
-            while(semStack.peek() != null){
-                childNodes.add(semStack.pop());
-            }
-            semStack.pop(); //pop null node
-
-        AST parentNode = new AST(null, childNodes, concept,  0);
-
-        for (var child: parentNode.childNodes){
-            child.setParentNode(parentNode);
-        }
-        parentNode.updateDepth();
-
-        Collections.reverse(childNodes);
-
-        semStack.push(parentNode);
-
-        return parentNode;
-    }
-
     public void updateDepth(){
         if(this.childNodes == null){
             return;
@@ -71,11 +33,6 @@ public class AST {
             child.setDepth(child.getDepth()+1);
             child.updateDepth();
         }
-    }
-
-    public static String treeToString(){
-        //returns ast node in the tree format
-        return semStack.toString();
     }
 
     @Override
