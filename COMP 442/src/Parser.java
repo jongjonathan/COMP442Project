@@ -162,9 +162,10 @@ public class Parser {
                         case "SEMACT5" -> this.makeFamily("CLASS DECL");
                         case "SEMACT6" -> this.makeFamily("MEMBER DECL");
                         case "SEMACT7" -> this.makeFamily("INHERLIST");
-                        case "SEMACT8" -> this.makeFamily("FUNC DECL");
-                        case "SEMACT9" -> this.makeFamily("MEMBER VAR");
+                        case "SEMACT8" -> this.makeFamily("MEMBER FUNC DECL");
+                        case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily("FPARAMS");
+                        case "SEMACT11" -> this.makeFamily("FUNC DEF");
 
 
 
