@@ -41,7 +41,7 @@ public class AST {
         return node;
     }
 
-    static public AST makeFamily(Object concept, int pops){
+    static public AST makeFamily(Object concept){
         ArrayList<AST> childNodes = new ArrayList<>();
 
             while(semStack.peek() != null){

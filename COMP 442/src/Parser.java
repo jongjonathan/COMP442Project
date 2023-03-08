@@ -19,7 +19,6 @@ public class Parser {
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
-    Iterator iter = AST.semStack.iterator();
 
 
     Lexer lex;
@@ -157,15 +156,15 @@ public class Parser {
                         case "SEMACT0" -> AST.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
                         case "SEMACT1" -> AST.makeNode(previousToken);
                         case "SEMACT2" -> AST.makeNode(); //null separator
-                        case "SEMACT3" -> AST.makeFamily("ARR SIZE", -1);
-                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL", -1);
-                        case "SEMACT5" -> AST.makeFamily("CLASS DECL", -1);
-                        case "SEMACT6" -> AST.makeFamily("MEMBER DECL", -1);
-                        case "SEMACT7" -> AST.makeFamily("INHERLIST", -1);
-                        case "SEMACT8" -> AST.makeFamily("FUNC DECL", -1);
-                        case "SEMACT9" -> AST.makeFamily("MEMBER VAR", -1);
-                        case "SEMACT10" -> AST.makeFamily("FPARAMS", -1);
-                        case "SEMACT11" -> AST.makeFamily("RETURN TYPE", -1);
+                        case "SEMACT3" -> AST.makeFamily("ARR SIZE");
+                        case "SEMACT4" -> AST.makeFamily("LOCAL VAR DECL");
+                        case "SEMACT5" -> AST.makeFamily("CLASS DECL");
+                        case "SEMACT6" -> AST.makeFamily("MEMBER DECL");
+                        case "SEMACT7" -> AST.makeFamily("INHERLIST");
+                        case "SEMACT8" -> AST.makeFamily("FUNC DECL");
+                        case "SEMACT9" -> AST.makeFamily("MEMBER VAR");
+                        case "SEMACT10" -> AST.makeFamily("FPARAMS");
+                        case "SEMACT11" -> AST.makeFamily("RETURN TYPE");
 
 
 
