@@ -164,6 +164,9 @@ public class Parser {
                         case "SEMACT7" -> AST.makeFamily("INHERLIST", -1);
                         case "SEMACT8" -> AST.makeFamily("FUNC DECL", -1);
                         case "SEMACT9" -> AST.makeFamily("MEMBER VAR", -1);
+                        case "SEMACT10" -> AST.makeFamily("FPARAMS", -1);
+                        case "SEMACT11" -> AST.makeFamily("RETURN TYPE", -1);
+
 
 
                     }
