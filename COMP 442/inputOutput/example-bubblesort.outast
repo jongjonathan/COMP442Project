@@ -1,34 +1,97 @@
-[[INTEGERKEYWORD, integer, 2]
-, [INTEGERKEYWORD, integer, 2]
-, LOCAL VAR DECL
-|  [ID, n, 4]
-|  [INTEGERKEYWORD, integer, 4]
-|  ARR SIZE
-, LOCAL VAR DECL
-|  [ID, i, 5]
-|  [INTEGERKEYWORD, integer, 5]
-|  ARR SIZE
-, LOCAL VAR DECL
-|  [ID, j, 6]
-|  [INTEGERKEYWORD, integer, 6]
-|  ARR SIZE
-, LOCAL VAR DECL
-|  [ID, temp, 7]
-|  [INTEGERKEYWORD, integer, 7]
-|  ARR SIZE
-, [INTEGERKEYWORD, integer, 28]
-, [INTEGERKEYWORD, integer, 28]
-, LOCAL VAR DECL
-|  [ID, n, 30]
-|  [INTEGERKEYWORD, integer, 30]
-|  ARR SIZE
-, LOCAL VAR DECL
-|  [ID, i, 31]
-|  [INTEGERKEYWORD, integer, 31]
-|  ARR SIZE
-, LOCAL VAR DECL
-|  [ID, arr, 43]
-|  [INTEGERKEYWORD, integer, 43]
-|  ARR SIZE
-|  |  [INTEGER, 7, 43]
+[FUNC DEF
+|    [ID, bubbleSort, 2]
+|    FPARAMS
+|    |    [ID, arr, 2]
+|    |    [INTEGERKEYWORD, integer, 2]
+|    |    [EPSILON, EPSILON, 2]
+|    |    [INTEGERKEYWORD, integer, 2]
+|    [VOIDKEYWORD, void, 2]
+, LOCAL VAR STAT BLOCK
+|    LOCAL VAR DECL
+|    |    [ID, n, 4]
+|    |    [INTEGERKEYWORD, integer, 4]
+|    |    ARR SIZE
+|    LOCAL VAR DECL
+|    |    [ID, i, 5]
+|    |    [INTEGERKEYWORD, integer, 5]
+|    |    ARR SIZE
+|    LOCAL VAR DECL
+|    |    [ID, j, 6]
+|    |    [INTEGERKEYWORD, integer, 6]
+|    |    ARR SIZE
+|    LOCAL VAR DECL
+|    |    [ID, temp, 7]
+|    |    [INTEGERKEYWORD, integer, 7]
+|    |    ARR SIZE
+|    STAT
+|    |    [ID, n, 8]
+|    STAT
+|    |    [ID, i, 9]
+|    STAT
+|    |    [ID, j, 10]
+|    STAT
+|    |    [ID, temp, 11]
+|    STAT
+|    |    WHILE
+|    |    |    WHILE
+|    |    |    |    IF
+|    |    |    |    |    [ID, temp, 17]
+|    |    |    |    |    [ID, arr, 18]
+|    |    |    |    |    [ID, arr, 19]
+|    |    |    |    [ID, j, 21]
+|    |    |    [ID, i, 23]
+, FUNC DEF
+|    [ID, printArray, 28]
+|    FPARAMS
+|    |    [ID, arr, 28]
+|    |    [INTEGERKEYWORD, integer, 28]
+|    |    [EPSILON, EPSILON, 28]
+|    |    [INTEGERKEYWORD, integer, 28]
+|    [VOIDKEYWORD, void, 28]
+, LOCAL VAR STAT BLOCK
+|    LOCAL VAR DECL
+|    |    [ID, n, 30]
+|    |    [INTEGERKEYWORD, integer, 30]
+|    |    ARR SIZE
+|    LOCAL VAR DECL
+|    |    [ID, i, 31]
+|    |    [INTEGERKEYWORD, integer, 31]
+|    |    ARR SIZE
+|    STAT
+|    |    [ID, n, 32]
+|    STAT
+|    |    [ID, i, 33]
+|    STAT
+|    |    WHILE
+|    |    |    WRITE
+|    |    |    [ID, i, 36]
+, FUNC DEF
+|    [ID, main, 41]
+|    [VOIDKEYWORD, void, 41]
+, LOCAL VAR STAT BLOCK
+|    LOCAL VAR DECL
+|    |    [ID, arr, 43]
+|    |    [INTEGERKEYWORD, integer, 43]
+|    |    ARR SIZE
+|    |    |    [INTEGER, 7, 43]
+|    STAT
+|    |    [ID, arr, 44]
+|    STAT
+|    |    [ID, arr, 45]
+|    STAT
+|    |    [ID, arr, 46]
+|    STAT
+|    |    [ID, arr, 47]
+|    STAT
+|    |    [ID, arr, 48]
+|    STAT
+|    |    [ID, arr, 49]
+|    STAT
+|    |    [ID, arr, 50]
+|    STAT
+|    |    [ID, printarray, 51]
+|    STAT
+|    |    [ID, bubbleSort, 52]
+|    STAT
+|    |    [ID, printarray, 53]
 ]
