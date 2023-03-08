@@ -153,6 +153,7 @@ public class Parser {
                 }
 
                 while (top.startsWith("SEMACT")) {
+                    //PRIVATE PUBLIC SEMACT2 SEMACT1 MEMBERDECL
                     switch (top) {
                         case "SEMACT0" -> this.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
                         case "SEMACT1" -> this.makeNode(previousToken);
@@ -166,7 +167,9 @@ public class Parser {
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily("FPARAMS");
                         case "SEMACT11" -> this.makeFamily("FUNC DEF");
-                        case "SEMACT12" -> this.makeFamily("STAT BLOCK");
+                        case "SEMACT12" -> this.makeFamily("STAT BLOCK"); //
+
+
 
 
 
