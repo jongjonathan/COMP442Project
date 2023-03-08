@@ -166,6 +166,8 @@ public class Parser {
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily("FPARAMS");
                         case "SEMACT11" -> this.makeFamily("FUNC DEF");
+                        case "SEMACT12" -> this.makeFamily("STAT BLOCK");
+
 
 
 
