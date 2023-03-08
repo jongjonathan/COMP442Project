@@ -14,8 +14,8 @@ public class Parser {
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
     //    String filename="example-polynomial";
-    String filename = "example-bubblesort";
-//    String filename="parsetest";
+//    String filename = "example-bubblesort";
+    String filename="parsetest";
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
@@ -115,8 +115,8 @@ public class Parser {
     public void parse() {
         try {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
-//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
             pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outsyntaxerrors"));
             PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outderivation"));
@@ -155,7 +155,6 @@ public class Parser {
                 while (top.startsWith("SEMACT")) {
                     //PRIVATE PUBLIC SEMACT2 SEMACT1 MEMBERDECL
                     switch (top) {
-                        case "SEMACT0" -> this.makeNode(new Token("EPSILON", TokenType.EPSILON, token.getPosition()));
                         case "SEMACT1" -> this.makeNode(previousToken);
                         case "SEMACT2" -> this.makeNode(); //null separator
                         case "SEMACT3" -> this.makeFamily("ARR SIZE");
@@ -174,11 +173,6 @@ public class Parser {
                         case "SEMACT16" -> this.makeFamily("WRITE");
                         case "SEMACT17" -> this.makeFamily("READ");
                         case "SEMACT18" -> this.makeFamily("RETURN");
-
-
-
-
-
 
                     }
                     s1.pop();

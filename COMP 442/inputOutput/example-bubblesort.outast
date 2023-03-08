@@ -3,7 +3,6 @@
 |    FPARAMS
 |    |    [ID, arr, 2]
 |    |    [INTEGERKEYWORD, integer, 2]
-|    |    [EPSILON, EPSILON, 2]
 |    |    [INTEGERKEYWORD, integer, 2]
 |    [VOIDKEYWORD, void, 2]
 , LOCAL VAR STAT BLOCK
@@ -33,19 +32,26 @@
 |    |    [ID, temp, 11]
 |    STAT
 |    |    WHILE
+|    |    |    [SUBTRACT, -, 12]
 |    |    |    WHILE
+|    |    |    |    [SUBTRACT, -, 13]
+|    |    |    |    [SUBTRACT, -, 13]
 |    |    |    |    IF
+|    |    |    |    |    [ADD, +, 14]
 |    |    |    |    |    [ID, temp, 17]
 |    |    |    |    |    [ID, arr, 18]
+|    |    |    |    |    [ADD, +, 18]
 |    |    |    |    |    [ID, arr, 19]
+|    |    |    |    |    [ADD, +, 19]
 |    |    |    |    [ID, j, 21]
+|    |    |    |    [ADD, +, 21]
 |    |    |    [ID, i, 23]
+|    |    |    [ADD, +, 23]
 , FUNC DEF
 |    [ID, printArray, 28]
 |    FPARAMS
 |    |    [ID, arr, 28]
 |    |    [INTEGERKEYWORD, integer, 28]
-|    |    [EPSILON, EPSILON, 28]
 |    |    [INTEGERKEYWORD, integer, 28]
 |    [VOIDKEYWORD, void, 28]
 , LOCAL VAR STAT BLOCK
@@ -65,6 +71,7 @@
 |    |    WHILE
 |    |    |    WRITE
 |    |    |    [ID, i, 36]
+|    |    |    [ADD, +, 36]
 , FUNC DEF
 |    [ID, main, 41]
 |    [VOIDKEYWORD, void, 41]

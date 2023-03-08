@@ -1,6 +1,6 @@
-ADDOP -> plus  .
-ADDOP -> minus  .
-ADDOP -> or  .
+ADDOP -> plus  SEMACT1 .
+ADDOP -> minus  SEMACT1 .
+ADDOP -> or  SEMACT1 .
 
 APARAMS -> EXPR REPTAPARAMS1  .
 APARAMS ->  .
@@ -15,7 +15,7 @@ ARRAYOROBJECT -> lpar APARAMS rpar  .
 ARRAYSIZE -> lsqbr ARRAYSIZE2  .
 
 ARRAYSIZE2 -> intlit SEMACT1 rsqbr  .
-ARRAYSIZE2 -> rsqbr SEMACT0 .
+ARRAYSIZE2 -> rsqbr  .
 
 ASSIGNOP -> equal  .
 
@@ -189,9 +189,3 @@ VARIDNEST2 -> REPTIDNEST1  .
 
 VISIBILITY -> public  .
 VISIBILITY -> private  .
-
-SEMACT0 -> .
-SEMACT1 -> .
-SEMACT2 -> .
-SEMACT3 -> .
-SEMACT4 -> .
