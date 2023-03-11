@@ -13,9 +13,9 @@ public class Parser {
     Stack<String> s1 = new Stack<>();
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
-    //    String filename="example-polynomial";
+    //        String filename="example-polynomial";
 //    String filename = "example-bubblesort";
-    String filename="parsetest";
+        String filename="parsetest";
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
@@ -87,10 +87,9 @@ public class Parser {
         String table = "COMP 442/parsingTableVar.csv";
         String line = "";
         String commaDel = ",";
-        try{
+        try {
             this.astOutput = new FileWriter("COMP 442/inputOutput/" + filename + ".outast");
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
 
@@ -105,6 +104,7 @@ public class Parser {
                 }
                 row++;
             }
+            System.out.println(hash);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,8 +131,9 @@ public class Parser {
             String[] lookahead;
 
             var line = "START";
-            while (!s1.peek().equals("$") && !s1.peek().equals("eof")) {
+            while (!s1.peek().equals("$") && !s1.peek().equals("EOF")) {
                 //System.out.println(s1);
+
                 while (token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT) {
                     previousToken = token;
                     token = lex.getNextToken();
@@ -141,13 +142,12 @@ public class Parser {
 
                 top = s1.peek();
 
-
                 if (top.equals("EPSILON")) {
                     s1.pop();
                     top = s1.peek();
                 }
 
-                if (top.equals("$") || top.equals("eof")) {
+                if (top.equals("$") || top.equals("EOF")) {
                     System.out.println("end of file");
                     break;
                 }
@@ -179,99 +179,88 @@ public class Parser {
                     top = s1.peek();
                 }
 //gets value of the key in the parsing table and stores it in templookahead for the not terminal
-                var tempLookahead = hash.get(top + "," + token.getTokenType());
 
+                    var tempLookahead = hash.get(top + "," + token.getTokenType());
 
-                if (tempLookahead != null) {
-                    lookahead = tempLookahead.split("→")[1].trim().split(" ");
+                    if (tempLookahead != null) {
+                        lookahead = tempLookahead.split("→")[1].trim().split(" ");
 
-                } else {
+                    } else {
 
-                    lookahead = new String[]{};
-                }
+                        lookahead = new String[]{};
+                    }
 
-                //System.out.println( lookahead.length > 0);
+                    //System.out.println( lookahead.length > 0);
 
-                if (Arrays.asList(terminals).contains(top)) {
-                    if (top.equals(token.getTokenType().name())) {
+                    if (Arrays.asList(terminals).contains(top)) {
+                        if (top.equals(token.getTokenType().name())) {
 
-                        s1.pop();
-                        previousToken = token;
-                        token = lex.getNextToken();
-
-
-                        while (token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT) {
+                            s1.pop();
                             previousToken = token;
                             token = lex.getNextToken();
 
-                        }
-                    } else {
+                            while ((token.getTokenType() == TokenType.BLOCKCOMMENT || token.getTokenType() == TokenType.INLINECOMMENT)) {
+                                    previousToken = token;
+                                    token = lex.getNextToken();
+                            }
 
+                        } else {
+                            // handle error
+                            System.out.println("error");
+                            skipError(token);
+                            hasError = true;
+
+                        }
+
+                    } else if (lookahead.length > 0) {
+
+                        var nT = s1.pop(); //pop nonterminal
+
+                        Collections.reverse(Arrays.asList(lookahead));
+                        //System.out.println(lookahead.length);
+                        for (var i : lookahead) {
+                            s1.push(convertTerminals(i));
+                        }
+
+                        Collections.reverse(Arrays.asList(lookahead));
+
+                        if (nT == null) {
+                            nT = "!";
+                        }
+
+                        var tempLine = "";
+
+                        for (var i : lookahead) {
+                            tempLine += " " + i;
+                        }
+
+                        line = line.replace(nT, tempLine).replace("&epsilon", "");
+                        //write to file
+
+                        output += "START => " + line + "\n";
+
+                    } else {
                         // handle error
-                        System.out.println("error");
+//                    System.out.println(token.getTokenType().name());
+                        System.out.println("Error:" + top);
                         skipError(token);
                         hasError = true;
-//                        return false;
 
                     }
-
-                } else if (lookahead.length > 0) {
-
-                    var nT = s1.pop(); //pop nonterminal
-
-
-                    Collections.reverse(Arrays.asList(lookahead));
-                    //System.out.println(lookahead.length);
-                    for (var i : lookahead) {
-                        s1.push(convertTerminals(i));
-
-                    }
-
-                    Collections.reverse(Arrays.asList(lookahead));
-
-                    if (nT == null) {
-                        nT = "!";
-                    }
-
-                    var tempLine = "";
-
-                    for (var i : lookahead) {
-                        tempLine += " " + i;
-
-                    }
-
-                    line = line.replace(nT, tempLine).replace("&epsilon", "");
-                    //write to file
-
-                    output += "START => " + line + "\n";
-                    pwDerivations.write(output);
-                } else {
-                    // handle error
-//                    System.out.println(token.getTokenType().name());
-                    System.out.println("Error:" + top);
-                    skipError(token);
-                    hasError = true;
-//                    return false;
-
-                }
-
             }
+            pwDerivations.write(output);
             pwError.close();
             pwDerivations.close();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        try{
-                astOutput.write(this.treeToString());
-                astOutput.close();
+        try {
+            astOutput.write(this.treeToString());
+            astOutput.close();
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-
-//        return true;
     }
 
     public String convertTerminals(String value) {
@@ -421,13 +410,13 @@ public class Parser {
         String top = s1.peek();
         Token token = lookahead;
 
-        if (token.getTokenType() == TokenType.ENDOFFILE || followSet.get(top).contains(token.getTokenType())) {
+        if (token.getTokenType() == TokenType.EOF || followSet.get(top).contains(token.getTokenType())) {
             s1.pop();
         } else {
             while (!firstSet.get(top).contains(token.getTokenType())
                     || (!(firstSet.get(top).contains("&epsilon")
                     && followSet.get(top).contains(token.getTokenType()))
-                    && token.getTokenType() != TokenType.ENDOFFILE)) {
+                    && token.getTokenType() != TokenType.EOF)) {
                 token = lex.getNextToken();
             }
         }
@@ -655,28 +644,28 @@ public class Parser {
     }
 
     //null node
-    public AST makeNode(){
+    public AST makeNode() {
         semStack.push(null);
         return null;
     }
 
-    public AST makeNode(Token concept){
-        AST node = new AST(null, null, concept,  0);
+    public AST makeNode(Token concept) {
+        AST node = new AST(null, null, concept, 0);
         semStack.push(node);
         return node;
     }
 
-    public AST makeFamily(Object concept){
+    public AST makeFamily(Object concept) {
         ArrayList<AST> childNodes = new ArrayList<>();
 
-        while(semStack.peek() != null){
+        while (semStack.peek() != null) {
             childNodes.add(semStack.pop());
         }
         semStack.pop(); //pop null node
 
-        AST parentNode = new AST(null, childNodes, concept,  0);
+        AST parentNode = new AST(null, childNodes, concept, 0);
 
-        for (var child: parentNode.childNodes){
+        for (var child : parentNode.childNodes) {
             child.setParentNode(parentNode);
         }
         parentNode.updateDepth();
@@ -688,7 +677,7 @@ public class Parser {
         return parentNode;
     }
 
-    public String treeToString(){
+    public String treeToString() {
         //returns ast node in the tree format
         return semStack.toString();
     }
@@ -698,7 +687,6 @@ public class Parser {
         p.Parser();
         p.parse();
         System.out.println(p.output);
-
 
     }
 }

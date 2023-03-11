@@ -3,6 +3,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Lexer {
 
@@ -414,10 +415,9 @@ public class Lexer {
                 addALEToken(prevCharPoint,countLinePos);
             }
 
-
             //Fin.close();
             pwErrors.close();
-
+            tokenSequence.add(new Token("eof", TokenType.EOF, new Position(countLinePos)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -594,6 +594,8 @@ public class Lexer {
         }
 
     }
+
+
     public Token getNextToken(){
         Token tok = null;
         if(tokenCount!= tokenSequence.size()){
