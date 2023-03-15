@@ -85,6 +85,7 @@ public class Parser {
 //        String table = "COMP 442/ll1parsingtable.csv";
 //        String table = "COMP 442/parsingTableSem.csv";
         String table = "COMP 442/parsingTableVar.csv";
+//        String table = "COMP 442/ll1attrsem.csv";
         String line = "";
         String commaDel = ",";
         try {
@@ -104,7 +105,7 @@ public class Parser {
                 }
                 row++;
             }
-            System.out.println(hash);
+//            System.out.println(hash);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -173,11 +174,72 @@ public class Parser {
                         case "SEMACT16" -> this.makeFamily("WRITE");
                         case "SEMACT17" -> this.makeFamily("READ");
                         case "SEMACT18" -> this.makeFamily("RETURN");
+                        case "SEMACT19" -> this.makeFamily("PROG");
+
 
                     }
                     s1.pop();
                     top = s1.peek();
                 }
+//                                while (top.startsWith("SEMACT")) {
+//                    //PRIVATE PUBLIC SEMACT2 SEMACT1 MEMBERDECL
+//                    switch (top) {
+//                        case "SEMACTCREATEVISIBILITY" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEDIMEMPTY" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEDIM" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATENUMBER" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEEPSILON" -> this.makeNode();
+//                        case "SEMACTCREATEID" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATESCOPE" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATERETURNTYPE" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATETYPE" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEMULT" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEADD" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEREL" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATESIGNVAL" -> this.makeNode(previousToken);
+//                        case "SEMACTCREATEMULTOP" -> this.makeFamily("MULT OP", 3);
+//                        case "SEMACTCREATEADDOP" -> this.makeFamily("ADD OP",3);
+//                        case "SEMACTCREATERELOP" -> this.makeFamily("REL OP",3);
+//                        case "SEMACTCREATESIGN" -> this.makeFamily("SIGN", 2);
+//                        case "SEMACTCREATEROOT" -> this.makeFamily("ROOT");
+//                        case "SEMACTCREATEINHERITLIST" -> this.makeFamily("INHER LIST");
+//                        case "SEMACTCREATEMEMBERDECLLIST" -> this.makeFamily("DECL LIST");
+//                        case "SEMACTCREATECLASSDECL" -> this.makeFamily("CLASS DECL", 3);
+//                        case "SEMACTCREATEMEMBCONSTRDECL" -> this.makeFamily("MEM CONSTRUCT LIST", 2);
+//                        case "SEMACTCREATEFPARAMSLIST" -> this.makeFamily("FPARAMS LIST");
+//                        case "SEMACTCREATEMEMBFUNCDECL" -> this.makeFamily("FUNC DECL",4);
+//                        case "SEMACTCREATEDIMLIST" -> this.makeFamily("DIM LIST");
+//                        case "SEMACTCREATEMEMBVARDECL" -> this.makeFamily("MEM VAR DECL", 4);
+//                        case "SEMACTCREATEFPARAM" -> this.makeFamily("FPARAM", 3);
+//                        case "SEMACTCREATEAPARAMS" -> this.makeFamily("APRAM");
+//                        case "SEMACTCREATEVARDECL" -> this.makeFamily("L VAR DECL", 3);
+//                        case "SEMACTCREATEINDEXLIST" -> this.makeFamily("INDEX LIST");
+//                        case "SEMACTCREATESTATBLOCK" -> this.makeFamily("STAT BLOCK");
+//                        case "SEMACTCREATEREADSTMT" -> this.makeFamily("READ", 1);
+//                        case "SEMACTCREATEWRITESTMT" -> this.makeFamily("WRITE", 1);
+//                        case "SEMACTCREATERETURNSTMT" -> this.makeFamily("RETURN", 1);
+//                        case "SEMACTCREATEASSIGNSTMT" -> this.makeFamily("ASSIGN STAT", 2);
+//                        case "SEMACTCREATEWHILESTMT" -> this.makeFamily("READ", 2);
+//                        case "SEMACTCREATEIFSTMT" -> this.makeFamily("IF", 3);
+//                        case "SEMACTCREATENOT" -> this.makeFamily("NOT", 1);
+//                        case "SEMACTCREATEDOT" -> this.makeFamily("DOT", 2);
+//                        case "SEMACTCREATEDATAMEMBER" -> this.makeFamily("DATA MEMBER", 2);
+//                        case "SEMACTCREATEFUNCCALL" -> this.makeFamily("FUNC CALL", 2);
+//                        case "SEMACTCREATEFUNCBODYLIST" -> this.makeFamily("FUNC BODY");
+//                        case "SEMACTMIGRATETOFUNCDEF" -> this.makeFamily("FUNC DEF", 1);
+//                        case "SEMACTAPPENDTOFUNCDEF" -> this.makeFamily("FUNC DEF", 2);
+//                        case "SEMACTCREATEFUNCHEAD" -> this.makeFamily("FUNC HEAD");
+//
+//
+//                    }
+//                    s1.pop();
+//                    top = s1.peek();
+//                }
+//                if (top.equals("$") || top.equals("EOF")) {
+//                    System.out.println("end of file");
+//                    break;
+//                }
+
 //gets value of the key in the parsing table and stores it in templookahead for the not terminal
 
                     var tempLookahead = hash.get(top + "," + token.getTokenType());
@@ -658,10 +720,11 @@ public class Parser {
     public AST makeFamily(Object concept) {
         ArrayList<AST> childNodes = new ArrayList<>();
 
-        while (semStack.peek() != null) {
-            childNodes.add(semStack.pop());
-        }
-        semStack.pop(); //pop null node
+            while(semStack.peek() != null){
+                childNodes.add(semStack.pop());
+            }
+            semStack.pop();
+
 
         AST parentNode = new AST(null, childNodes, concept, 0);
 
@@ -676,6 +739,27 @@ public class Parser {
 
         return parentNode;
     }
+
+//    public AST makeFamily(Object concept, int pops) {
+//        ArrayList<AST> childNodes = new ArrayList<>();
+//
+//            for(int i = 0; i < pops; i++){
+//                childNodes.add(semStack.pop());
+//            }
+//
+//        AST parentNode = new AST(null, childNodes, concept, 0);
+//
+//        for (var child : parentNode.childNodes) {
+//            child.setParentNode(parentNode);
+//        }
+//        parentNode.updateDepth();
+//
+//        Collections.reverse(childNodes);
+//
+//        semStack.push(parentNode);
+//
+//        return parentNode;
+//    }
 
     public String treeToString() {
         //returns ast node in the tree format
