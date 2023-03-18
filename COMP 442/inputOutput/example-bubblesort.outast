@@ -1,104 +1,265 @@
-[FUNC DEF
-|    [ID, bubbleSort, 2]
-|    FPARAMS
-|    |    [ID, arr, 2]
-|    |    [INTEGERKEYWORD, integer, 2]
-|    |    [INTEGERKEYWORD, integer, 2]
-|    [VOIDKEYWORD, void, 2]
-, LOCAL VAR STAT BLOCK
-|    LOCAL VAR DECL
-|    |    [ID, n, 4]
-|    |    [INTEGERKEYWORD, integer, 4]
-|    |    ARR SIZE
-|    LOCAL VAR DECL
-|    |    [ID, i, 5]
-|    |    [INTEGERKEYWORD, integer, 5]
-|    |    ARR SIZE
-|    LOCAL VAR DECL
-|    |    [ID, j, 6]
-|    |    [INTEGERKEYWORD, integer, 6]
-|    |    ARR SIZE
-|    LOCAL VAR DECL
-|    |    [ID, temp, 7]
-|    |    [INTEGERKEYWORD, integer, 7]
-|    |    ARR SIZE
-|    STAT
-|    |    [ID, n, 8]
-|    STAT
-|    |    [ID, i, 9]
-|    STAT
-|    |    [ID, j, 10]
-|    STAT
-|    |    [ID, temp, 11]
-|    STAT
-|    |    WHILE
-|    |    |    [SUBTRACT, -, 12]
+[PROG
+|    FUNC DEF
+|    |    FUNCHEAD
+|    |    |    [ID, bubbleSort, 2]
+|    |    |    FUNCHEAD TAIL
+|    |    |    |    FPARAMS
+|    |    |    |    |    [ID, arr, 2]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    |    [VOIDKEYWORD, void, 2]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, n, 4]
+|    |    |    |    [INTEGERKEYWORD, integer, 4]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, i, 5]
+|    |    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, j, 6]
+|    |    |    |    [INTEGERKEYWORD, integer, 6]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, temp, 7]
+|    |    |    |    [INTEGERKEYWORD, integer, 7]
+|    |    |    |    ARR SIZE
+|    |    |    [ID, n, 8]
+|    |    |    [EQUAL, =, 8]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, size, 8]
+|    |    |    [ID, i, 9]
+|    |    |    [EQUAL, =, 9]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 9]
+|    |    |    [ID, j, 10]
+|    |    |    [EQUAL, =, 10]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 10]
+|    |    |    [ID, temp, 11]
+|    |    |    [EQUAL, =, 11]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 11]
 |    |    |    WHILE
-|    |    |    |    [SUBTRACT, -, 13]
-|    |    |    |    [SUBTRACT, -, 13]
-|    |    |    |    IF
-|    |    |    |    |    [ADD, +, 14]
-|    |    |    |    |    [ID, temp, 17]
-|    |    |    |    |    [ID, arr, 18]
-|    |    |    |    |    [ADD, +, 18]
-|    |    |    |    |    [ID, arr, 19]
-|    |    |    |    |    [ADD, +, 19]
-|    |    |    |    [ID, j, 21]
-|    |    |    |    [ADD, +, 21]
-|    |    |    [ID, i, 23]
-|    |    |    [ADD, +, 23]
-, FUNC DEF
-|    [ID, printArray, 28]
-|    FPARAMS
-|    |    [ID, arr, 28]
-|    |    [INTEGERKEYWORD, integer, 28]
-|    |    [INTEGERKEYWORD, integer, 28]
-|    [VOIDKEYWORD, void, 28]
-, LOCAL VAR STAT BLOCK
-|    LOCAL VAR DECL
-|    |    [ID, n, 30]
-|    |    [INTEGERKEYWORD, integer, 30]
-|    |    ARR SIZE
-|    LOCAL VAR DECL
-|    |    [ID, i, 31]
-|    |    [INTEGERKEYWORD, integer, 31]
-|    |    ARR SIZE
-|    STAT
-|    |    [ID, n, 32]
-|    STAT
-|    |    [ID, i, 33]
-|    STAT
-|    |    WHILE
-|    |    |    WRITE
-|    |    |    [ID, i, 36]
-|    |    |    [ADD, +, 36]
-, FUNC DEF
-|    [ID, main, 41]
-|    [VOIDKEYWORD, void, 41]
-, LOCAL VAR STAT BLOCK
-|    LOCAL VAR DECL
-|    |    [ID, arr, 43]
-|    |    [INTEGERKEYWORD, integer, 43]
-|    |    ARR SIZE
-|    |    |    [INTEGER, 7, 43]
-|    STAT
-|    |    [ID, arr, 44]
-|    STAT
-|    |    [ID, arr, 45]
-|    STAT
-|    |    [ID, arr, 46]
-|    STAT
-|    |    [ID, arr, 47]
-|    STAT
-|    |    [ID, arr, 48]
-|    STAT
-|    |    [ID, arr, 49]
-|    STAT
-|    |    [ID, arr, 50]
-|    STAT
-|    |    [ID, printarray, 51]
-|    STAT
-|    |    [ID, bubbleSort, 52]
-|    STAT
-|    |    [ID, printarray, 53]
+|    |    |    |    REL EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, i, 12]
+|    |    |    |    |    [LESSTHAN, <, 12]
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, n, 12]
+|    |    |    |    |    |    [SUBTRACT, -, 12]
+|    |    |    |    |    |    [INTEGER, 1, 12]
+|    |    |    |    WHILE
+|    |    |    |    |    REL EXPR
+|    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    [ID, j, 13]
+|    |    |    |    |    |    [LESSTHAN, <, 13]
+|    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    [ID, n, 13]
+|    |    |    |    |    |    |    [SUBTRACT, -, 13]
+|    |    |    |    |    |    |    [ID, i, 13]
+|    |    |    |    |    |    |    [SUBTRACT, -, 13]
+|    |    |    |    |    |    |    [INTEGER, 1, 13]
+|    |    |    |    |    IF
+|    |    |    |    |    |    REL EXPR
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, arr, 14]
+|    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    |    |    [ID, j, 14]
+|    |    |    |    |    |    |    [GREATERTHAN, >, 14]
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, arr, 14]
+|    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    |    |    [ID, j, 14]
+|    |    |    |    |    |    |    |    |    |    [ADD, +, 14]
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 14]
+|    |    |    |    |    |    [ID, temp, 17]
+|    |    |    |    |    |    [EQUAL, =, 17]
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, arr, 17]
+|    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    |    |    [ID, j, 17]
+|    |    |    |    |    |    [ID, arr, 18]
+|    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, j, 18]
+|    |    |    |    |    |    [EQUAL, =, 18]
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, arr, 18]
+|    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    |    |    [ID, j, 18]
+|    |    |    |    |    |    |    |    |    |    [ADD, +, 18]
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 18]
+|    |    |    |    |    |    [ID, arr, 19]
+|    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, j, 19]
+|    |    |    |    |    |    |    |    [ADD, +, 19]
+|    |    |    |    |    |    |    |    [INTEGER, 1, 19]
+|    |    |    |    |    |    [EQUAL, =, 19]
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    [ID, temp, 19]
+|    |    |    |    |    [ID, j, 21]
+|    |    |    |    |    [EQUAL, =, 21]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    [ID, j, 21]
+|    |    |    |    |    |    |    [ADD, +, 21]
+|    |    |    |    |    |    |    [INTEGER, 1, 21]
+|    |    |    |    [ID, i, 23]
+|    |    |    |    [EQUAL, =, 23]
+|    |    |    |    EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, i, 23]
+|    |    |    |    |    |    [ADD, +, 23]
+|    |    |    |    |    |    [INTEGER, 1, 23]
+|    FUNC DEF
+|    |    FUNCHEAD
+|    |    |    [ID, printArray, 28]
+|    |    |    FUNCHEAD TAIL
+|    |    |    |    FPARAMS
+|    |    |    |    |    [ID, arr, 28]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 28]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 28]
+|    |    |    |    [VOIDKEYWORD, void, 28]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, n, 30]
+|    |    |    |    [INTEGERKEYWORD, integer, 30]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, i, 31]
+|    |    |    |    [INTEGERKEYWORD, integer, 31]
+|    |    |    |    ARR SIZE
+|    |    |    [ID, n, 32]
+|    |    |    [EQUAL, =, 32]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, size, 32]
+|    |    |    [ID, i, 33]
+|    |    |    [EQUAL, =, 33]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 33]
+|    |    |    WHILE
+|    |    |    |    REL EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, i, 34]
+|    |    |    |    |    [LESSTHAN, <, 34]
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, n, 34]
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    [ID, arr, 35]
+|    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    |    |    |    [ID, i, 35]
+|    |    |    |    [ID, i, 36]
+|    |    |    |    [EQUAL, =, 36]
+|    |    |    |    EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, i, 36]
+|    |    |    |    |    |    [ADD, +, 36]
+|    |    |    |    |    |    [INTEGER, 1, 36]
+|    FUNC DEF
+|    |    FUNCHEAD
+|    |    |    [ID, main, 41]
+|    |    |    FUNCHEAD TAIL
+|    |    |    |    [VOIDKEYWORD, void, 41]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, arr, 43]
+|    |    |    |    [INTEGERKEYWORD, integer, 43]
+|    |    |    |    ARR SIZE
+|    |    |    |    |    [INTEGER, 7, 43]
+|    |    |    [ID, arr, 44]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 44]
+|    |    |    [EQUAL, =, 44]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 64, 44]
+|    |    |    [ID, arr, 45]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 1, 45]
+|    |    |    [EQUAL, =, 45]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 34, 45]
+|    |    |    [ID, arr, 46]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 2, 46]
+|    |    |    [EQUAL, =, 46]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 25, 46]
+|    |    |    [ID, arr, 47]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 3, 47]
+|    |    |    [EQUAL, =, 47]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 12, 47]
+|    |    |    [ID, arr, 48]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 4, 48]
+|    |    |    [EQUAL, =, 48]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 22, 48]
+|    |    |    [ID, arr, 49]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 5, 49]
+|    |    |    [EQUAL, =, 49]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 11, 49]
+|    |    |    [ID, arr, 50]
+|    |    |    INDICE
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 6, 50]
+|    |    |    [EQUAL, =, 50]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 90, 50]
+|    |    |    [ID, printarray, 51]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, arr, 51]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 7, 51]
+|    |    |    [ID, bubbleSort, 52]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, arr, 52]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 7, 52]
+|    |    |    [ID, printarray, 53]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, arr, 53]
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 7, 53]
 ]

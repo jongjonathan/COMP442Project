@@ -1,5 +1,8 @@
+import AST.AST;
+
 import java.io.*;
 import java.util.*;
+
 
 public class Parser {
     HashMap<String, String[]> hm = new HashMap<String, String[]>();
@@ -14,8 +17,8 @@ public class Parser {
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
     //        String filename="example-polynomial";
-//    String filename = "example-bubblesort";
-        String filename="parsetest";
+    String filename = "example-bubblesort";
+//        String filename="parsetest";
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
@@ -116,8 +119,8 @@ public class Parser {
     public void parse() {
         try {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
-//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
+//            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
             pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outsyntaxerrors"));
             PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outderivation"));
@@ -167,7 +170,7 @@ public class Parser {
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily("FPARAMS");
                         case "SEMACT11" -> this.makeFamily("FUNC DEF");
-                        case "SEMACT12" -> this.makeFamily("LOCAL VAR STAT BLOCK"); //
+                        case "SEMACT12" -> this.makeFamily("FUNC BODY/LOCAL VAR STAT BLOCK"); //
                         case "SEMACT13" -> this.makeFamily("STAT");
                         case "SEMACT14" -> this.makeFamily("WHILE");
                         case "SEMACT15" -> this.makeFamily("IF");
@@ -175,11 +178,29 @@ public class Parser {
                         case "SEMACT17" -> this.makeFamily("READ");
                         case "SEMACT18" -> this.makeFamily("RETURN");
                         case "SEMACT19" -> this.makeFamily("PROG");
+                        case "SEMACT20" -> this.makeFamily("FACTOR");
+                        case "SEMACT21" -> this.makeFamily("FUNCHEAD TAIL");
+                        case "SEMACT22" -> this.makeFamily("FUNCHEAD");
+                        case "SEMACT23" -> this.makeFamily("ID NEST");
+                        case "SEMACT24" -> this.makeFamily("INDICE");
+                        case "SEMACT25" -> this.makeFamily("ARITHM EXPR");
+                        case "SEMACT26" -> this.makeFamily("EXPR");
+                        case "SEMACT27" -> this.makeFamily("REL EXPR");
+                        case "SEMACT28" -> this.makeFamily("STAT ID NEST");
+
+
+
+
+
 
 
                     }
                     s1.pop();
                     top = s1.peek();
+                }
+                if (top.equals("$") || top.equals("EOF")) {
+                    System.out.println("end of file");
+                    break;
                 }
 //                                while (top.startsWith("SEMACT")) {
 //                    //PRIVATE PUBLIC SEMACT2 SEMACT1 MEMBERDECL
@@ -235,10 +256,7 @@ public class Parser {
 //                    s1.pop();
 //                    top = s1.peek();
 //                }
-//                if (top.equals("$") || top.equals("EOF")) {
-//                    System.out.println("end of file");
-//                    break;
-//                }
+
 
 //gets value of the key in the parsing table and stores it in templookahead for the not terminal
 
@@ -728,7 +746,7 @@ public class Parser {
 
         AST parentNode = new AST(null, childNodes, concept, 0);
 
-        for (var child : parentNode.childNodes) {
+        for (var child : parentNode.getChildNodes()) {
             child.setParentNode(parentNode);
         }
         parentNode.updateDepth();
@@ -740,14 +758,14 @@ public class Parser {
         return parentNode;
     }
 
-//    public AST makeFamily(Object concept, int pops) {
-//        ArrayList<AST> childNodes = new ArrayList<>();
+//    public AST.AST makeFamily(Object concept, int pops) {
+//        ArrayList<AST.AST> childNodes = new ArrayList<>();
 //
 //            for(int i = 0; i < pops; i++){
 //                childNodes.add(semStack.pop());
 //            }
 //
-//        AST parentNode = new AST(null, childNodes, concept, 0);
+//        AST.AST parentNode = new AST.AST(null, childNodes, concept, 0);
 //
 //        for (var child : parentNode.childNodes) {
 //            child.setParentNode(parentNode);

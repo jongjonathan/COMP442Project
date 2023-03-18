@@ -1,14 +1,18 @@
+package AST;
+
 import java.util.ArrayList;
 
 public class AST {
     Object concept;
     AST parentNode;
-    ArrayList<AST> childNodes;
+    private ArrayList<AST> childNodes;
     int depth;
 
     public void setParentNode(AST parentNode) {
         this.parentNode = parentNode;
     }
+
+    public ArrayList<AST> getChildNodes(){ return childNodes;}
 
     public int getDepth() {
         return depth;
