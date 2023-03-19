@@ -7,13 +7,27 @@
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
 |    | inherit   | none      |                           |
+|    | function  | evaluate  |           | (x, float) float| public    |
+|    |    =====================================================
+|    |    | table: evaluate         scope offset: 0           |
+|    |    =====================================================
+|    |    | PARAM     | x         | float     | 0     |       |
+|    |    =====================================================
 |    =====================================================
 | class     | LINEAR                                |
 |    =====================================================
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | function  | tryMethod |           | (l, integer, v, id) float| public    |
+|    | var       | a         | float     | 0     | private|
+|    | var       | b         | float     | 0     | private|
+|    =====================================================
+| class     | LINEAR                                |
+|    =====================================================
+|    | table: LINEAR           scope offset: 0           |
+|    =====================================================
+|    | inherit   | POLYNOMIAL|                           |
+|    | function  | tryMethod |           | (l, integer, v, id) integer| public    |
 |    |    =====================================================
 |    |    | table: tryMethod        scope offset: 0           |
 |    |    =====================================================
@@ -26,14 +40,33 @@
 |    | table: QUADRATIC        scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | function  | tryVoidMethod|           |           | public    |
+|    | function  | undefMethod|           |           | public    |
 |    |    =====================================================
-|    |    | table: tryVoidMethod    scope offset: 0           |
+|    |    | table: undefMethod      scope offset: 0           |
 |    |    =====================================================
 |    |    =====================================================
 |    | var       | x         | float     | 0     | public|
 |    | var       | y         | integer   | 0     | public|
 |    | var       | z         | id        | 0     | public|
+|    =====================================================
+| function  | undeclMethod|           | (integer, integer) void|           |
+|    =====================================================
+|    | table: undeclMethod     scope offset: 0           |
+|    =====================================================
+|    | PARAM     | arr       | integer   | 0     |       |
+|    | PARAM     | size      | integer   | 0     |       |
+|    | var       | n         | integer   | 0     |       |
+|    | var       | i         | integer   | 0     |       |
+|    =====================================================
+| function  | tryMethod |           | (integer, id) integer|           |
+|    =====================================================
+|    | table: tryMethod        scope offset: 0           |
+|    =====================================================
+|    | PARAM     | l         | integer   | 0     |       |
+|    | PARAM     | v         | id        | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
 |    =====================================================
 | function  | tryMethod |           | (integer, id) integer|           |
 |    =====================================================

@@ -43,7 +43,9 @@ public class TypeCheckingVisitor extends Visitor{
     //    public abstract void visit(DimListNode      p_node);
 //    public abstract void visit(DimNode          p_node);
     public void visit(FuncCallNode     p_node){
+        boolean found = false;
         for (AST progChild : p_node.parentNode.parentNode.getChildNodes()) {
+
                 if(progChild.concept.equals("FUNC DEF"))   {
                     //name of func
                     String curName = ((Token)p_node.getChildNodes().get(1).concept).getLexeme();
@@ -60,21 +62,17 @@ public class TypeCheckingVisitor extends Visitor{
 
                            if(compReturn.equals(curReturn)){
                                System.out.println("They're equal");
-                           }
-                           else{
-//                    p_node.setType("typeerror");
-                               this.m_errors += "Undefined member function declaration type error: "
-                                       + "\n";
+                               found =true;
+                               ((FuncDefNode)progChild).declared = true;
                            }
                         }
                     }
-
-
-
                 }
-
-
-
+        }
+        if(found == false){
+                this.m_errors += "[error 6.2] Undefined member function declaration type : "
+                        + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
+                        +" method not found, on line "+((Token) p_node.getChildNodes().get(1).concept).getPosition()+"\n";
 
         }
     };
@@ -86,7 +84,12 @@ public class TypeCheckingVisitor extends Visitor{
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
-
+        if(p_node.declared == false){
+            this.m_errors += "[error 6.1] undeclared member function definition "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
+        
     };
     //    public abstract void visit(FuncDefNode      p_node);
     public void visit(IDNode           p_node){
