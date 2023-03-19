@@ -59,9 +59,26 @@ public class SymbolTableCreationVisitor extends Visitor {
         String ftype = "";
         String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         SymTable localtable = new SymTable(1,fname, p_node.m_symtab);
-        Vector<VarEntry> paramlist = new Vector<VarEntry>();
+        String paramList = "";
+        boolean returntypeneeded = false;
+        for (AST child : p_node.getChildNodes()) {
+            if(child instanceof ParamsListNode){
+                paramList = "(";
+                for (AST secondChild : child.getChildNodes()) {
+                    paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                }
+                paramList = paramList.substring(0,paramList.length()-2)+")";
+                returntypeneeded = true;
+                continue;
+            }
+            if(returntypeneeded == true){
+                returntypeneeded = false;
+                paramList += " "+((Token)child.concept).getLexeme();
+            }
 
-        p_node.m_symtabentry = new FuncEntry(ftype, fname, paramlist, localtable);
+        }
+
+        p_node.m_symtabentry = new FuncEntry(ftype, fname, paramList, localtable);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
         p_node.m_symtab = localtable;
         // propagate accepting the same visitor to all the children
@@ -112,6 +129,42 @@ public class SymbolTableCreationVisitor extends Visitor {
         p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
+    public void visit(FuncCallNode p_node) {
+        //  public function evaluate: (x: float) => float;
+
+        String ftype = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        String fname = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
+        SymTable localtable = new SymTable(2,fname, p_node.m_symtab);
+        String paramList = "";
+        boolean returntypeneeded = false;
+        for (AST child : p_node.getChildNodes()) {
+            if(child instanceof ParamsListNode){
+                paramList = "(";
+                for (AST secondChild : child.getChildNodes()) {
+                    paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                }
+                paramList = paramList.substring(0,paramList.length()-2)+")";
+                returntypeneeded = true;
+                continue;
+            }
+            if(returntypeneeded == true){
+                returntypeneeded = false;
+                paramList += " "+((Token)child.concept).getLexeme();
+            }
+
+        }
+
+        p_node.m_symtabentry = new FuncEntry(ftype, fname, paramList, localtable);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+        p_node.m_symtab = localtable;
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+        System.out.println("func call");
+    };
 
     @Override
     public void visit(AST p_node) {

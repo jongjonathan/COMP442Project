@@ -14,7 +14,7 @@ public class Parser {
     Stack<String> s1 = new Stack<>();
     private ArrayList<String> nullable = new ArrayList<>();
     private ArrayList<String> endable = new ArrayList<>();
-    //        String filename="example-polynomial";
+//            String filename="example-polynomial";
 //    String filename = "example-bubblesort";
         String filename="parsetest";
     // String filename="parse2";
@@ -164,7 +164,7 @@ public class Parser {
                         case "SEMACT5" -> this.makeFamily(new ClassNode(null,null, "CLASS DECL",0));
                         case "SEMACT6" -> this.makeFamily("MEMBER DECL");
                         case "SEMACT7" -> this.makeFamily("INHERLIST");
-                        case "SEMACT8" -> this.makeFamily("MEMBER FUNC DECL");
+                        case "SEMACT8" -> this.makeFamily(new FuncCallNode(null,null,"MEMBER FUNC DECL",0));
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily(new ParamsListNode(null,null, "FPARAMS",0));
                         case "SEMACT11" -> this.makeFamily(new FuncDefNode(null,null, "FUNC DEF",0));
