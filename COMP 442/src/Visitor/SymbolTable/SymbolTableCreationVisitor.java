@@ -99,9 +99,9 @@ public class SymbolTableCreationVisitor extends Visitor {
         int count =0;
         for (AST child : p_node.getChildNodes()) {
             if( count%2 ==0){
-                String fname = ((Token) child.concept).getLexeme();
                 child.m_symtab = p_node.m_symtab;
-                p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getLexeme(), fname, null);
+                p_node.m_symtabentry = new VarEntry("PARAM", ""+((Token)p_node.getChildNodes().get(count+1).concept).getLexeme(),
+                        "" + ((Token) child.concept).getLexeme(), null);
                 child.m_symtabentry = p_node.m_symtabentry;
                 child.m_symtab.addEntry(p_node.m_symtabentry);
                 child.accept(this);

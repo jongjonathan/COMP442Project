@@ -2,6 +2,7 @@ import AST.*;
 import Lexer.*;
 import java.io.*;
 import java.util.*;
+import Visitor.SemanticCheck.TypeCheckingVisitor;
 
 
 public class Parser {
@@ -734,6 +735,12 @@ public class Parser {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+//    public void writeSemanticErrors(Stack<AST> stack){
+//        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + filename + ".outsemanticerrors");
+//    }
+    public String getFilename(){
+        return filename;
     }
 
 }

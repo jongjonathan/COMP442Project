@@ -2,52 +2,47 @@
 =====================================================
 | table: global           scope offset: 0           |
 =====================================================
-| function  | bubbleSort|           | (integer, integer) void|           |
-|    =====================================================
-|    | table: bubbleSort       scope offset: 0           |
-|    =====================================================
-|    | PARAM     | arr       | arr       | 0     |       |
-|    | PARAM     | size      | size      | 0     |       |
-|    | var       | n         | integer   | 0     |       |
-|    | var       | i         | integer   | 0     |       |
-|    | var       | j         | integer   | 0     |       |
-|    | var       | temp      | integer   | 0     |       |
-|    =====================================================
-| function  | main      |           |           |           |
-|    =====================================================
-|    | table: main             scope offset: 0           |
-|    =====================================================
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    =====================================================
 | class     | POLYNOMIAL                            |
 |    =====================================================
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
 |    | inherit   | none      |                           |
-|    | function  | evaluate  |           | (x, float) float| public    |
-|    |    =====================================================
-|    |    | table: evaluate         scope offset: 0           |
-|    |    =====================================================
-|    |    | PARAM     | x         | x         | 0     |       |
-|    |    =====================================================
-|    | var       | a         | int       | 0     | public|
-|    | var       | b         | float     | 0     | private|
-|    | var       | c         | int       | 0     | private|
 |    =====================================================
 | class     | LINEAR                                |
 |    =====================================================
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | var       | a         | float     | 0     | private|
-|    | var       | b         | float     | 0     | private|
-|    | function  | evaluate  |           | (x, float) float| public    |
+|    | function  | tryMethod |           | (l, integer, v, id) float| public    |
 |    |    =====================================================
-|    |    | table: evaluate         scope offset: 0           |
+|    |    | table: tryMethod        scope offset: 0           |
 |    |    =====================================================
-|    |    | PARAM     | x         | x         | 0     |       |
+|    |    | PARAM     | l         | integer   | 0     |       |
+|    |    | PARAM     | v         | id        | 0     |       |
 |    |    =====================================================
+|    =====================================================
+| class     | QUADRATIC                             |
+|    =====================================================
+|    | table: QUADRATIC        scope offset: 0           |
+|    =====================================================
+|    | inherit   | POLYNOMIAL|                           |
+|    | function  | tryVoidMethod|           |           | public    |
+|    |    =====================================================
+|    |    | table: tryVoidMethod    scope offset: 0           |
+|    |    =====================================================
+|    |    =====================================================
+|    | var       | x         | float     | 0     | public|
+|    | var       | y         | integer   | 0     | public|
+|    | var       | z         | id        | 0     | public|
+|    =====================================================
+| function  | tryMethod |           | (integer, id) integer|           |
+|    =====================================================
+|    | table: tryMethod        scope offset: 0           |
+|    =====================================================
+|    | PARAM     | l         | integer   | 0     |       |
+|    | PARAM     | v         | id        | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
 |    =====================================================
 =====================================================
