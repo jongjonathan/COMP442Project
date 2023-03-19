@@ -1,3 +1,5 @@
+package Lexer;
+
 public class Token {
     private TokenType tokenType;
     private String lexeme;
@@ -22,7 +24,7 @@ public class Token {
     public Position getPosition(){
         return this.position;
     }
-    public Token (String lexeme, TokenType type,  Position line){
+    public Token (String lexeme, TokenType type, Position line){
         this.lexeme = lexeme;
         this.tokenType = type;
         this.position = line;

@@ -1,18 +1,29 @@
 package AST;
-
+import Visitor.*;
+import SymbolTable.*;
 import java.util.ArrayList;
 
 public class AST {
-    Object concept;
-    AST parentNode;
+    public Object concept;
+    public AST parentNode;
     private ArrayList<AST> childNodes;
-    int depth;
+    public int depth;
+    public String      m_data      = null;
+
+    public String getData() {
+        return this.m_data;
+    }
+
+    public  SymTable      m_symtab             = null;
+    public  SymTableEntry m_symtabentry        = null;
 
     public void setParentNode(AST parentNode) {
         this.parentNode = parentNode;
     }
 
     public ArrayList<AST> getChildNodes(){ return childNodes;}
+
+    public void setChildNodes(ArrayList<AST> childNodes){ this.childNodes= childNodes;}
 
     public int getDepth() {
         return depth;
@@ -53,5 +64,8 @@ public class AST {
         }
 
         return tree.toString();
+    }
+    public void accept(Visitor p_visitor) {
+        p_visitor.visit(this);
     }
 }

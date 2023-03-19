@@ -1,4 +1,6 @@
-public class ErrorToken extends Token{
+package Lexer;
+
+public class ErrorToken extends Token {
 
     private String errorPrint;
 
