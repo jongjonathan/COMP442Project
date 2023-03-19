@@ -16,13 +16,20 @@
 |    =====================================================
 |    | table: bubbleSort       scope offset: 0           |
 |    =====================================================
-|    | PARAM     | arr       | ID        | 0     |
-|    | PARAM     | integer   | INTEGERKEYWORD| 0     |
-|    | PARAM     | integer   | INTEGERKEYWORD| 0     |
+|    | PARAM     | arr       | arr       | 0     |
+|    | PARAM     | integer   | integer   | 0     |
+|    | PARAM     | integer   | integer   | 0     |
+|    | var       | n         | integer   | 0     |
+|    | var       | i         | integer   | 0     |
+|    | var       | j         | integer   | 0     |
+|    | var       | temp      | integer   | 0     |
 |    =====================================================
 | function  | main      |                           |
 |    =====================================================
 |    | table: main             scope offset: 0           |
 |    =====================================================
+|    | var       | arr       | integer   | 0     |
+|    | var       | arr       | integer   | 0     |
+|    | var       | arr       | integer   | 0     |
 |    =====================================================
 =====================================================

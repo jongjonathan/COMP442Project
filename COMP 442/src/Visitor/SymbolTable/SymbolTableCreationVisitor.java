@@ -77,7 +77,7 @@ public class SymbolTableCreationVisitor extends Visitor {
         for (AST child : p_node.getChildNodes()) {
             String fname = ((Token) child.concept).getLexeme();
             child.m_symtab = p_node.m_symtab;
-            p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getTokenType(), fname, null);
+            p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getLexeme(), fname, null);
             child.m_symtabentry = p_node.m_symtabentry;
             child.m_symtab.addEntry(p_node.m_symtabentry);
             child.accept(this);
@@ -88,6 +88,30 @@ public class SymbolTableCreationVisitor extends Visitor {
         p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.concept).getTokenType(), fname,null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     };
+    public void visit(StatBlockNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+
+    }
+    public void visit(VarDeclNode p_node){
+        String vartype = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
+        String varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        // loop over the list of dimension nodes and aggregate here
+        Vector<Integer> dimlist = new Vector<Integer>();
+        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
+            // parameter dimension
+            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
+            dimlist.add(dimval);
+        }
+        // create the symbol table entry for this variable
+        // it will be picked-up by another node above later
+        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+    }
 
     @Override
     public void visit(AST p_node) {

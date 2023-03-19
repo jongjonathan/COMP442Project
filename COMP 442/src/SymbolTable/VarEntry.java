@@ -7,6 +7,9 @@ public class VarEntry extends SymTableEntry {
     public VarEntry(String p_kind, String p_type, String p_name, Vector<Integer> p_dims){
         super(p_kind, p_type, p_name, null);
     }
+    public VarEntry(String p_kind, String p_type, String p_name, int p_dims){
+        super(p_kind, p_type, p_name, null);
+    }
 
     public String toString(){
         return 	String.format("%-12s" , "| " + m_kind) +

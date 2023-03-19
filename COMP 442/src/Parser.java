@@ -160,7 +160,7 @@ public class Parser {
                         case "SEMACT1" -> this.makeNode(previousToken);
                         case "SEMACT2" -> this.makeNode(); //null separator
                         case "SEMACT3" -> this.makeFamily("ARR SIZE");
-                        case "SEMACT4" -> this.makeFamily("LOCAL VAR DECL");
+                        case "SEMACT4" -> this.makeFamily(new VarDeclNode(null,null,"LOCAL VAR DECL",0));
                         case "SEMACT5" -> this.makeFamily(new ClassNode(null,null, "CLASS DECL",0));
                         case "SEMACT6" -> this.makeFamily("MEMBER DECL");
                         case "SEMACT7" -> this.makeFamily("INHERLIST");
@@ -168,7 +168,7 @@ public class Parser {
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
                         case "SEMACT10" -> this.makeFamily(new ParamsListNode(null,null, "FPARAMS",0));
                         case "SEMACT11" -> this.makeFamily(new FuncDefNode(null,null, "FUNC DEF",0));
-                        case "SEMACT12" -> this.makeFamily("FUNC BODY/LOCAL VAR STAT BLOCK"); //
+                        case "SEMACT12" -> this.makeFamily(new StatBlockNode(null,null,"FUNC BODY/LOCAL VAR STAT BLOCK",0)); //
                         case "SEMACT13" -> this.makeFamily("STAT");
                         case "SEMACT14" -> this.makeFamily("WHILE");
                         case "SEMACT15" -> this.makeFamily("IF");
