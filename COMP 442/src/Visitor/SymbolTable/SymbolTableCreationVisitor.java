@@ -62,11 +62,15 @@ public class SymbolTableCreationVisitor extends Visitor {
         SymTable localtable = new SymTable(1,fname, p_node.m_symtab);
         String paramList = "";
         boolean returntypeneeded = false;
+        int count =0;
         for (AST child : p_node.getChildNodes()) {
             if(child instanceof ParamsListNode){
                 paramList = "(";
                 for (AST secondChild : child.getChildNodes()) {
-                    paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                    if( count%2 ==1) {
+                        paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                    }
+                   count++;
                 }
                 paramList = paramList.substring(0,paramList.length()-2)+")";
                 returntypeneeded = true;
@@ -92,13 +96,19 @@ public class SymbolTableCreationVisitor extends Visitor {
     }
     public void visit(ParamsListNode p_node) {
         System.out.println("param");
+        int count =0;
         for (AST child : p_node.getChildNodes()) {
-            String fname = ((Token) child.concept).getLexeme();
-            child.m_symtab = p_node.m_symtab;
-            p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getLexeme(), fname, null);
-            child.m_symtabentry = p_node.m_symtabentry;
-            child.m_symtab.addEntry(p_node.m_symtabentry);
-            child.accept(this);
+            if( count%2 ==0){
+                String fname = ((Token) child.concept).getLexeme();
+                child.m_symtab = p_node.m_symtab;
+                p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getLexeme(), fname, null);
+                child.m_symtabentry = p_node.m_symtabentry;
+                child.m_symtab.addEntry(p_node.m_symtabentry);
+                child.accept(this);
+
+            }
+            count++;
+
         }
     }
     public void visit(IDNode p_node) {
