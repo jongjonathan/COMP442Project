@@ -22,11 +22,11 @@ public abstract class Visitor {
 //    public abstract void visit(FuncCallNode     p_node);
     public abstract void visit(FuncDefNode p_node);
 //    public abstract void visit(FuncDefNode      p_node);
-//    public abstract void visit(IdNode           p_node);
+    public abstract void visit(IDNode           p_node);
 //    public abstract void visit(MultOpNode       p_node);
     public abstract void visit(AST             p_node);
 //    public abstract void visit(NumNode          p_node);
-//    public abstract void visit(ParamListNode    p_node);
+    public abstract void visit(ParamsListNode    p_node);
     public abstract void visit(ProgNode         p_node);
 //    public abstract void visit(ProgramBlockNode p_node);
 //    public abstract void visit(PutStatNode      p_node);

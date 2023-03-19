@@ -56,15 +56,10 @@ public class SymbolTableCreationVisitor extends Visitor {
     }
 
     public void visit(FuncDefNode p_node) {
-        String ftype = "FUNCTION";
+        String ftype = "";
         String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         SymTable localtable = new SymTable(1,fname, p_node.m_symtab);
         Vector<VarEntry> paramlist = new Vector<VarEntry>();
-        if ( p_node.getChildNodes().get(1).concept.equals("FPARAMS")){
-            for (AST param : p_node.getChildNodes().get(1).getChildNodes()){
-                paramlist.add((VarEntry) p_node.m_symtabentry);
-            }
-        }
 
         p_node.m_symtabentry = new FuncEntry(ftype, fname, paramlist, localtable);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
@@ -77,6 +72,22 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
         System.out.println("func def");
     }
+    public void visit(ParamsListNode p_node) {
+        System.out.println("param");
+        for (AST child : p_node.getChildNodes()) {
+            String fname = ((Token) child.concept).getLexeme();
+            child.m_symtab = p_node.m_symtab;
+            p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) child.concept).getTokenType(), fname, null);
+            child.m_symtabentry = p_node.m_symtabentry;
+            child.m_symtab.addEntry(p_node.m_symtabentry);
+            child.accept(this);
+        }
+    }
+    public void visit(IDNode p_node) {
+        String fname = ((Token) p_node.concept).getLexeme();
+        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.concept).getTokenType(), fname,null);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+    };
 
     @Override
     public void visit(AST p_node) {

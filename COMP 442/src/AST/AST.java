@@ -21,6 +21,11 @@ public class AST {
         this.parentNode = parentNode;
     }
 
+    public void addChild(AST p_child) {
+        p_child.setParentNode(this);
+        this.childNodes.add(p_child);
+    }
+
     public ArrayList<AST> getChildNodes(){ return childNodes;}
 
     public void setChildNodes(ArrayList<AST> childNodes){ this.childNodes= childNodes;}

@@ -166,7 +166,7 @@ public class Parser {
                         case "SEMACT7" -> this.makeFamily("INHERLIST");
                         case "SEMACT8" -> this.makeFamily("MEMBER FUNC DECL");
                         case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
-                        case "SEMACT10" -> this.makeFamily("FPARAMS");
+                        case "SEMACT10" -> this.makeFamily(new ParamsListNode(null,null, "FPARAMS",0));
                         case "SEMACT11" -> this.makeFamily(new FuncDefNode(null,null, "FUNC DEF",0));
                         case "SEMACT12" -> this.makeFamily("FUNC BODY/LOCAL VAR STAT BLOCK"); //
                         case "SEMACT13" -> this.makeFamily("STAT");
@@ -719,6 +719,17 @@ public class Parser {
         try {
             astOutput.write(this.treeToString());
             astOutput.close();
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void writeSymbolTable(Stack<AST> stack){
+        FileWriter f;
+        try {
+            f = new FileWriter("COMP 442/inputOutput/" + filename + ".outsymboltables");
+            f.write(stack.get(0).m_symtab.toString());
+            f.close();
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
