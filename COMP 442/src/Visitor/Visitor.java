@@ -20,10 +20,11 @@ public abstract class Visitor {
 //    public abstract void visit(DimListNode      p_node);
 //    public abstract void visit(DimNode          p_node);
     public abstract void visit(FuncCallNode     p_node);
-    public abstract void visit(MemberVarDeclNode           p_node);
+    public abstract void visit(MemberVarDeclNode   p_node);
     public abstract void visit(FuncDefNode p_node);
 //    public abstract void visit(FuncDefNode      p_node);
     public abstract void visit(IDNode           p_node);
+    public abstract void visit(InheritNode      p_node);
 //    public abstract void visit(MultOpNode       p_node);
     public abstract void visit(AST             p_node);
 //    public abstract void visit(NumNode          p_node);

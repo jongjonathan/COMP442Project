@@ -6,6 +6,7 @@
 |    =====================================================
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
+|    | inherit   | none      |                           |
 |    | function  | evaluate  |           | (x, float) float| public    |
 |    |    =====================================================
 |    |    | table: evaluate         scope offset: 0           |
@@ -21,6 +22,7 @@
 |    =====================================================
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
+|    | inherit   | POLYNOMIAL|                           |
 |    | var       | a         | float     | 0     | private|
 |    | var       | b         | float     | 0     | private|
 |    | function  | evaluate  |           | (x, float) float| public    |

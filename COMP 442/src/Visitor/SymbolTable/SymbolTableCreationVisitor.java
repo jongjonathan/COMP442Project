@@ -183,6 +183,24 @@ public class SymbolTableCreationVisitor extends Visitor {
         p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist,visibility );
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
+    public void visit(InheritNode p_node){
+        String varid = "none";
+        if(p_node.getChildNodes().size()!=0){
+            varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        }
+
+        // loop over the list of dimension nodes and aggregate here
+        Vector<Integer> dimlist = new Vector<Integer>();
+//        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
+//            // parameter dimension
+//            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
+//            dimlist.add(dimval);
+//        }
+        // create the symbol table entry for this variable
+        // it will be picked-up by another node above later
+        p_node.m_symtabentry = new InheritEntry("inherit", null,varid,null);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+    }
 
     @Override
     public void visit(AST p_node) {
