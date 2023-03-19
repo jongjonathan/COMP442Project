@@ -6,44 +6,49 @@
 |    =====================================================
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
-|    | function  | evaluate  | public    | (x, float) float          |
+|    | function  | evaluate  |           | (x, float) float| public    |
 |    |    =====================================================
 |    |    | table: evaluate         scope offset: 0           |
 |    |    =====================================================
-|    |    | PARAM     | x         | x         | 0     |
-|    |    | PARAM     | float     | float     | 0     |
+|    |    | PARAM     | x         | x         | 0     |       |
+|    |    | PARAM     | float     | float     | 0     |       |
 |    |    =====================================================
+|    | var       | a         | int       | 0     | public|
+|    | var       | b         | float     | 0     | private|
+|    | var       | c         | int       | 0     | private|
 |    =====================================================
 | class     | LINEAR                                |
 |    =====================================================
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
-|    | function  | evaluate  | public    | (x, float) float          |
+|    | var       | a         | float     | 0     | private|
+|    | var       | b         | float     | 0     | private|
+|    | function  | evaluate  |           | (x, float) float| public    |
 |    |    =====================================================
 |    |    | table: evaluate         scope offset: 0           |
 |    |    =====================================================
-|    |    | PARAM     | x         | x         | 0     |
-|    |    | PARAM     | float     | float     | 0     |
+|    |    | PARAM     | x         | x         | 0     |       |
+|    |    | PARAM     | float     | float     | 0     |       |
 |    |    =====================================================
 |    =====================================================
-| function  | bubbleSort|           | (arr, integer, integer) void|
+| function  | bubbleSort|           | (arr, integer, integer) void|           |
 |    =====================================================
 |    | table: bubbleSort       scope offset: 0           |
 |    =====================================================
-|    | PARAM     | arr       | arr       | 0     |
-|    | PARAM     | integer   | integer   | 0     |
-|    | PARAM     | integer   | integer   | 0     |
-|    | var       | n         | integer   | 0     |
-|    | var       | i         | integer   | 0     |
-|    | var       | j         | integer   | 0     |
-|    | var       | temp      | integer   | 0     |
+|    | PARAM     | arr       | arr       | 0     |       |
+|    | PARAM     | integer   | integer   | 0     |       |
+|    | PARAM     | integer   | integer   | 0     |       |
+|    | var       | n         | integer   | 0     |       |
+|    | var       | i         | integer   | 0     |       |
+|    | var       | j         | integer   | 0     |       |
+|    | var       | temp      | integer   | 0     |       |
 |    =====================================================
-| function  | main      |           |                           |
+| function  | main      |           |           |           |
 |    =====================================================
 |    | table: main             scope offset: 0           |
 |    =====================================================
-|    | var       | arr       | integer   | 0     |
-|    | var       | arr       | integer   | 0     |
-|    | var       | arr       | integer   | 0     |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
 |    =====================================================
 =====================================================

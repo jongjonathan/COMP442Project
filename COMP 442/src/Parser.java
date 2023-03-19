@@ -165,7 +165,7 @@ public class Parser {
                         case "SEMACT6" -> this.makeFamily("MEMBER DECL");
                         case "SEMACT7" -> this.makeFamily("INHERLIST");
                         case "SEMACT8" -> this.makeFamily(new FuncCallNode(null,null,"MEMBER FUNC DECL",0));
-                        case "SEMACT9" -> this.makeFamily("MEMBER VAR DECL");
+                        case "SEMACT9" -> this.makeFamily(new MemberVarDeclNode(null,null,"MEMBER VAR DECL",0));
                         case "SEMACT10" -> this.makeFamily(new ParamsListNode(null,null, "FPARAMS",0));
                         case "SEMACT11" -> this.makeFamily(new FuncDefNode(null,null, "FUNC DEF",0));
                         case "SEMACT12" -> this.makeFamily(new StatBlockNode(null,null,"FUNC BODY/LOCAL VAR STAT BLOCK",0)); //

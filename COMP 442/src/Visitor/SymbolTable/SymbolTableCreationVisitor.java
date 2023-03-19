@@ -3,6 +3,7 @@ import AST.*;
 import SymbolTable.*;
 import Visitor.*;
 import java.io.*;
+import java.lang.reflect.Member;
 import java.util.*;
 import Lexer.*;
 
@@ -132,8 +133,9 @@ public class SymbolTableCreationVisitor extends Visitor {
     public void visit(FuncCallNode p_node) {
         //  public function evaluate: (x: float) => float;
 
-        String ftype = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        String ftype ="";
         String fname = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
+        String visibility = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         SymTable localtable = new SymTable(2,fname, p_node.m_symtab);
         String paramList = "";
         boolean returntypeneeded = false;
@@ -154,7 +156,7 @@ public class SymbolTableCreationVisitor extends Visitor {
 
         }
 
-        p_node.m_symtabentry = new FuncEntry(ftype, fname, paramList, localtable);
+        p_node.m_symtabentry = new FuncEntry(ftype, fname, paramList, localtable, visibility);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
         p_node.m_symtab = localtable;
         // propagate accepting the same visitor to all the children
@@ -165,6 +167,22 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
         System.out.println("func call");
     };
+    public void visit(MemberVarDeclNode p_node){
+        String vartype = ((Token) p_node.getChildNodes().get(2).concept).getLexeme();
+        String varid = ""+((Token)p_node.getChildNodes().get(1).concept).getLexeme();
+        String visibility = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        // loop over the list of dimension nodes and aggregate here
+        Vector<Integer> dimlist = new Vector<Integer>();
+//        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
+//            // parameter dimension
+//            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
+//            dimlist.add(dimval);
+//        }
+        // create the symbol table entry for this variable
+        // it will be picked-up by another node above later
+        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist,visibility );
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+    }
 
     @Override
     public void visit(AST p_node) {
