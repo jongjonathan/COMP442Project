@@ -28,10 +28,8 @@ public class SymbolTableDriver {
 //        Stack<AST> astCheck = typeCheckingVisitor.semanticCheck(sym);
         astTables.firstElement().accept(typeCheckingVisitor);
 
-
         p.writeSymbolTable(astTables);
 
-        System.out.println("finish");
 
 
     }

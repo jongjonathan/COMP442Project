@@ -84,9 +84,52 @@ public class TypeCheckingVisitor extends Visitor{
                                ((FuncDefNode)progChild).declared = true;
                            }
                         }
+
                     }
                 }
         }
+        for (AST progChild : p_node.parentNode.getChildNodes()) {
+            if(progChild instanceof FuncCallNode){
+                String iterFuncName = ((Token)progChild.getChildNodes().get(1).concept).getLexeme();
+                if(((Token)p_node.getChildNodes().get(1).concept).getLexeme().equals(iterFuncName)){
+                    //if params not empty
+                    if(p_node.getChildNodes().size()>3 && p_node.getChildNodes().size()>3) {
+                        String checkParam = progChild.getChildNodes().get(2).m_symtabentry.toString();
+                        String pnodeParam = p_node.getChildNodes().get(2).m_symtabentry.toString();
+                        if ((checkParam.equals(pnodeParam))) {
+
+
+
+
+                        } else {
+                            this.m_errors += "[warning 9.2] Overloaded member function : "
+                                    + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
+                                    + " , on line " + ((Token) p_node.getChildNodes().get(1).concept).getPosition() + "\n";
+                        }
+                    }
+
+                }
+            }
+        }
+
+                if(p_node.parentNode.getChildNodes().get(1).getChildNodes().size()!=0){
+                    String inherClass = ((Token)p_node.parentNode.getChildNodes().get(1).getChildNodes().get(0).concept).getLexeme();
+                    for (AST progChild : p_node.parentNode.parentNode.getChildNodes()) {
+                        //if class equal, go and compare function
+                        if(((Token)(progChild.getChildNodes().get(0).concept)).getLexeme().equals(inherClass)){
+                            for(AST child2 : progChild.getChildNodes()){
+                                if(child2 instanceof FuncCallNode){
+                                    if(child2.m_symtabentry.toString().equals(p_node.m_symtabentry.toString())){
+                                        this.m_errors += "[warning 9.3] Overidden member function : "
+                                                + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
+                                                + " , on line " + ((Token) p_node.getChildNodes().get(1).concept).getPosition() + "\n";
+                                    }
+                                }
+                            }
+                            }
+                        }
+                    }
+
         if(found == false){
                 this.m_errors += "[error 6.2] Undefined member function declaration type : "
                         + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
@@ -126,7 +169,7 @@ public class TypeCheckingVisitor extends Visitor{
                 String iterFuncName = ((Token)progChild.getChildNodes().get(0).concept).getLexeme();
                 if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)){
                     //if params are same
-                    //if contains params list
+                    //if contains params list so >3
                     if(p_node.getChildNodes().size()>3 && p_node.getChildNodes().size()>3){
                         String checkParam = progChild.getChildNodes().get(1).m_symtabentry.toString();
                         String pnodeParam =p_node.getChildNodes().get(1).m_symtabentry.toString();
@@ -203,6 +246,24 @@ public class TypeCheckingVisitor extends Visitor{
             this.m_errors += "[error 8.4] multiply declared identifier in function : "
                     + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
                     +" , on line "+((Token) p_node.getChildNodes().get(1).concept).getPosition()+"\n";
+        }
+
+        if(((Token) p_node.getChildNodes().get(1).concept).getTokenType().equals(TokenType.ID)){
+            boolean found = false;
+            String curClass = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
+            for(AST progChild : p_node.parentNode.parentNode.parentNode.getChildNodes()){
+                if(progChild instanceof ClassNode){
+                    String progClass = ((Token) progChild.getChildNodes().get(0).concept).getLexeme();
+                    if(curClass.equals(progClass)){
+                        found = true;
+                    }
+                }
+            }
+            if(found == false){
+                this.m_errors+="[error 11.5] Undeclared Class : "
+                        + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
+                        +", line "+((Token) p_node.getChildNodes().get(1).concept).getPosition()+"\n";
+            }
         }
 
 

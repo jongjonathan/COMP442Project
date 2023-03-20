@@ -7,32 +7,37 @@
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
 |    | inherit   | none      |                           |
-|    | function  | evaluate  |           | (x, float) float| public    |
+|    | function  | overload  |           | (l, integer, v, id) integer| public    |
 |    |    =====================================================
-|    |    | table: evaluate         scope offset: 0           |
-|    |    =====================================================
-|    |    | PARAM     | x         | float     | 0     |       |
-|    |    =====================================================
-|    =====================================================
-| class     | LINEAR                                |
-|    =====================================================
-|    | table: LINEAR           scope offset: 0           |
-|    =====================================================
-|    | inherit   | POLYNOMIAL|                           |
-|    | var       | a         | int       | 0     | private|
-|    | var       | a         | float     | 0     | private|
-|    =====================================================
-| class     | LINEAR                                |
-|    =====================================================
-|    | table: LINEAR           scope offset: 0           |
-|    =====================================================
-|    | inherit   | POLYNOMIAL|                           |
-|    | function  | duplicateMe|           | (l, integer, v, id) integer| public    |
-|    |    =====================================================
-|    |    | table: duplicateMe      scope offset: 0           |
+|    |    | table: overload         scope offset: 0           |
 |    |    =====================================================
 |    |    | PARAM     | l         | integer   | 0     |       |
 |    |    | PARAM     | v         | id        | 0     |       |
+|    |    =====================================================
+|    | function  | overload  |           | (l, integer) integer| public    |
+|    |    =====================================================
+|    |    | table: overload         scope offset: 0           |
+|    |    =====================================================
+|    |    | PARAM     | l         | integer   | 0     |       |
+|    |    =====================================================
+|    =====================================================
+| class     | LINEAR                                |
+|    =====================================================
+|    | table: LINEAR           scope offset: 0           |
+|    =====================================================
+|    | inherit   | POLYNOMIAL|                           |
+|    | function  | overload  |           | (l, integer, v, id) integer| public    |
+|    |    =====================================================
+|    |    | table: overload         scope offset: 0           |
+|    |    =====================================================
+|    |    | PARAM     | l         | integer   | 0     |       |
+|    |    | PARAM     | v         | id        | 0     |       |
+|    |    =====================================================
+|    | function  | overload  |           | (l, integer) integer| public    |
+|    |    =====================================================
+|    |    | table: overload         scope offset: 0           |
+|    |    =====================================================
+|    |    | PARAM     | l         | integer   | 0     |       |
 |    |    =====================================================
 |    =====================================================
 | class     | QUADRATIC                             |
@@ -40,18 +45,15 @@
 |    | table: QUADRATIC        scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | function  | undefMethod|           |           | public    |
+|    | function  | emptyMethod|           |           | public    |
 |    |    =====================================================
-|    |    | table: undefMethod      scope offset: 0           |
+|    |    | table: emptyMethod      scope offset: 0           |
 |    |    =====================================================
 |    |    =====================================================
-|    | var       | x         | float     | 0     | public|
-|    | var       | y         | integer   | 0     | public|
-|    | var       | z         | id        | 0     | public|
 |    =====================================================
-| function  | undeclMethod|           | (integer, integer) void|           |
+| function  | noMethod  |           | (integer, integer) void|           |
 |    =====================================================
-|    | table: undeclMethod     scope offset: 0           |
+|    | table: noMethod         scope offset: 0           |
 |    =====================================================
 |    | PARAM     | arr       | integer   | 0     |       |
 |    | PARAM     | size      | integer   | 0     |       |
@@ -66,7 +68,6 @@
 |    | PARAM     | v         | id        | 0     |       |
 |    | var       | arr       | integer   | 0     |       |
 |    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
 |    =====================================================
 | function  | duplicateMe|           | (integer, id) integer|           |
 |    =====================================================
@@ -74,9 +75,7 @@
 |    =====================================================
 |    | PARAM     | l         | integer   | 0     |       |
 |    | PARAM     | v         | id        | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
+|    | var       | a         | a         | 0     |       |
 |    =====================================================
 | function  | duplicateMe|           | (integer) integer|           |
 |    =====================================================

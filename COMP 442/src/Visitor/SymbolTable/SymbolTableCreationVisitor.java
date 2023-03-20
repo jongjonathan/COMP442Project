@@ -35,7 +35,7 @@ public class SymbolTableCreationVisitor extends Visitor {
             catch(Exception e){
                 e.printStackTrace();}
         }
-        System.out.println("prog");
+//        System.out.println("prog");
 //        for (AST child : p_node.getChildNodes()) {
 //            child.accept(this);
 //        }
@@ -53,7 +53,7 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
-        System.out.println("classdecl");
+//        System.out.println("classdecl");
     }
 
     public void visit(FuncDefNode p_node) {
@@ -92,10 +92,10 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
-        System.out.println("func def");
+//        System.out.println("func def");
     }
     public void visit(ParamsListNode p_node) {
-        System.out.println("param");
+//        System.out.println("param");
         int count =0;
         for (AST child : p_node.getChildNodes()) {
             if( count%2 ==0){
@@ -175,7 +175,7 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
-        System.out.println("func call");
+//        System.out.println("func call");
     };
     public void visit(MemberVarDeclNode p_node){
         String vartype = ((Token) p_node.getChildNodes().get(2).concept).getLexeme();
