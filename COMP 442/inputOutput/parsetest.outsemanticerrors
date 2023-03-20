@@ -1,3 +1,19 @@
 [error 6.2] Undefined member function declaration type : evaluate method not found, on line 2
+[error 8.3] multiply declared data member in class : a , on line 6
+[error 8.3] multiply declared data member in class : a , on line 7
+[error 8.1] multiply declared class : LINEAR , on line 5
+[error 8.1] multiply declared class : LINEAR , on line 10
 [error 6.2] Undefined member function declaration type : undefMethod method not found, on line 14
 [error 6.1] undeclared member function definition undeclMethod , on line 22
+[error 8.4] multiply declared identifier in function : arr , on line 36
+[error 8.4] multiply declared identifier in function : arr , on line 37
+[error 8.4] multiply declared identifier in function : arr , on line 38
+[error 8.2] multiply declared free function : duplicateMe , on line 34
+[warning 9.1] Overloaded free function : duplicateMe , on line 34
+[error 8.4] multiply declared identifier in function : arr , on line 43
+[error 8.4] multiply declared identifier in function : arr , on line 44
+[error 8.4] multiply declared identifier in function : arr , on line 45
+[error 8.2] multiply declared free function : duplicateMe , on line 41
+[warning 9.1] Overloaded free function : duplicateMe , on line 41
+[warning 9.1] Overloaded free function : duplicateMe , on line 47
+[error 6.1] undeclared member function definition duplicateMe , on line 47

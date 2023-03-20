@@ -39,10 +39,28 @@ public class TypeCheckingVisitor extends Visitor{
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
+        int oneClass = 0;
+        for (AST progChild : p_node.parentNode.getChildNodes()) {
+            if(progChild instanceof ClassNode){
+                String iterClassName = ((Token)progChild.getChildNodes().get(0).concept).getLexeme();
+                if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterClassName)){
+                    oneClass++;
+                }
+            }
+        }
+        if(oneClass>1){
+            this.m_errors += "[error 8.1] multiply declared class : "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
+
     }
     //    public abstract void visit(DimListNode      p_node);
 //    public abstract void visit(DimNode          p_node);
     public void visit(FuncCallNode     p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
         boolean found = false;
         for (AST progChild : p_node.parentNode.parentNode.getChildNodes()) {
 
@@ -77,6 +95,23 @@ public class TypeCheckingVisitor extends Visitor{
         }
     };
     public void visit(MemberVarDeclNode   p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+        int countVar = 0;
+        for (AST child : p_node.parentNode.getChildNodes()) {
+            if(child instanceof MemberVarDeclNode){
+                String iterFuncName = ((Token)child.getChildNodes().get(1).concept).getLexeme();
+                if(((Token)p_node.getChildNodes().get(1).concept).getLexeme().equals(iterFuncName)){
+                    countVar++;
+                }
+            }
+        }
+        if(countVar>1){
+            this.m_errors += "[error 8.3] multiply declared data member in class : "
+                    + ((Token) p_node.getChildNodes().get(1).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(1).concept).getPosition()+"\n";
+        }
 
 
     };
@@ -84,12 +119,44 @@ public class TypeCheckingVisitor extends Visitor{
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
+        int multFreeFunc = 0;
+        int overloadFunc = 0;
+        for (AST progChild : p_node.parentNode.getChildNodes()) {
+            if(progChild instanceof FuncDefNode){
+                String iterFuncName = ((Token)progChild.getChildNodes().get(0).concept).getLexeme();
+                if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)){
+                    //if params are same
+                    //if contains params list
+                    if(p_node.getChildNodes().size()>3 && p_node.getChildNodes().size()>3){
+                        String checkParam = progChild.getChildNodes().get(1).m_symtabentry.toString();
+                        String pnodeParam =p_node.getChildNodes().get(1).m_symtabentry.toString();
+                        if((checkParam.equals(pnodeParam))){
+                            multFreeFunc++;
+                        }
+                        else{
+                            overloadFunc++;
+                        }
+                    }
+
+                }
+            }
+        }
+        if(multFreeFunc>1){
+            this.m_errors += "[error 8.2] multiply declared free function : "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
+        if(overloadFunc>0){
+            this.m_errors += "[warning 9.1] Overloaded free function : "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
         if(p_node.declared == false){
             this.m_errors += "[error 6.1] undeclared member function definition "
                     + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
                     +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
         }
-        
+
     };
     //    public abstract void visit(FuncDefNode      p_node);
     public void visit(IDNode           p_node){
@@ -113,13 +180,31 @@ public class TypeCheckingVisitor extends Visitor{
 //    public abstract void visit(PutStatNode      p_node);
 //    public abstract void visit(ReturnStatNode   p_node);
     public void visit(StatBlockNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
 
-    };
+    }
     //    public abstract void visit(TypeNode         p_node);
     public void visit(VarDeclNode      p_node){
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
+        int countID = 0;
+        for (AST child : p_node.parentNode.getChildNodes()) {
+            if(child instanceof VarDeclNode){
+                String iterFuncName = ((Token)child.getChildNodes().get(0).concept).getLexeme();
+                if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)){
+                    countID++;
+                }
+            }
+        }
+        if(countID>1){
+            this.m_errors += "[error 8.4] multiply declared identifier in function : "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(1).concept).getPosition()+"\n";
+        }
+
 
     };
 

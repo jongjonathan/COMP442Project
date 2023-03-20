@@ -19,17 +19,17 @@
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
+|    | var       | a         | int       | 0     | private|
 |    | var       | a         | float     | 0     | private|
-|    | var       | b         | float     | 0     | private|
 |    =====================================================
 | class     | LINEAR                                |
 |    =====================================================
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | function  | tryMethod |           | (l, integer, v, id) integer| public    |
+|    | function  | duplicateMe|           | (l, integer, v, id) integer| public    |
 |    |    =====================================================
-|    |    | table: tryMethod        scope offset: 0           |
+|    |    | table: duplicateMe      scope offset: 0           |
 |    |    =====================================================
 |    |    | PARAM     | l         | integer   | 0     |       |
 |    |    | PARAM     | v         | id        | 0     |       |
@@ -58,9 +58,19 @@
 |    | var       | n         | integer   | 0     |       |
 |    | var       | i         | integer   | 0     |       |
 |    =====================================================
-| function  | tryMethod |           | (integer, id) integer|           |
+| function  | duplicateMe|           | (integer, id) integer|           |
 |    =====================================================
-|    | table: tryMethod        scope offset: 0           |
+|    | table: duplicateMe      scope offset: 0           |
+|    =====================================================
+|    | PARAM     | l         | integer   | 0     |       |
+|    | PARAM     | v         | id        | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    | var       | arr       | integer   | 0     |       |
+|    =====================================================
+| function  | duplicateMe|           | (integer, id) integer|           |
+|    =====================================================
+|    | table: duplicateMe      scope offset: 0           |
 |    =====================================================
 |    | PARAM     | l         | integer   | 0     |       |
 |    | PARAM     | v         | id        | 0     |       |
@@ -68,14 +78,10 @@
 |    | var       | arr       | integer   | 0     |       |
 |    | var       | arr       | integer   | 0     |       |
 |    =====================================================
-| function  | tryMethod |           | (integer, id) integer|           |
+| function  | duplicateMe|           | (integer) integer|           |
 |    =====================================================
-|    | table: tryMethod        scope offset: 0           |
+|    | table: duplicateMe      scope offset: 0           |
 |    =====================================================
 |    | PARAM     | l         | integer   | 0     |       |
-|    | PARAM     | v         | id        | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
-|    | var       | arr       | integer   | 0     |       |
 |    =====================================================
 =====================================================
