@@ -1,22 +1,17 @@
-package Visitor.SymbolTable;
+package Visitor.CodeGeneration;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Stack;
+import java.util.Vector;
+
 import AST.*;
+import Lexer.Token;
 import SymbolTable.*;
-import Visitor.*;
-import java.io.*;
-import java.lang.reflect.Member;
-import java.util.*;
-import Lexer.*;
+import Visitor.Visitor;
 
 
+public class TagsBasedCodeGenerationVisitor extends Visitor {
 
-public class SymbolTableCreationVisitor extends Visitor {
-
-    public Integer m_tempVarNum     = 0;
-    public String  m_outputfilename = new String();
-
-    public SymbolTableCreationVisitor(){
-
-    }
 
     public void visit(ProgNode p_node){
         p_node.m_symtab = new SymTable(0,"global", null);
@@ -27,18 +22,6 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
-        if (!this.m_outputfilename.isEmpty()) {
-            File file = new File(this.m_outputfilename);
-            try (PrintWriter out = new PrintWriter(file)){
-                out.println(p_node.m_symtab);
-            }
-            catch(Exception e){
-                e.printStackTrace();}
-        }
-//        System.out.println("prog");
-//        for (AST child : p_node.getChildNodes()) {
-//            child.accept(this);
-//        }
     }
 
     public void visit(ClassNode p_node) {
@@ -70,7 +53,7 @@ public class SymbolTableCreationVisitor extends Visitor {
                     if( count%2 ==1) {
                         paramList += ((Token)secondChild.concept).getLexeme()+", ";
                     }
-                   count++;
+                    count++;
                 }
                 paramList = paramList.substring(0,paramList.length()-2)+")";
                 returntypeneeded = true;
@@ -134,13 +117,10 @@ public class SymbolTableCreationVisitor extends Visitor {
             // parameter dimension
             Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
             dimlist.add(dimval);
-
         }
-
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
         p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist);
-//        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist[0]);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
     public void visit(FuncCallNode p_node) {
@@ -214,23 +194,13 @@ public class SymbolTableCreationVisitor extends Visitor {
         p_node.m_symtabentry = new InheritEntry("inherit", null,varid,null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
+    public void visit(AST             p_node){
 
-    @Override
-    public void visit(AST p_node) {
-
-    }
+    };
     public void visit(ArrSizeNode    p_node){
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
 
-    }
-
-    public Stack<AST> createTables(Stack<AST> nodeStack){
-
-        SymbolTableCreationVisitor stv = new SymbolTableCreationVisitor();
-        nodeStack.firstElement().accept(stv);
-
-        return nodeStack;
     }
 }

@@ -7,12 +7,15 @@ public class VarEntry extends SymTableEntry {
 
     public VarEntry(String p_kind, String p_type, String p_name, Vector<Integer> p_dims){
         super(p_kind, p_type, p_name, null);
+        m_dims = p_dims;
     }
     public VarEntry(String p_kind, String p_type, String p_name, int p_dims){
         super(p_kind, p_type, p_name, null);
     }
+
     public VarEntry(String p_kind, String p_type, String p_name, Vector<Integer> p_dims, String visibility){
         super(p_kind, p_type, p_name, null);
+        m_dims = p_dims;
         this.visibility = visibility;
     }
 

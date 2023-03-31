@@ -1,6 +1,7 @@
 import AST.*;
 import Visitor.*;
 import Visitor.SemanticCheck.TypeCheckingVisitor;
+import Visitor.SymbolTable.ComputeMemorySizeVisitor;
 import Visitor.SymbolTable.SymbolTableCreationVisitor;
 
 import java.io.File;
@@ -27,8 +28,14 @@ public class SymbolTableDriver {
         TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + p.getFilename() + ".outsemanticerrors");
 //        Stack<AST> astCheck = typeCheckingVisitor.semanticCheck(sym);
         astTables.firstElement().accept(typeCheckingVisitor);
-
         p.writeSymbolTable(astTables);
+
+        ComputeMemorySizeVisitor memorySizeVisitor = new ComputeMemorySizeVisitor();
+        astTables.firstElement().accept(memorySizeVisitor);
+
+        System.out.println("temp finish");
+
+
 
 
 

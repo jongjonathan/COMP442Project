@@ -9,6 +9,7 @@ import java.util.Vector;
         public String          m_name       = null;
         public int             m_size       = 0;
         public SymTable         m_subtable   = null;
+        public Vector<Integer> m_dims       = new Vector<Integer>();
 
         public SymTableEntry() {}
 

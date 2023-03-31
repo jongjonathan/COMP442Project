@@ -160,7 +160,7 @@ public class Parser {
                     switch (top) {
                         case "SEMACT1" -> this.makeNode(previousToken);
                         case "SEMACT2" -> this.makeNode(); //null separator
-                        case "SEMACT3" -> this.makeFamily("ARR SIZE");
+                        case "SEMACT3" -> this.makeFamily(new ArrSizeNode(null,null,"ARR SIZE",0));
                         case "SEMACT4" -> this.makeFamily(new VarDeclNode(null,null,"LOCAL VAR DECL",0));
                         case "SEMACT5" -> this.makeFamily(new ClassNode(null,null, "CLASS DECL",0));
                         case "SEMACT6" -> this.makeFamily("MEMBER DECL");

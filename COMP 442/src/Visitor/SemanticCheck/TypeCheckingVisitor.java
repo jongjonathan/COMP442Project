@@ -164,15 +164,20 @@ public class TypeCheckingVisitor extends Visitor{
         }
         int multFreeFunc = 0;
         int overloadFunc = 0;
+        String checkParam = "";
+        String pnodeParam = "";
         for (AST progChild : p_node.parentNode.getChildNodes()) {
             if(progChild instanceof FuncDefNode){
                 String iterFuncName = ((Token)progChild.getChildNodes().get(0).concept).getLexeme();
                 if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)){
                     //if params are same
                     //if contains params list so >3
-                    if(p_node.getChildNodes().size()>3 && p_node.getChildNodes().size()>3){
-                        String checkParam = progChild.getChildNodes().get(1).m_symtabentry.toString();
-                        String pnodeParam =p_node.getChildNodes().get(1).m_symtabentry.toString();
+                    if(progChild.getChildNodes().size()>3 && p_node.getChildNodes().size()>3){
+                        if(progChild instanceof ParamsListNode){
+                             checkParam = progChild.m_symtabentry.toString();
+                             pnodeParam =p_node.m_symtabentry.toString();
+                        }
+
                         if((checkParam.equals(pnodeParam))){
                             multFreeFunc++;
                         }
@@ -268,6 +273,13 @@ public class TypeCheckingVisitor extends Visitor{
 
 
     };
+    public void visit(ArrSizeNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+
 
 
 }

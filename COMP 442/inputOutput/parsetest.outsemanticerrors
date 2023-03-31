@@ -1,23 +1,7 @@
-[warning 9.2] Overloaded member function : overload , on line 2
-[error 6.2] Undefined member function declaration type : overload method not found, on line 2
-[warning 9.2] Overloaded member function : overload , on line 3
-[error 6.2] Undefined member function declaration type : overload method not found, on line 3
-[warning 9.2] Overloaded member function : overload , on line 6
-[warning 9.3] Overidden member function : overload , on line 6
-[error 6.2] Undefined member function declaration type : overload method not found, on line 6
-[warning 9.2] Overloaded member function : overload , on line 7
-[warning 9.3] Overidden member function : overload , on line 7
-[error 6.2] Undefined member function declaration type : overload method not found, on line 7
-[error 6.2] Undefined member function declaration type : emptyMethod method not found, on line 10
-[error 6.1] undeclared member function definition noMethod , on line 14
-[error 8.4] multiply declared identifier in function : arr , on line 28
-[error 8.4] multiply declared identifier in function : arr , on line 29
-[error 8.2] multiply declared free function : duplicateMe , on line 26
-[warning 9.1] Overloaded free function : duplicateMe , on line 26
-[error 6.1] undeclared member function definition duplicateMe , on line 26
-[error 11.5] Undeclared Class : a, line 35
-[error 8.2] multiply declared free function : duplicateMe , on line 33
-[warning 9.1] Overloaded free function : duplicateMe , on line 33
-[error 6.1] undeclared member function definition duplicateMe , on line 33
-[warning 9.1] Overloaded free function : duplicateMe , on line 37
-[error 6.1] undeclared member function definition duplicateMe , on line 37
+[error 8.4] multiply declared identifier in function : arr , on line 4
+[error 8.4] multiply declared identifier in function : arr , on line 5
+[error 6.1] undeclared member function definition duplicateMe , on line 2
+[warning 9.2] Overloaded member function : overload , on line 12
+[error 6.2] Undefined member function declaration type : overload method not found, on line 12
+[warning 9.2] Overloaded member function : overload , on line 13
+[error 6.2] Undefined member function declaration type : overload method not found, on line 13

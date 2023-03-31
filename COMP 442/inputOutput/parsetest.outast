@@ -1,53 +1,48 @@
-[CLASS DECL
-|    [ID, POLYNOMIAL, 1]
-|    INHERLIST
-|    |    [ID, SHAPE, 1]
-, CLASS DECL
-|    [ID, LINEAR, 3]
-|    INHERLIST
-|    |    [ID, POLYNOMIAL, 3]
-|    MEMBER VAR DECL
-|    |    [PRIVATEKEYWORD, private, 4]
-|    |    [ID, a, 4]
-|    |    [FLOATKEYWORD, float, 4]
-|    |    ARR SIZE
-, FUNC DEF
-|    [ID, QUADRATIC, 7]
-|    [ID, evaluate, 7]
-|    FPARAMS
-|    |    [ID, x, 7]
-|    |    [FLOATKEYWORD, float, 7]
-|    [FLOATKEYWORD, float, 7]
-, LOCAL VAR STAT BLOCK
-|    LOCAL VAR DECL
-|    |    [ID, arr, 9]
-|    |    [INTEGERKEYWORD, integer, 9]
-|    |    ARR SIZE
-|    |    |    [INTEGER, 7, 9]
-|    LOCAL VAR DECL
-|    |    [ID, arr, 10]
-|    |    [INTEGERKEYWORD, integer, 10]
-|    |    ARR SIZE
-|    |    |    [INTEGER, 6, 10]
-|    LOCAL VAR DECL
-|    |    [ID, arr, 11]
-|    |    [INTEGERKEYWORD, integer, 11]
-|    |    ARR SIZE
-|    |    |    [INTEGER, 2, 11]
-|    STAT
-|    |    WHILE
-|    |    |    WRITE
-|    |    |    READ
-|    |    |    WRITE
-|    STAT
-|    |    IF
-|    |    |    [ADD, +, 18]
-|    |    |    [ID, temp, 21]
-|    |    |    [ID, arr, 22]
-|    |    |    [ADD, +, 22]
-|    |    |    [ID, arr, 23]
-|    |    |    [ADD, +, 23]
-|    STAT
-|    |    [ID, j, 25]
-|    |    [ADD, +, 25]
+[PROG
+|    FUNC DEF
+|    |    [ID, duplicateMe, 2]
+|    |    FPARAMS
+|    |    |    [ID, l, 2]
+|    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    [ID, v, 2]
+|    |    |    [ID, id, 2]
+|    |    [INTEGERKEYWORD, integer, 2]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, arr, 4]
+|    |    |    |    [INTEGERKEYWORD, integer, 4]
+|    |    |    |    ARR SIZE
+|    |    |    |    |    [INTEGER, 7, 4]
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, arr, 5]
+|    |    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    |    ARR SIZE
+|    |    |    |    |    [INTEGER, 6, 5]
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, n, 6]
+|    |    |    |    [INTEGERKEYWORD, integer, 6]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, i, 7]
+|    |    |    |    [INTEGERKEYWORD, integer, 7]
+|    |    |    |    ARR SIZE
+|    CLASS DECL
+|    |    [ID, POLYNOMIAL, 11]
+|    |    INHERLIST
+|    |    MEMBER FUNC DECL
+|    |    |    [PUBLICKEYWORD, public, 12]
+|    |    |    [ID, overload, 12]
+|    |    |    FPARAMS
+|    |    |    |    [ID, l, 12]
+|    |    |    |    [INTEGERKEYWORD, integer, 12]
+|    |    |    |    [ID, v, 12]
+|    |    |    |    [ID, id, 12]
+|    |    |    [INTEGERKEYWORD, integer, 12]
+|    |    MEMBER FUNC DECL
+|    |    |    [PUBLICKEYWORD, public, 13]
+|    |    |    [ID, overload, 13]
+|    |    |    FPARAMS
+|    |    |    |    [ID, l, 13]
+|    |    |    |    [INTEGERKEYWORD, integer, 13]
+|    |    |    [INTEGERKEYWORD, integer, 13]
 ]

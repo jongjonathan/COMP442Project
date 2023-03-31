@@ -1,41 +1,16 @@
-class POLYNOMIAL isa SHAPE {
-};
-class LINEAR isa POLYNOMIAL {
-  private attribute a: float;
-};
 
-function QUADRATIC::evaluate(x: float) => float
+function duplicateMe(l: integer, v: id) => integer
 {
   localvar arr: integer[7];
   localvar arr: integer[6];
-  localvar arr: integer[2];
-  while(counter <= 10)
-      {
-        write(counter);
-        read(x);
-        write(f2.evaluate(counter));
-      };
-  if (arr[j] > arr[j+1])
-        then {
-          // swap temp and arr[i]
-          temp = arr[j];
-          arr[j] = arr[j+1];
-          arr[j+1] = temp;
-        } else ;
-        j = j+1;
-      };
-  return (result);
-}
-class POLYNOMIAL isa SHAPE {
-};
-class LINEAR isa POLYNOMIAL {
+  localvar n: integer;
+  localvar i: integer;
 
-};
-class QUADRATIC isa POLYNOMIAL {
-    public attribute x: float[5];
-    public attribute y: int[2];
-    public attribute z: id[7];
-    public function voidcall: () => void;
+
+}
+class POLYNOMIAL {
+   public function overload: (l: integer, v: id) => integer;
+   public function overload: (l: integer) => integer;
 };
 
 

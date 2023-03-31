@@ -1,0 +1,128 @@
+[null, CLASS DECL
+|    [ID, POLYNOMIAL, 2]
+|    INHERLIST
+|    MEMBER FUNC DECL
+|    |    [PUBLICKEYWORD, public, 3]
+|    |    [ID, evaluate, 3]
+|    |    FPARAMS
+|    |    |    [ID, x, 3]
+|    |    |    [FLOATKEYWORD, float, 3]
+|    |    [FLOATKEYWORD, float, 3]
+, CLASS DECL
+|    [ID, LINEAR, 6]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 6]
+|    MEMBER VAR DECL
+|    |    [PRIVATEKEYWORD, private, 7]
+|    |    [ID, a, 7]
+|    |    [FLOATKEYWORD, float, 7]
+|    |    ARR SIZE
+|    MEMBER VAR DECL
+|    |    [PRIVATEKEYWORD, private, 8]
+|    |    [ID, b, 8]
+|    |    [FLOATKEYWORD, float, 8]
+|    |    ARR SIZE
+|    MEMBER FUNC DECL
+|    |    [PUBLICKEYWORD, public, 9]
+|    |    FPARAMS
+|    |    |    [ID, A, 9]
+|    |    |    [FLOATKEYWORD, float, 9]
+|    |    |    [FLOATKEYWORD, float, 9]
+|    MEMBER FUNC DECL
+|    |    [PUBLICKEYWORD, public, 10]
+|    |    [ID, evaluate, 10]
+|    |    FPARAMS
+|    |    |    [ID, x, 10]
+|    |    |    [FLOATKEYWORD, float, 10]
+|    |    [FLOATKEYWORD, float, 10]
+, CLASS DECL
+|    [ID, QUADRATIC, 13]
+|    INHERLIST
+|    |    [ID, POLYNOMIAL, 13]
+|    MEMBER VAR DECL
+|    |    [PRIVATEKEYWORD, private, 14]
+|    |    [ID, a, 14]
+|    |    [FLOATKEYWORD, float, 14]
+|    |    ARR SIZE
+|    MEMBER VAR DECL
+|    |    [PRIVATEKEYWORD, private, 15]
+|    |    [ID, b, 15]
+|    |    [FLOATKEYWORD, float, 15]
+|    |    ARR SIZE
+|    MEMBER VAR DECL
+|    |    [PRIVATEKEYWORD, private, 16]
+|    |    [ID, c, 16]
+|    |    [FLOATKEYWORD, float, 16]
+|    |    ARR SIZE
+|    MEMBER FUNC DECL
+|    |    [PUBLICKEYWORD, public, 17]
+|    |    FPARAMS
+|    |    |    [ID, A, 17]
+|    |    |    [FLOATKEYWORD, float, 17]
+|    |    |    [FLOATKEYWORD, float, 17]
+|    |    |    [FLOATKEYWORD, float, 17]
+|    MEMBER FUNC DECL
+|    |    [PUBLICKEYWORD, public, 18]
+|    |    [ID, evaluate, 18]
+|    |    FPARAMS
+|    |    |    [ID, x, 18]
+|    |    |    [FLOATKEYWORD, float, 18]
+|    |    [FLOATKEYWORD, float, 18]
+, FUNC DEF
+|    [ID, POLYNOMIAL, 22]
+|    [ID, evaluate, 22]
+|    FPARAMS
+|    |    [ID, x, 22]
+|    |    [FLOATKEYWORD, float, 22]
+|    [FLOATKEYWORD, float, 22]
+|    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    RETURN
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [INTEGER, 0, 24]
+, FUNC DEF
+|    [ID, QUADRATIC, 27]
+|    [ID, evaluate, 27]
+|    FPARAMS
+|    |    [ID, x, 27]
+|    |    [FLOATKEYWORD, float, 27]
+|    [FLOATKEYWORD, float, 27]
+|    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    LOCAL VAR DECL
+|    |    |    [ID, result, 29]
+|    |    |    [FLOATKEYWORD, float, 29]
+|    |    |    ARR SIZE
+|    |    [ID, result, 31]
+|    |    [EQUAL, =, 31]
+|    |    EXPR
+|    |    |    ARITHM EXPR
+|    |    |    |    [ID, a, 31]
+|    |    [ID, result, 32]
+|    |    [EQUAL, =, 32]
+|    |    EXPR
+|    |    |    ARITHM EXPR
+|    |    |    |    [ID, result, 32]
+|    |    |    |    [MULTIPLY, *, 32]
+|    |    |    |    [ID, x, 32]
+|    |    |    |    [ADD, +, 32]
+|    |    |    |    [ID, b, 32]
+|    |    [ID, result, 33]
+|    |    [EQUAL, =, 33]
+|    |    EXPR
+|    |    |    ARITHM EXPR
+|    |    |    |    [ID, result, 33]
+|    |    |    |    [MULTIPLY, *, 33]
+|    |    |    |    [ID, x, 33]
+|    |    |    |    [ADD, +, 33]
+|    |    |    |    [ID, c, 33]
+|    |    RETURN
+|    |    |    EXPR
+|    |    |    |    ARITHM EXPR
+|    |    |    |    |    [ID, result, 34]
+, null, [ID, QUADRATIC, 37]
+, FPARAMS
+|    [ID, A, 37]
+|    [FLOATKEYWORD, float, 37]
+|    [FLOATKEYWORD, float, 37]
+|    [FLOATKEYWORD, float, 37]
+, null]

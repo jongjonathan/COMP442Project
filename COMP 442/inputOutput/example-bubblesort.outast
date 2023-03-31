@@ -1,13 +1,12 @@
 [PROG
 |    FUNC DEF
-|    |    FUNCHEAD
-|    |    |    [ID, bubbleSort, 2]
-|    |    |    FUNCHEAD TAIL
-|    |    |    |    FPARAMS
-|    |    |    |    |    [ID, arr, 2]
-|    |    |    |    |    [INTEGERKEYWORD, integer, 2]
-|    |    |    |    |    [INTEGERKEYWORD, integer, 2]
-|    |    |    |    [VOIDKEYWORD, void, 2]
+|    |    [ID, bubbleSort, 2]
+|    |    FPARAMS
+|    |    |    [ID, arr, 2]
+|    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    [ID, size, 2]
+|    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    [VOIDKEYWORD, void, 2]
 |    |    FUNC BODY/LOCAL VAR STAT BLOCK
 |    |    |    LOCAL VAR DECL
 |    |    |    |    [ID, n, 4]
@@ -126,14 +125,13 @@
 |    |    |    |    |    |    [ADD, +, 23]
 |    |    |    |    |    |    [INTEGER, 1, 23]
 |    FUNC DEF
-|    |    FUNCHEAD
-|    |    |    [ID, printArray, 28]
-|    |    |    FUNCHEAD TAIL
-|    |    |    |    FPARAMS
-|    |    |    |    |    [ID, arr, 28]
-|    |    |    |    |    [INTEGERKEYWORD, integer, 28]
-|    |    |    |    |    [INTEGERKEYWORD, integer, 28]
-|    |    |    |    [VOIDKEYWORD, void, 28]
+|    |    [ID, printArray, 28]
+|    |    FPARAMS
+|    |    |    [ID, arr, 28]
+|    |    |    [INTEGERKEYWORD, integer, 28]
+|    |    |    [ID, size, 28]
+|    |    |    [INTEGERKEYWORD, integer, 28]
+|    |    [VOIDKEYWORD, void, 28]
 |    |    FUNC BODY/LOCAL VAR STAT BLOCK
 |    |    |    LOCAL VAR DECL
 |    |    |    |    [ID, n, 30]
@@ -175,10 +173,8 @@
 |    |    |    |    |    |    [ADD, +, 36]
 |    |    |    |    |    |    [INTEGER, 1, 36]
 |    FUNC DEF
-|    |    FUNCHEAD
-|    |    |    [ID, main, 41]
-|    |    |    FUNCHEAD TAIL
-|    |    |    |    [VOIDKEYWORD, void, 41]
+|    |    [ID, main, 41]
+|    |    [VOIDKEYWORD, void, 41]
 |    |    FUNC BODY/LOCAL VAR STAT BLOCK
 |    |    |    LOCAL VAR DECL
 |    |    |    |    [ID, arr, 43]
