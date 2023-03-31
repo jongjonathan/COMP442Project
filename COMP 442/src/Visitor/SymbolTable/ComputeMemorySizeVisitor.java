@@ -25,7 +25,7 @@ public class ComputeMemorySizeVisitor extends Visitor {
 
     public int sizeOfEntry(AST p_node) {
         int size = 0;
-        if(p_node.m_symtabentry.m_type.equals("integer"))
+        if(p_node.m_symtabentry.m_type.equals("integer") || p_node.m_symtabentry.m_type.equals("int"))
             size = 4;
         else if(p_node.m_symtabentry.m_type.equals("float"))
             size = 8;
@@ -171,6 +171,7 @@ public class ComputeMemorySizeVisitor extends Visitor {
 //        // it will be picked-up by another node above later
 //        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist,visibility );
 //        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+        p_node.m_symtabentry.m_size = this.sizeOfEntry(p_node);
     }
     public void visit(InheritNode p_node){
         for (AST child : p_node.getChildNodes() )

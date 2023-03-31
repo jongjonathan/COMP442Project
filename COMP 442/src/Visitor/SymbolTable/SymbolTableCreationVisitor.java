@@ -186,11 +186,11 @@ public class SymbolTableCreationVisitor extends Visitor {
         String visibility = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
         // loop over the list of dimension nodes and aggregate here
         Vector<Integer> dimlist = new Vector<Integer>();
-//        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
-//            // parameter dimension
-//            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
-//            dimlist.add(dimval);
-//        }
+        for (AST dim : p_node.getChildNodes().get(3).getChildNodes()){
+            // parameter dimension
+            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
+            dimlist.add(dimval);
+        }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
         p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist,visibility );

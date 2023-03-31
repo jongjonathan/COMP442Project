@@ -1,7 +1,8 @@
-[error 8.4] multiply declared identifier in function : arr , on line 4
+[error 11.5] Undeclared Class : id, line 4
 [error 8.4] multiply declared identifier in function : arr , on line 5
+[error 8.4] multiply declared identifier in function : arr , on line 6
 [error 6.1] undeclared member function definition duplicateMe , on line 2
-[warning 9.2] Overloaded member function : overload , on line 12
-[error 6.2] Undefined member function declaration type : overload method not found, on line 12
 [warning 9.2] Overloaded member function : overload , on line 13
 [error 6.2] Undefined member function declaration type : overload method not found, on line 13
+[warning 9.2] Overloaded member function : overload , on line 14
+[error 6.2] Undefined member function declaration type : overload method not found, on line 14
