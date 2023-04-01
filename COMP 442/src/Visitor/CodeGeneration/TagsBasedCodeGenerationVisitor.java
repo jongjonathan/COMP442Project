@@ -1,4 +1,5 @@
 package Visitor.CodeGeneration;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.Stack;
@@ -11,28 +12,65 @@ import Visitor.Visitor;
 
 
 public class TagsBasedCodeGenerationVisitor extends Visitor {
+    public Stack<String> m_registerPool = new Stack<String>();
+    public Integer m_tempVarNum = 0;
+    public String m_moonExecCode = new String();               // moon code instructions part
+    public String m_moonDataCode = new String();               // moon code data part
+    public String m_mooncodeindent = new String("           ");
+    public String m_outputfilename = new String();
+
+    public TagsBasedCodeGenerationVisitor() {
+        // create a pool of registers as a stack of Strings
+        // assuming only r1, ..., r12 are available
+        for (Integer i = 12; i >= 1; i--)
+            m_registerPool.push("r" + i.toString());
+    }
+
+    public TagsBasedCodeGenerationVisitor(String p_filename) {
+        this.m_outputfilename = p_filename;
+        // create a pool of registers as a stack of Strings
+        // assuming only r1, ..., r15 are available
+        for (Integer i = 12; i >= 1; i--)
+            m_registerPool.push("r" + i.toString());
+    }
 
 
-    public void visit(ProgNode p_node){
-        p_node.m_symtab = new SymTable(0,"global", null);
-        // propagate accepting tohe same visitor to all the children
+    public void visit(ProgNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal	// generate moon program's entry point
+        m_moonExecCode += m_mooncodeindent + "entry\n";
+        m_moonExecCode += m_mooncodeindent + "addi r14,r0,topaddr\n";
+        // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
-        for (AST child : p_node.getChildNodes() ) {
-            //make all children use this scopes' symbol table
-            child.m_symtab = p_node.m_symtab;
+        for (AST child : p_node.getChildNodes())
             child.accept(this);
+        // generate moon program's end point
+        m_moonDataCode += m_mooncodeindent + "% buffer space used for console output\n";
+        m_moonDataCode += String.format("%-11s", "buf") + "res 20\n";
+        m_moonExecCode += m_mooncodeindent + "hlt\n";
+
+        if (!this.m_outputfilename.isEmpty()) {
+            File file = new File(this.m_outputfilename);
+            try (PrintWriter out = new PrintWriter(file)) {
+                out.println(this.m_moonExecCode);
+                out.println(this.m_moonDataCode);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
+    ;
+
     public void visit(ClassNode p_node) {
         String classname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
-        SymTable localtable = new SymTable(1,classname, p_node.m_symtab);
+        SymTable localtable = new SymTable(1, classname, p_node.m_symtab);
         p_node.m_symtabentry = new ClassEntry(classname, localtable);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
         p_node.m_symtab = localtable;
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
-        for (AST child : p_node.getChildNodes() ) {
+        for (AST child : p_node.getChildNodes()) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
@@ -42,26 +80,26 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
     public void visit(FuncDefNode p_node) {
         String ftype = "";
         String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
-        SymTable localtable = new SymTable(1,fname, p_node.m_symtab);
+        SymTable localtable = new SymTable(1, fname, p_node.m_symtab);
         String paramList = "";
         boolean returntypeneeded = false;
-        int count =0;
+        int count = 0;
         for (AST child : p_node.getChildNodes()) {
-            if(child instanceof ParamsListNode){
+            if (child instanceof ParamsListNode) {
                 paramList = "(";
                 for (AST secondChild : child.getChildNodes()) {
-                    if( count%2 ==1) {
-                        paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                    if (count % 2 == 1) {
+                        paramList += ((Token) secondChild.concept).getLexeme() + ", ";
                     }
                     count++;
                 }
-                paramList = paramList.substring(0,paramList.length()-2)+")";
+                paramList = paramList.substring(0, paramList.length() - 2) + ")";
                 returntypeneeded = true;
                 continue;
             }
-            if(returntypeneeded == true){
+            if (returntypeneeded == true) {
                 returntypeneeded = false;
-                paramList += " "+((Token)child.concept).getLexeme();
+                paramList += " " + ((Token) child.concept).getLexeme();
             }
 
         }
@@ -71,19 +109,20 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         p_node.m_symtab = localtable;
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
-        for (AST child : p_node.getChildNodes() ) {
+        for (AST child : p_node.getChildNodes()) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
 //        System.out.println("func def");
     }
+
     public void visit(ParamsListNode p_node) {
 //        System.out.println("param");
-        int count =0;
+        int count = 0;
         for (AST child : p_node.getChildNodes()) {
-            if( count%2 ==0){
+            if (count % 2 == 0) {
                 child.m_symtab = p_node.m_symtab;
-                p_node.m_symtabentry = new VarEntry("PARAM", ""+((Token)p_node.getChildNodes().get(count+1).concept).getLexeme(),
+                p_node.m_symtabentry = new VarEntry("PARAM", "" + ((Token) p_node.getChildNodes().get(count + 1).concept).getLexeme(),
                         "" + ((Token) child.concept).getLexeme(), null);
                 child.m_symtabentry = p_node.m_symtabentry;
                 child.m_symtab.addEntry(p_node.m_symtabentry);
@@ -94,57 +133,61 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 
         }
     }
+
     public void visit(IDNode p_node) {
         String fname = ((Token) p_node.concept).getLexeme();
-        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.concept).getTokenType(), fname,null);
+        p_node.m_symtabentry = new VarEntry("ID", "" + ((Token) p_node.concept).getTokenType(), fname, null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
-    };
+    }
+
+    ;
+
     public void visit(StatBlockNode p_node) {
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
-        for (AST child : p_node.getChildNodes() ) {
+        for (AST child : p_node.getChildNodes()) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
 
     }
-    public void visit(VarDeclNode p_node){
-        String vartype = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
-        String varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
-        // loop over the list of dimension nodes and aggregate here
-        Vector<Integer> dimlist = new Vector<Integer>();
-        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
-            // parameter dimension
-            Integer dimval = Integer.parseInt(((Token)dim.concept).getLexeme());
-            dimlist.add(dimval);
+
+    public void visit(VarDeclNode p_node) {
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() )
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        if (((Token)p_node.getChildNodes().get(1).concept).getLexeme().equals("int") || ((Token)p_node.getChildNodes().get(1).concept).getLexeme().equals("integer")){
+            m_moonDataCode += m_mooncodeindent + "% space for variable " + ((Token)p_node.getChildNodes().get(0).concept).getLexeme() + "\n";
+            m_moonDataCode += ((Token)p_node.getChildNodes().get(0).concept).getLexeme() + " res 4\n";
         }
-        // create the symbol table entry for this variable
-        // it will be picked-up by another node above later
-        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist);
-        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+
+
     }
+
     public void visit(FuncCallNode p_node) {
         //  public function evaluate: (x: float) => float;
 
-        String ftype ="";
+        String ftype = "";
         String fname = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
         String visibility = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
-        SymTable localtable = new SymTable(2,fname, p_node.m_symtab);
+        SymTable localtable = new SymTable(2, fname, p_node.m_symtab);
         String paramList = "";
         boolean returntypeneeded = false;
         for (AST child : p_node.getChildNodes()) {
-            if(child instanceof ParamsListNode){
+            if (child instanceof ParamsListNode) {
                 paramList = "(";
                 for (AST secondChild : child.getChildNodes()) {
-                    paramList += ((Token)secondChild.concept).getLexeme()+", ";
+                    paramList += ((Token) secondChild.concept).getLexeme() + ", ";
                 }
-                paramList = paramList.substring(0,paramList.length()-2)+")";
+                paramList = paramList.substring(0, paramList.length() - 2) + ")";
                 returntypeneeded = true;
                 continue;
             }
-            if(returntypeneeded == true){
+            if (returntypeneeded == true) {
                 returntypeneeded = false;
-                paramList += " "+((Token)child.concept).getLexeme();
+                paramList += " " + ((Token) child.concept).getLexeme();
             }
 
         }
@@ -154,16 +197,19 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         p_node.m_symtab = localtable;
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
-        for (AST child : p_node.getChildNodes() ) {
+        for (AST child : p_node.getChildNodes()) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
 //        System.out.println("func call");
-    };
-    public void visit(MemberVarDeclNode p_node){
+    }
+
+    ;
+
+    public void visit(MemberVarDeclNode p_node) {
         String vartype = ((Token) p_node.getChildNodes().get(2).concept).getLexeme();
-        String varid = ""+((Token)p_node.getChildNodes().get(1).concept).getLexeme();
-        String visibility = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        String varid = "" + ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
+        String visibility = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         // loop over the list of dimension nodes and aggregate here
         Vector<Integer> dimlist = new Vector<Integer>();
 //        for (AST dim : p_node.getChildNodes().get(2).getChildNodes()){
@@ -173,13 +219,14 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 //        }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
-        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist,visibility );
+        p_node.m_symtabentry = new VarEntry("var", vartype, varid, dimlist, visibility);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
-    public void visit(InheritNode p_node){
+
+    public void visit(InheritNode p_node) {
         String varid = "none";
-        if(p_node.getChildNodes().size()!=0){
-            varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        if (p_node.getChildNodes().size() != 0) {
+            varid = "" + ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         }
 
         // loop over the list of dimension nodes and aggregate here
@@ -191,13 +238,17 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 //        }
         // create the symbol table entry for this variable
         // it will be picked-up by another node above later
-        p_node.m_symtabentry = new InheritEntry("inherit", null,varid,null);
+        p_node.m_symtabentry = new InheritEntry("inherit", null, varid, null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
-    public void visit(AST             p_node){
 
-    };
-    public void visit(ArrSizeNode    p_node){
+    public void visit(AST p_node) {
+
+    }
+
+    ;
+
+    public void visit(ArrSizeNode p_node) {
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }

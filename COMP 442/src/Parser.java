@@ -3,6 +3,7 @@ import Lexer.*;
 import java.io.*;
 import java.util.*;
 import Visitor.SemanticCheck.TypeCheckingVisitor;
+import Visitor.CodeGeneration.TagsBasedCodeGenerationVisitor;
 
 
 public class Parser {
@@ -736,6 +737,18 @@ public class Parser {
             System.out.println(e.getMessage());
         }
     }
+//    public void writeMoonCode(Stack<AST> stack){
+//        FileWriter f;
+//        try {
+//            f = new FileWriter("COMP 442/inputOutput/" + filename + ".m");
+//            f.write(this.m_moonExecCode);
+//            f.write(this.m_moonDataCode);
+//        f.close();
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 //    public void writeSemanticErrors(Stack<AST> stack){
 //        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + filename + ".outsemanticerrors");
 //    }

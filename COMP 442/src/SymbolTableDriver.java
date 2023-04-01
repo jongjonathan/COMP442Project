@@ -3,6 +3,7 @@ import Visitor.*;
 import Visitor.SemanticCheck.TypeCheckingVisitor;
 import Visitor.SymbolTable.ComputeMemorySizeVisitor;
 import Visitor.SymbolTable.SymbolTableCreationVisitor;
+import Visitor.CodeGeneration.TagsBasedCodeGenerationVisitor;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -19,6 +20,7 @@ public class SymbolTableDriver {
         //AST stack
         Stack<AST> sym = p.semStack;
 
+
         //Create symbol table
         SymbolTableCreationVisitor symVisitor = new SymbolTableCreationVisitor();
         Stack<AST> astTables = symVisitor.createTables(sym);
@@ -28,10 +30,17 @@ public class SymbolTableDriver {
         TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + p.getFilename() + ".outsemanticerrors");
 //        Stack<AST> astCheck = typeCheckingVisitor.semanticCheck(sym);
         astTables.firstElement().accept(typeCheckingVisitor);
-        p.writeSymbolTable(astTables);
+
 
         ComputeMemorySizeVisitor memorySizeVisitor = new ComputeMemorySizeVisitor();
         astTables.firstElement().accept(memorySizeVisitor);
+
+        p.writeSymbolTable(astTables);
+
+
+        TagsBasedCodeGenerationVisitor  CGVisitor    = new TagsBasedCodeGenerationVisitor("COMP 442/inputOutput/" + p.getFilename() + ".c");
+        astTables.firstElement().accept(CGVisitor);
+
 
         System.out.println("temp finish");
 
