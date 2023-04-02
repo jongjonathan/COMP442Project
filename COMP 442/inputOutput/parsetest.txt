@@ -4,6 +4,5 @@ function main() => void
    localvar i    : integer;
    localvar j    : integer;
    n = 1;
-   i = 2;
-   j = n + i;
+   i = 2 + 2;
 }
