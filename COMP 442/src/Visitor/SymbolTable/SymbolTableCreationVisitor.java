@@ -116,8 +116,15 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
     }
     public void visit(IDNode p_node) {
-        String fname = ((Token) p_node.concept).getLexeme();
-        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.concept).getTokenType(), fname,null);
+        String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        p_node.m_moonVarName = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
+        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), fname,null);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+    };
+    public void visit(NumNode p_node) {
+        p_node.m_moonVarName =((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        p_node.m_symtabentry = new VarEntry("litval", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), fname,null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     };
     public void visit(StatBlockNode p_node) {
@@ -257,7 +264,7 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
         String tempvarname = this.getNewTempVarName();
         p_node.m_moonVarName = tempvarname;
-        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
+        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
 
     }
@@ -270,7 +277,7 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
         String tempvarname = this.getNewTempVarName();
         p_node.m_moonVarName = tempvarname;
-        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
+        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
 
     }
@@ -281,6 +288,12 @@ public class SymbolTableCreationVisitor extends Visitor {
         }
     }
     public void visit(ExprNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(WriteNode    p_node){
         for (AST child : p_node.getChildNodes() ) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);

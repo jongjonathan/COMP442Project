@@ -174,7 +174,7 @@ public class Parser {
                         case "SEMACT13" -> this.makeFamily("STAT");
                         case "SEMACT14" -> this.makeFamily("WHILE");
                         case "SEMACT15" -> this.makeFamily("IF");
-                        case "SEMACT16" -> this.makeFamily("WRITE");
+                        case "SEMACT16" -> this.makeFamily(new WriteNode(null, null,"WRITE", 0 ));
                         case "SEMACT17" -> this.makeFamily("READ");
                         case "SEMACT18" -> this.makeFamily("RETURN");
                         case "SEMACT19" -> this.makeFamily(new ProgNode(null,null, "PROG",0));
@@ -190,6 +190,8 @@ public class Parser {
                         case "SEMACT29" -> this.makeFamily(new AddOpNode(null,null, "ADD OP",0));
                         case "SEMACT30" -> this.makeFamily(new AssignOpNode(null,null, "ASSIGN OP",0));
                         case "SEMACT31" -> this.makeFamily(new MultOpNode(null,null, "MULT OP",0));
+                        case "SEMACT32" -> this.makeFamily(new NumNode(null,null, "NUM",0));
+                        case "SEMACT33" -> this.makeFamily(new IDNode(null,null, "ID",0));
                     }
                     s1.pop();
                     top = s1.peek();

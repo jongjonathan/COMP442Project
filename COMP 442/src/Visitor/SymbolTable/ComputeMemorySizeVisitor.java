@@ -232,5 +232,15 @@ public class ComputeMemorySizeVisitor extends Visitor {
         }
 
     }
+    public void visit(WriteNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+    }
+    public void visit(NumNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+    }
 
 }

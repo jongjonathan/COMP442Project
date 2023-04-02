@@ -136,9 +136,9 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
     }
 
     public void visit(IDNode p_node) {
-        String fname = ((Token) p_node.concept).getLexeme();
-        p_node.m_symtabentry = new VarEntry("ID", "" + ((Token) p_node.concept).getTokenType(), fname, null);
-        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
     }
 
     ;
@@ -266,6 +266,7 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         int indexBefore = -1;
 
         String indexBeforeName = "";
+        String tempVarOp = "";
         //before name
         for (AST child : p_node.parentNode.getChildNodes()) {
             indexBefore ++;
@@ -276,7 +277,13 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 
             }
         }
-        String tempVarOp = p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(1).m_moonVarName;
+        if(p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().size()>1){
+           tempVarOp = p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(1).m_moonVarName;
+        }
+        else{
+           tempVarOp = p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(0).m_moonVarName;
+        }
+
 //((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme()
        // ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme()
         m_moonExecCode += m_mooncodeindent + "% processing: "  + indexBeforeName+ " := " +  tempVarOp+ "\n";
@@ -308,8 +315,8 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 
             }
         }
-        String left = ((Token)p_node.parentNode.getChildNodes().get(0).concept).getLexeme();
-        String right = ((Token)p_node.getChildNodes().get(1).concept).getLexeme();
+        String left = ((Token)p_node.parentNode.getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme();
+        String right = ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).concept).getLexeme();
 
         m_moonExecCode += m_mooncodeindent + "% processing: " + p_node.m_moonVarName + " := " + left + " + " + right + "\n";
         m_moonExecCode += m_mooncodeindent + "lw "  + leftChildRegister +  "," + left + "(r0)\n";
@@ -345,8 +352,8 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 
             }
         }
-        String left = ((Token)p_node.parentNode.getChildNodes().get(0).concept).getLexeme();
-        String right = ((Token)p_node.getChildNodes().get(1).concept).getLexeme();
+        String left = ((Token)p_node.parentNode.getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme();
+        String right = ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).concept).getLexeme();
         // generate code
         m_moonExecCode += m_mooncodeindent + "% processing: " + p_node.m_moonVarName + " := " + left + " * " + right + "\n";
         m_moonExecCode += m_mooncodeindent + "lw "  + leftChildRegister  + "," + left + "(r0)\n";
@@ -370,6 +377,37 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
+
+    }
+    public void visit(NumNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(WriteNode    p_node){
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes())
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        // create a local variable and allocate a register to this subcomputation
+        String localRegister      = this.m_registerPool.pop();
+        //generate code
+        m_moonExecCode += m_mooncodeindent + "% processing: put("  + p_node.getChildNodes().get(0).m_moonVarName + ")\n";
+        m_moonExecCode += m_mooncodeindent + "lw " + localRegister + "," + p_node.getChildNodes().get(0).m_moonVarName + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "% put value on stack\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14)," + localRegister + "\n";
+        m_moonExecCode += m_mooncodeindent + "% link buffer to stack\n";
+        m_moonExecCode += m_mooncodeindent + "addi " + localRegister + ",r0, buf\n";
+        m_moonExecCode += m_mooncodeindent + "sw -12(r14)," + localRegister + "\n";
+        m_moonExecCode += m_mooncodeindent + "% convert int to string for output\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, intstr\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14),r13\n";
+        m_moonExecCode += m_mooncodeindent + "% output to console\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, putstr\n";
+        //deallocate local register
+        this.m_registerPool.push(localRegister);
 
     }
 }
