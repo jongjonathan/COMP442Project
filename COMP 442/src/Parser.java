@@ -187,6 +187,8 @@ public class Parser {
                         case "SEMACT26" -> this.makeFamily("EXPR");
                         case "SEMACT27" -> this.makeFamily("REL EXPR");
                         case "SEMACT28" -> this.makeFamily("STAT ID NEST");
+                        case "SEMACT29" -> this.makeFamily("ADD OP");
+                        case "SEMACT30" -> this.makeFamily("ASSIGN OP");
                     }
                     s1.pop();
                     top = s1.peek();

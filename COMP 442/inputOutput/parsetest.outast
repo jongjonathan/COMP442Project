@@ -1,48 +1,38 @@
 [PROG
 |    FUNC DEF
-|    |    [ID, duplicateMe, 2]
-|    |    FPARAMS
-|    |    |    [ID, l, 2]
-|    |    |    [INTEGERKEYWORD, integer, 2]
-|    |    |    [ID, v, 2]
-|    |    |    [ID, id, 2]
-|    |    [INTEGERKEYWORD, integer, 2]
+|    |    [ID, main, 1]
+|    |    [VOIDKEYWORD, void, 1]
 |    |    FUNC BODY/LOCAL VAR STAT BLOCK
 |    |    |    LOCAL VAR DECL
-|    |    |    |    [ID, arr, 4]
+|    |    |    |    [ID, n, 3]
+|    |    |    |    [INTEGERKEYWORD, integer, 3]
+|    |    |    |    ARR SIZE
+|    |    |    LOCAL VAR DECL
+|    |    |    |    [ID, i, 4]
 |    |    |    |    [INTEGERKEYWORD, integer, 4]
 |    |    |    |    ARR SIZE
-|    |    |    |    |    [INTEGER, 7, 4]
 |    |    |    LOCAL VAR DECL
-|    |    |    |    [ID, arr, 5]
+|    |    |    |    [ID, j, 5]
 |    |    |    |    [INTEGERKEYWORD, integer, 5]
 |    |    |    |    ARR SIZE
-|    |    |    |    |    [INTEGER, 6, 5]
-|    |    |    LOCAL VAR DECL
+|    |    |    ASSIGN OP
 |    |    |    |    [ID, n, 6]
-|    |    |    |    [INTEGERKEYWORD, integer, 6]
-|    |    |    |    ARR SIZE
-|    |    |    LOCAL VAR DECL
+|    |    |    |    [EQUAL, =, 6]
+|    |    |    |    EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [INTEGER, 1, 6]
+|    |    |    ASSIGN OP
 |    |    |    |    [ID, i, 7]
-|    |    |    |    [INTEGERKEYWORD, integer, 7]
-|    |    |    |    ARR SIZE
-|    CLASS DECL
-|    |    [ID, POLYNOMIAL, 11]
-|    |    INHERLIST
-|    |    MEMBER FUNC DECL
-|    |    |    [PUBLICKEYWORD, public, 12]
-|    |    |    [ID, overload, 12]
-|    |    |    FPARAMS
-|    |    |    |    [ID, l, 12]
-|    |    |    |    [INTEGERKEYWORD, integer, 12]
-|    |    |    |    [ID, v, 12]
-|    |    |    |    [ID, id, 12]
-|    |    |    [INTEGERKEYWORD, integer, 12]
-|    |    MEMBER FUNC DECL
-|    |    |    [PUBLICKEYWORD, public, 13]
-|    |    |    [ID, overload, 13]
-|    |    |    FPARAMS
-|    |    |    |    [ID, l, 13]
-|    |    |    |    [INTEGERKEYWORD, integer, 13]
-|    |    |    [INTEGERKEYWORD, integer, 13]
+|    |    |    |    [EQUAL, =, 7]
+|    |    |    |    EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [INTEGER, 2, 7]
+|    |    |    ASSIGN OP
+|    |    |    |    [ID, j, 8]
+|    |    |    |    [EQUAL, =, 8]
+|    |    |    |    EXPR
+|    |    |    |    |    ARITHM EXPR
+|    |    |    |    |    |    [ID, n, 8]
+|    |    |    |    |    |    [ADD, +, 8]
+|    |    |    |    |    |    [ID, i, 8]
 ]
