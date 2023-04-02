@@ -202,5 +202,35 @@ public class ComputeMemorySizeVisitor extends Visitor {
         }
 
     }
+    public void visit(AssignOpNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(AddOpNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(MultOpNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(ArithmNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(ExprNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
 
 }

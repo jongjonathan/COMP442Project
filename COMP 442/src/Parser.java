@@ -183,13 +183,13 @@ public class Parser {
                         case "SEMACT22" -> this.makeFamily("FUNCHEAD");
                         case "SEMACT23" -> this.makeFamily("ID NEST");
                         case "SEMACT24" -> this.makeFamily("INDICE");
-                        case "SEMACT25" -> this.makeFamily("ARITHM EXPR");
-                        case "SEMACT26" -> this.makeFamily("EXPR");
+                        case "SEMACT25" -> this.makeFamily(new ArithmNode(null,null, "ARITH EXPR",0));
+                        case "SEMACT26" -> this.makeFamily(new ExprNode(null,null, "EXPR",0));
                         case "SEMACT27" -> this.makeFamily("REL EXPR");
                         case "SEMACT28" -> this.makeFamily("STAT ID NEST");
-                        case "SEMACT29" -> this.makeFamily("ADD OP");
-                        case "SEMACT30" -> this.makeFamily("ASSIGN OP");
-                        case "SEMACT31" -> this.makeFamily("MULT OP");
+                        case "SEMACT29" -> this.makeFamily(new AddOpNode(null,null, "ADD OP",0));
+                        case "SEMACT30" -> this.makeFamily(new AssignOpNode(null,null, "ASSIGN OP",0));
+                        case "SEMACT31" -> this.makeFamily(new MultOpNode(null,null, "MULT OP",0));
                     }
                     s1.pop();
                     top = s1.peek();

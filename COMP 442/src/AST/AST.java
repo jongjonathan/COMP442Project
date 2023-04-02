@@ -16,6 +16,7 @@ public class AST {
 
     public  SymTable      m_symtab             = null;
     public  SymTableEntry m_symtabentry        = null;
+    public  String      m_moonVarName        = new String();
 
     public void setParentNode(AST parentNode) {
         this.parentNode = parentNode;

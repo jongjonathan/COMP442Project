@@ -38,7 +38,7 @@ public class SymbolTableDriver {
         p.writeSymbolTable(astTables);
 
 
-        TagsBasedCodeGenerationVisitor  CGVisitor    = new TagsBasedCodeGenerationVisitor("COMP 442/inputOutput/" + p.getFilename() + ".c");
+        TagsBasedCodeGenerationVisitor  CGVisitor    = new TagsBasedCodeGenerationVisitor("COMP 442/inputOutput/" + p.getFilename() + ".m");
         astTables.firstElement().accept(CGVisitor);
 
 

@@ -18,6 +18,7 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
     public String m_moonDataCode = new String();               // moon code data part
     public String m_mooncodeindent = new String("           ");
     public String m_outputfilename = new String();
+    int indexRestart = 0;
 
     public TagsBasedCodeGenerationVisitor() {
         // create a pool of registers as a stack of Strings
@@ -246,9 +247,126 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
 
     }
 
-    ;
 
     public void visit(ArrSizeNode p_node) {
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(AssignOpNode    p_node){
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() )
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        // allocate local register
+        String localRegister = this.m_registerPool.pop();
+        //generate code
+        int indexBefore = -1;
+
+        String indexBeforeName = "";
+        //before name
+        for (AST child : p_node.parentNode.getChildNodes()) {
+            indexBefore ++;
+            if(child instanceof AssignOpNode && child == p_node){
+                indexBeforeName = ((Token)p_node.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+                indexRestart = indexBefore;
+                break;
+
+            }
+        }
+        String tempVarOp = p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(1).m_moonVarName;
+//((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme()
+       // ((Token)p_node.getChildNodes().get(1).getChildNodes().get(0).getChildNodes().get(0).concept).getLexeme()
+        m_moonExecCode += m_mooncodeindent + "% processing: "  + indexBeforeName+ " := " +  tempVarOp+ "\n";
+        m_moonExecCode += m_mooncodeindent + "lw " + localRegister + "," +tempVarOp+ "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "sw " + indexBeforeName + "(r0)," + localRegister + "\n";
+        //deallocate local register
+        this.m_registerPool.push(localRegister);
+
+    }
+    public void visit(AddOpNode    p_node){
+// propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() )
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        // create a local variable and allocate a register to this subcomputation
+        String localRegister      = this.m_registerPool.pop();
+        String leftChildRegister  = this.m_registerPool.pop();
+        String rightChildRegister = this.m_registerPool.pop();
+        // generate code
+        int indexBefore = -1;
+        String indexBeforeName = "";
+        //before name of assign
+        for (AST child : p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes()) {
+            indexBefore ++;
+            if(child instanceof AssignOpNode){
+                //ex: n from n = 1 + 1
+                indexBeforeName = ((Token)p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+
+            }
+        }
+        String left = ((Token)p_node.parentNode.getChildNodes().get(0).concept).getLexeme();
+        String right = ((Token)p_node.getChildNodes().get(1).concept).getLexeme();
+
+        m_moonExecCode += m_mooncodeindent + "% processing: " + p_node.m_moonVarName + " := " + left + " + " + right + "\n";
+        m_moonExecCode += m_mooncodeindent + "lw "  + leftChildRegister +  "," + left + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "lw "  + rightChildRegister + "," + right + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "add " + localRegister +      "," + leftChildRegister + "," + rightChildRegister + "\n";
+        m_moonDataCode += m_mooncodeindent + "% space for " + left + " + " + right + "\n";
+        m_moonDataCode += String.format("%-10s",p_node.m_moonVarName) + " res 4\n";
+        m_moonExecCode += m_mooncodeindent + "sw " + p_node.m_moonVarName + "(r0)," + localRegister + "\n";
+        // deallocate the registers for the two children, and the current node
+        this.m_registerPool.push(leftChildRegister);
+        this.m_registerPool.push(rightChildRegister);
+        this.m_registerPool.push(localRegister);
+
+    }
+    public void visit(MultOpNode    p_node){
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes() )
+            child.accept(this);
+        // Then, do the processing of this nodes' visitor
+        // create a local variable and allocate a register to this subcomputation
+        String localRegister      = this.m_registerPool.pop();
+        String leftChildRegister  = this.m_registerPool.pop();
+        String rightChildRegister = this.m_registerPool.pop();
+        int indexBefore = -1;
+        String indexBeforeName = "";
+        //before name of assign
+        for (AST child : p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes()) {
+            indexBefore ++;
+            if(child instanceof AssignOpNode){
+                //ex: n from n = 1 + 1
+                indexBeforeName = ((Token)p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+
+            }
+        }
+        String left = ((Token)p_node.parentNode.getChildNodes().get(0).concept).getLexeme();
+        String right = ((Token)p_node.getChildNodes().get(1).concept).getLexeme();
+        // generate code
+        m_moonExecCode += m_mooncodeindent + "% processing: " + p_node.m_moonVarName + " := " + left + " * " + right + "\n";
+        m_moonExecCode += m_mooncodeindent + "lw "  + leftChildRegister  + "," + left + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "lw "  + rightChildRegister + "," + right + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "mul " + localRegister      + "," + leftChildRegister + "," + rightChildRegister + "\n";
+        m_moonDataCode += m_mooncodeindent + "% space for " + left + " * " + right + "\n";
+        m_moonDataCode += String.format("%-10s",p_node.m_moonVarName) + " res 4\n";
+        m_moonExecCode += m_mooncodeindent + "sw " + p_node.m_moonVarName + "(r0)," + localRegister + "\n";
+        // deallocate the registers for the two children, and the current node
+        this.m_registerPool.push(leftChildRegister);
+        this.m_registerPool.push(rightChildRegister);
+        this.m_registerPool.push(localRegister);
+    }
+    public void visit(ArithmNode    p_node){
+        for (AST child : p_node.getChildNodes()) {
+            child.accept(this);
+        }
+
+    }
+    public void visit(ExprNode    p_node){
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }

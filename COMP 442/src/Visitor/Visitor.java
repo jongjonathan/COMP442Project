@@ -13,8 +13,10 @@ import AST.*;
  */
 
 public abstract class Visitor {
-//    public abstract void visit(AddOpNode        p_node);
-//    public abstract void visit(AssignStatNode   p_node);
+    public abstract void visit(AddOpNode        p_node);
+    public abstract void visit(AssignOpNode   p_node);
+    public abstract void visit(ArithmNode   p_node);
+    public abstract void visit(ExprNode   p_node);
 //    public abstract void visit(ClassListNode    p_node);
     public abstract void visit(ClassNode p_node);
 //    public abstract void visit(DimListNode      p_node);
@@ -25,7 +27,7 @@ public abstract class Visitor {
 //    public abstract void visit(FuncDefNode      p_node);
     public abstract void visit(IDNode           p_node);
     public abstract void visit(InheritNode      p_node);
-//    public abstract void visit(MultOpNode       p_node);
+    public abstract void visit(MultOpNode       p_node);
     public abstract void visit(AST             p_node);
 //    public abstract void visit(NumNode          p_node);
     public abstract void visit(ParamsListNode    p_node);

@@ -17,6 +17,10 @@ public class SymbolTableCreationVisitor extends Visitor {
     public SymbolTableCreationVisitor(){
 
     }
+    public String getNewTempVarName(){
+        m_tempVarNum++;
+        return "t" + m_tempVarNum.toString();
+    }
 
     public void visit(ProgNode p_node){
         p_node.m_symtab = new SymTable(0,"global", null);
@@ -126,6 +130,10 @@ public class SymbolTableCreationVisitor extends Visitor {
 
     }
     public void visit(VarDeclNode p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
         String vartype = ((Token) p_node.getChildNodes().get(1).concept).getLexeme();
         String varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
         // loop over the list of dimension nodes and aggregate here
@@ -181,6 +189,10 @@ public class SymbolTableCreationVisitor extends Visitor {
 //        System.out.println("func call");
     };
     public void visit(MemberVarDeclNode p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
         String vartype = ((Token) p_node.getChildNodes().get(2).concept).getLexeme();
         String varid = ""+((Token)p_node.getChildNodes().get(1).concept).getLexeme();
         String visibility = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
@@ -197,6 +209,10 @@ public class SymbolTableCreationVisitor extends Visitor {
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     }
     public void visit(InheritNode p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
         String varid = "none";
         if(p_node.getChildNodes().size()!=0){
             varid = ""+((Token)p_node.getChildNodes().get(0).concept).getLexeme();
@@ -220,10 +236,55 @@ public class SymbolTableCreationVisitor extends Visitor {
 
     }
     public void visit(ArrSizeNode    p_node){
-        for (AST child : p_node.getChildNodes()) {
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
 
+    }
+    public void visit(AssignOpNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(AddOpNode    p_node){
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes()) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+
+    }
+    public void visit(MultOpNode    p_node){
+        // propagate accepting the same visitor to all the children
+        // this effectively achieves Depth-First AST Traversal
+        for (AST child : p_node.getChildNodes()) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+        String tempvarname = this.getNewTempVarName();
+        p_node.m_moonVarName = tempvarname;
+        p_node.m_symtabentry = new VarEntry("tempvar", ((Token)p_node.getChildNodes().get(1).concept).getTokenType().toString().toLowerCase(), p_node.m_moonVarName, null);
+        p_node.m_symtab.addEntry(p_node.m_symtabentry);
+
+    }
+    public void visit(ArithmNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(ExprNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
     }
 
     public Stack<AST> createTables(Stack<AST> nodeStack){
