@@ -313,6 +313,18 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.accept(this);
         }
     }
+    public void visit(IfNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(RelExprNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
 
     public Stack<AST> createTables(Stack<AST> nodeStack){
 

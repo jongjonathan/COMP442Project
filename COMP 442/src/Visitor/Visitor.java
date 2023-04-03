@@ -26,6 +26,7 @@ public abstract class Visitor {
     public abstract void visit(FuncDefNode p_node);
 //    public abstract void visit(FuncDefNode      p_node);
     public abstract void visit(IDNode           p_node);
+    public abstract void visit(IfNode           p_node);
     public abstract void visit(InheritNode      p_node);
     public abstract void visit(IndiceNode      p_node);
     public abstract void visit(MultOpNode       p_node);
