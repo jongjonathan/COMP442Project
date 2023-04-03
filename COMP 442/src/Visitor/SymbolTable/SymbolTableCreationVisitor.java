@@ -118,13 +118,13 @@ public class SymbolTableCreationVisitor extends Visitor {
     public void visit(IDNode p_node) {
         String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
         p_node.m_moonVarName = ((Token)p_node.getChildNodes().get(0).concept).getLexeme();
-        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), fname,null);
+        p_node.m_symtabentry = new VarEntry("ID", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), p_node.m_moonVarName,null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     };
     public void visit(NumNode p_node) {
-        p_node.m_moonVarName =((Token) p_node.getChildNodes().get(0).concept).getLexeme();
+        p_node.m_moonVarName =this.getNewTempVarName();
         String fname = ((Token) p_node.getChildNodes().get(0).concept).getLexeme();
-        p_node.m_symtabentry = new VarEntry("litval", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), fname,null);
+        p_node.m_symtabentry = new VarEntry("litval", ""+((Token) p_node.getChildNodes().get(0).concept).getTokenType(), p_node.m_moonVarName,null);
         p_node.m_symtab.addEntry(p_node.m_symtabentry);
     };
     public void visit(StatBlockNode p_node) {
