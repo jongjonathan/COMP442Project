@@ -286,14 +286,28 @@ public class SymbolTableCreationVisitor extends Visitor {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
+        p_node.m_moonVarName = p_node.getChildNodes().get(0).m_moonVarName;
     }
     public void visit(ExprNode    p_node){
         for (AST child : p_node.getChildNodes() ) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);
         }
+        p_node.m_moonVarName = p_node.getChildNodes().get(0).m_moonVarName;
     }
     public void visit(WriteNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(IndiceNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.m_symtab = p_node.m_symtab;
+            child.accept(this);
+        }
+    }
+    public void visit(StatNode    p_node){
         for (AST child : p_node.getChildNodes() ) {
             child.m_symtab = p_node.m_symtab;
             child.accept(this);

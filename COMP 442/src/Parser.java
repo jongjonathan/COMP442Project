@@ -171,7 +171,7 @@ public class Parser {
                         case "SEMACT10" -> this.makeFamily(new ParamsListNode(null,null, "FPARAMS",0));
                         case "SEMACT11" -> this.makeFamily(new FuncDefNode(null,null, "FUNC DEF",0));
                         case "SEMACT12" -> this.makeFamily(new StatBlockNode(null,null,"FUNC BODY/LOCAL VAR STAT BLOCK",0)); //
-                        case "SEMACT13" -> this.makeFamily("STAT");
+                        case "SEMACT13" -> this.makeFamily(new StatNode(null, null, "STAT", 0));
                         case "SEMACT14" -> this.makeFamily("WHILE");
                         case "SEMACT15" -> this.makeFamily("IF");
                         case "SEMACT16" -> this.makeFamily(new WriteNode(null, null,"WRITE", 0 ));
@@ -182,7 +182,7 @@ public class Parser {
                         case "SEMACT21" -> this.makeFamily("FUNCHEAD TAIL");
                         case "SEMACT22" -> this.makeFamily("FUNCHEAD");
                         case "SEMACT23" -> this.makeFamily("ID NEST");
-                        case "SEMACT24" -> this.makeFamily("INDICE");
+                        case "SEMACT24" -> this.makeFamily( new IndiceNode(null,null, "INDICE",0));
                         case "SEMACT25" -> this.makeFamily(new ArithmNode(null,null, "ARITH EXPR",0));
                         case "SEMACT26" -> this.makeFamily(new ExprNode(null,null, "EXPR",0));
                         case "SEMACT27" -> this.makeFamily("REL EXPR");

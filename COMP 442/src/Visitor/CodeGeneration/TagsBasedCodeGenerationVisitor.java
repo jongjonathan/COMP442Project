@@ -270,7 +270,11 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         //before name
         for (AST child : p_node.parentNode.getChildNodes()) {
             indexBefore ++;
-            if(child instanceof AssignOpNode && child == p_node){
+            if(child instanceof IndiceNode){
+                indexBeforeName = ((Token)p_node.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+                break;
+            }
+            else if(child instanceof AssignOpNode && child == p_node){
                 indexBeforeName = ((Token)p_node.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
                 indexRestart = indexBefore;
                 break;
@@ -312,7 +316,11 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         //before name of assign
         for (AST child : p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes()) {
             indexBefore ++;
-            if(child instanceof AssignOpNode){
+            if(child instanceof IndiceNode){
+                indexBeforeName = ((Token)p_node.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+                break;
+            }
+            else if(child instanceof AssignOpNode){
                 //ex: n from n = 1 + 1
                 indexBeforeName = ((Token)p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
 
@@ -349,7 +357,11 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         //before name of assign
         for (AST child : p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes()) {
             indexBefore ++;
-            if(child instanceof AssignOpNode){
+            if(child instanceof IndiceNode){
+                indexBeforeName = ((Token)p_node.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
+                break;
+            }
+            else if(child instanceof AssignOpNode){
                 //ex: n from n = 1 + 1
                 indexBeforeName = ((Token)p_node.parentNode.parentNode.parentNode.parentNode.getChildNodes().get(indexBefore-1).concept).getLexeme();
 
@@ -380,6 +392,7 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
         }
+
 
     }
     public void visit(NumNode    p_node){
@@ -414,6 +427,7 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         String localRegister      = this.m_registerPool.pop();
         //generate code
         String writeChar = p_node.getChildNodes().get(0).getChildNodes().get(0).getChildNodes().get(0).m_moonVarName;
+//        String writeChar = p_node.m_moonVarName;
         m_moonExecCode += m_mooncodeindent + "% processing: put("  + writeChar + ")\n";
         m_moonExecCode += m_mooncodeindent + "lw " + localRegister + "," + writeChar + "(r0)\n";
         m_moonExecCode += m_mooncodeindent + "% put value on stack\n";
@@ -429,5 +443,15 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         //deallocate local register
         this.m_registerPool.push(localRegister);
 
+    }
+    public void visit(IndiceNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+    }
+    public void visit(StatNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
     }
 }

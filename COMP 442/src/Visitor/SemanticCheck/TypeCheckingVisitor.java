@@ -319,6 +319,16 @@ public class TypeCheckingVisitor extends Visitor{
             child.accept(this);
         }
     }
+    public void visit(IndiceNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+    }
+    public void visit(StatNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+    }
 
 
 

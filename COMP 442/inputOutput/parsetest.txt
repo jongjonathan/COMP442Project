@@ -1,8 +1,16 @@
 function main() => void
 {
-   localvar n    : integer;
-   localvar i    : integer;
-   localvar j    : integer;
-   n = 1;
-   i = 2 + 2;
+localvar arr: integer[6];
+localvar n    : integer;
+localvar k    : integer;
+localvar i    : integer;
+localvar d    : integer;
+arr[0] = 6;
+k = 5;
+n = 7;
+i  = k + n;
+d = k * n;
+write(k);
+write(i);
+write(d);
 }

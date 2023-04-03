@@ -27,6 +27,7 @@ public abstract class Visitor {
 //    public abstract void visit(FuncDefNode      p_node);
     public abstract void visit(IDNode           p_node);
     public abstract void visit(InheritNode      p_node);
+    public abstract void visit(IndiceNode      p_node);
     public abstract void visit(MultOpNode       p_node);
     public abstract void visit(AST             p_node);
     public abstract void visit(NumNode          p_node);
@@ -36,6 +37,7 @@ public abstract class Visitor {
 //    public abstract void visit(PutStatNode      p_node);
 //    public abstract void visit(ReturnStatNode   p_node);
     public abstract void visit(StatBlockNode    p_node);
+    public abstract void visit(StatNode    p_node);
 //    public abstract void visit(TypeNode         p_node);
     public abstract void visit(VarDeclNode      p_node);
     public abstract void visit(WriteNode      p_node);
