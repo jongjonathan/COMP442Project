@@ -361,10 +361,37 @@ public class TagsBasedCodeGenerationVisitor extends Visitor {
         for (AST child : p_node.getChildNodes() ) {
             child.accept(this);
         }
+
     }
     public void visit(RelExprNode    p_node){
         for (AST child : p_node.getChildNodes() ) {
             child.accept(this);
         }
+    }
+    public void visit(ReadNode    p_node){
+        for (AST child : p_node.getChildNodes() ) {
+            child.accept(this);
+        }
+        // Then, do the processing of this nodes' visitor
+        // create a local variable and allocate a register to this subcomputation
+        String localRegister      = this.m_registerPool.pop();
+        //generate code
+        String writeChar = p_node.getChildNodes().get(0).getChildNodes().get(0).getChildNodes().get(0).m_moonVarName;
+//        String writeChar = p_node.m_moonVarName;
+        m_moonExecCode += m_mooncodeindent + "% processing: put("  + writeChar + ")\n";
+        m_moonExecCode += m_mooncodeindent + "lw " + localRegister + "," + writeChar + "(r0)\n";
+        m_moonExecCode += m_mooncodeindent + "% put value on stack\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14)," + localRegister + "\n";
+        m_moonExecCode += m_mooncodeindent + "% link buffer to stack\n";
+        m_moonExecCode += m_mooncodeindent + "addi " + localRegister + ",r0, buf\n";
+        m_moonExecCode += m_mooncodeindent + "sw -12(r14)," + localRegister + "\n";
+        m_moonExecCode += m_mooncodeindent + "% convert int to string for output\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, intstr\n";
+        m_moonExecCode += m_mooncodeindent + "sw -8(r14),r13\n";
+        m_moonExecCode += m_mooncodeindent + "% output to console\n";
+        m_moonExecCode += m_mooncodeindent + "jl r15, putstr\n";
+        //deallocate local register
+        this.m_registerPool.push(localRegister);
+
     }
 }

@@ -37,6 +37,7 @@ public abstract class Visitor {
 //    public abstract void visit(ProgramBlockNode p_node);
 //    public abstract void visit(PutStatNode      p_node);
 //    public abstract void visit(ReturnStatNode   p_node);
+    public abstract void visit(ReadNode   p_node);
     public abstract void visit(StatBlockNode    p_node);
     public abstract void visit(StatNode    p_node);
 //    public abstract void visit(TypeNode         p_node);

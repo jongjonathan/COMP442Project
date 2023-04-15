@@ -18,11 +18,12 @@ public class Parser {
     private ArrayList<String> endable = new ArrayList<>();
 //            String filename="example-polynomial";
 //    String filename = "example-bubblesort";
-        String filename="parsetest";
+//        String filename="parsetest";
     // String filename="parse2";
     PrintWriter pwError;
     FileWriter astOutput;
     Stack<AST> semStack = new Stack<>();
+    String filename = "";
 
 
     Lexer lex;
@@ -80,7 +81,7 @@ public class Parser {
     };
 
 
-    public void Parser() {
+    public void Parser(String filename) {
 
         addFirstFollow();
 
@@ -91,8 +92,10 @@ public class Parser {
 //        String table = "COMP 442/ll1attrsem.csv";
         String line = "";
         String commaDel = ",";
+        int noExtensionNameIndex = filename.indexOf(".");
+        filename  = filename.substring(0,noExtensionNameIndex);
         try {
-            this.astOutput = new FileWriter("COMP 442/inputOutput/" + filename + ".outast");
+            this.astOutput = new FileWriter("COMP 442/astOutput/" + filename + ".outast");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -116,14 +119,16 @@ public class Parser {
 
     }
 
-    public void parse() {
+    public void parse(String file) {
         try {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
-            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parsetest.txt");
+            FileInputStream fin = new FileInputStream("COMP 442/projectInput/" + file);
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-bubblesort.src");
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
-            pwError = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outsyntaxerrors"));
-            PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/inputOutput/" + filename + ".outderivation"));
+            int noExtensionNameIndex = file.indexOf(".");
+            filename  = file.substring(0,noExtensionNameIndex);
+            pwError = new PrintWriter(new File("COMP 442/errors/" + filename + ".errors"));
+            PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/parserOutput/" + filename + ".outderivation"));
             lex = new Lexer(fin, pwError);
 
             s1.push("$");//
@@ -734,7 +739,7 @@ public class Parser {
     public void writeSymbolTable(Stack<AST> stack){
         FileWriter f;
         try {
-            f = new FileWriter("COMP 442/inputOutput/" + filename + ".outsymboltables");
+            f = new FileWriter("COMP 442/symbolTableOutput/" + filename + ".outsymboltables");
             f.write(stack.get(0).m_symtab.toString());
             f.close();
 
