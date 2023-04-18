@@ -1,0 +1,10 @@
+[error 6.2] Undefined member function declaration type : evaluate method not found, on line 12
+[error 6.1] undeclared member function definition LINEAR , on line 15
+[error 11.5] Undeclared Class : SQUARE, line 31
+[error 11.5] Undeclared Class : SQUARE, line 32
+[error 6.1] undeclared member function definition doo1 , on line 25
+[error 6.1] undeclared member function definition doo2 , on line 48
+[error 6.1] undeclared member function definition add , on line 62
+[error 11.5] Undeclared Class : SQUARE, line 80
+[error 11.5] Undeclared Class : id, line 81
+[error 6.1] undeclared member function definition main , on line 69

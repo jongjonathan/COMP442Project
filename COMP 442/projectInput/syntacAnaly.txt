@@ -1,0 +1,87 @@
+class SHAPE {
+  public attribute a: integer; //public data member
+  private attribute b: float;  //private data member
+  private attribute c: id; //public data member
+  public attribute d: integer;
+};
+class SQUARE isa SHAPE {
+  public attribute a: integer; //public data member
+  private attribute b: float;  //private data member
+  private attribute c: id; //public data member
+
+  public function evaluate: (x: float) => float; //member func
+};
+
+function LINEAR::evaluate(x: float) => float
+  {
+    localvar result: float;
+    localvar result: float;
+    result = 0.0;
+    result = a * x + b;
+    write(result); //write
+    read(result); //read
+    return (result); //return
+  }
+
+function doo1(arr: integer[], size: integer) => void
+{
+  localvar n    : integer; //int decl
+  localvar i    : float;       //float decl
+  localvar j    : integer;
+  localvar temp : integer;
+  localvar SQUARE : SQUARE; //class var
+  localvar arr : SQUARE[8]; //class var arr
+
+  n = size;
+  i = 0;
+  j = 0;
+  temp = 0;
+  while (i < n-1) { //loop
+    while (j < n-i-1*5+n) {
+      if (arr[j*1-5] > arr[j+1/5]) //complex expr
+        then {
+        } else ;
+      };
+  };
+}
+
+
+function doo2() => integer //free func
+{
+  localvar n: integer;
+  localvar i: integer;
+  n = size;
+  i = 0;
+  while (i<n) {
+    write(arr[i]);
+      i = i+1;
+  };
+}
+
+
+
+function add(one: integer, two: integer) => integer{
+    localvar result : integer;
+    result = one + two;
+    return(result);
+}
+
+// main func
+function main() => void             //main func
+{
+  localvar arr: integer[7][6];
+  arr[0][0] = 64;
+  localvar one: integer;
+  localvar two: integer;
+   one = 1;
+   two = 2;
+
+  f1.add(one,two);          //function statement, dot operator
+  one = arr[0][0];              //arrays multi
+  localvar square : SQUARE;
+  localvar hello : id;
+  square.a.b.c = hello;             //dot
+
+
+
+}

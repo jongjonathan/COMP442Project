@@ -18,10 +18,21 @@ public class TypeCheckingVisitor extends Visitor{
         this.m_outputfilename = p_filename;
     }
     public void visit(ProgNode p_node) {
+        boolean noMain = true;
         // propagate accepting the same visitor to all the children
         // this effectively achieves Depth-First AST Traversal
         for (AST child : p_node.getChildNodes()) {
             child.accept(this);
+        }
+        for (AST progChild : p_node.getChildNodes()) {
+            if(progChild instanceof FuncDefNode){
+                if(((Token)progChild.getChildNodes().get(0).concept).getLexeme().equals("main")){
+                    noMain = false;
+                }
+            }
+        }
+        if(noMain == true){
+            this.m_errors += "[error 15.2] non-existing main function " +"\n";
         }
             if (!this.m_outputfilename.isEmpty()) {
                 File file = new File(this.m_outputfilename);
@@ -79,7 +90,6 @@ public class TypeCheckingVisitor extends Visitor{
                            String compReturn = ((Token) progChild.getChildNodes().get(2).concept).getLexeme();
 
                            if(compReturn.equals(curReturn)){
-                               System.out.println("They're equal");
                                found =true;
                                ((FuncDefNode)progChild).declared = true;
                            }
@@ -164,6 +174,7 @@ public class TypeCheckingVisitor extends Visitor{
         }
         int multFreeFunc = 0;
         int overloadFunc = 0;
+        int countMain = 0;
         String checkParam = "";
         String pnodeParam = "";
         for (AST progChild : p_node.parentNode.getChildNodes()) {
@@ -173,7 +184,7 @@ public class TypeCheckingVisitor extends Visitor{
                     //if params are same
                     //if contains params list so >3
                     if(progChild.getChildNodes().size()>3 && p_node.getChildNodes().size()>3){
-                        if(progChild instanceof ParamsListNode){
+                        if(progChild.getChildNodes().get(1) instanceof ParamsListNode){
                              checkParam = progChild.m_symtabentry.toString();
                              pnodeParam =p_node.m_symtabentry.toString();
                         }
@@ -185,8 +196,12 @@ public class TypeCheckingVisitor extends Visitor{
                             overloadFunc++;
                         }
                     }
+                    if(((Token)progChild.getChildNodes().get(0).concept).getLexeme().equals("main")){
+                        countMain++;
+                    }
 
                 }
+
             }
         }
         if(multFreeFunc>1){
@@ -204,6 +219,12 @@ public class TypeCheckingVisitor extends Visitor{
                     + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
                     +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
         }
+        if(countMain>1){
+            this.m_errors += "[error 15.3] duplicate main function "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
+
 
     };
     //    public abstract void visit(FuncDefNode      p_node);
@@ -239,12 +260,17 @@ public class TypeCheckingVisitor extends Visitor{
             child.accept(this);
         }
         int countID = 0;
-        for (AST child : p_node.parentNode.getChildNodes()) {
-            if(child instanceof VarDeclNode){
-                String iterFuncName = ((Token)child.getChildNodes().get(0).concept).getLexeme();
-                if(((Token)p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)){
-                    countID++;
+        for (AST child : p_node.parentNode.parentNode.getChildNodes()) {
+            if(child instanceof StatNode){
+                for(AST child2 : child.getChildNodes()){
+                    if(child2 instanceof VarDeclNode) {
+                        String iterFuncName = ((Token) child2.getChildNodes().get(0).concept).getLexeme();
+                        if (((Token) p_node.getChildNodes().get(0).concept).getLexeme().equals(iterFuncName)) {
+                            countID++;
+                        }
+                    }
                 }
+
             }
         }
         if(countID>1){
@@ -323,6 +349,20 @@ public class TypeCheckingVisitor extends Visitor{
         for (AST child : p_node.getChildNodes() ) {
             child.accept(this);
         }
+        for (AST child2 : p_node.getChildNodes() ) {
+           if(child2 instanceof ArithmNode){
+               for(AST child3 : child2.getChildNodes()){
+                   if(child3 instanceof IDNode) {
+                       if (((Token) child3.getChildNodes().get(0).concept).getTokenType().name().equals("ID")){
+                           this.m_errors += "[error 13.2] Array index is not an integer : "
+                                   + ((Token) child3.getChildNodes().get(0).concept).getLexeme()
+                                   +" , on line "+((Token) child3.getChildNodes().get(0).concept).getPosition()+"\n";
+                       }
+                   }
+               }
+           }
+        }
+
     }
     public void visit(StatNode    p_node){
         for (AST child : p_node.getChildNodes() ) {

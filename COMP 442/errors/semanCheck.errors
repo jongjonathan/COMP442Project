@@ -1,0 +1,41 @@
+[warning 9.2] Overloaded member function : overload , on line 2
+[error 6.2] Undefined member function declaration type : overload method not found, on line 2
+[warning 9.2] Overloaded member function : overload , on line 3
+[error 6.2] Undefined member function declaration type : overload method not found, on line 3
+[error 8.3] multiply declared data member in class : eightThree , on line 5
+[error 8.3] multiply declared data member in class : eightThree , on line 6
+[error 8.1] multiply declared class : POLYNOMIAL , on line 1
+[warning 9.2] Overloaded member function : overload , on line 9
+[error 6.2] Undefined member function declaration type : overload method not found, on line 9
+[warning 9.2] Overloaded member function : overload , on line 10
+[error 6.2] Undefined member function declaration type : overload method not found, on line 10
+[error 8.1] multiply declared class : POLYNOMIAL , on line 8
+[warning 9.2] Overloaded member function : overload , on line 13
+[warning 9.3] Overidden member function : overload , on line 13
+[warning 9.3] Overidden member function : overload , on line 13
+[error 6.2] Undefined member function declaration type : overload method not found, on line 13
+[warning 9.2] Overloaded member function : overload , on line 14
+[warning 9.3] Overidden member function : overload , on line 14
+[warning 9.3] Overidden member function : overload , on line 14
+[error 6.2] Undefined member function declaration type : overload method not found, on line 14
+[error 6.2] Undefined member function declaration type : emptyMethod method not found, on line 17
+[error 13.2] Array index is not an integer : f , on line 30
+[error 13.2] Array index is not an integer : helloworld , on line 31
+[error 6.1] undeclared member function definition noMethod , on line 23
+[error 8.4] multiply declared identifier in function : arrDupe , on line 46
+[error 8.4] multiply declared identifier in function : arrDupe , on line 47
+[warning 9.1] Overloaded free function : duplicateMe , on line 44
+[error 6.1] undeclared member function definition duplicateMe , on line 44
+[error 8.4] multiply declared identifier in function : dupeA , on line 53
+[error 11.5] Undeclared Class : a, line 53
+[error 8.4] multiply declared identifier in function : dupeA , on line 54
+[error 11.5] Undeclared Class : a, line 54
+[error 11.5] Undeclared Class : undeclaredBclass, line 55
+[warning 9.1] Overloaded free function : duplicateMe , on line 51
+[error 6.1] undeclared member function definition duplicateMe , on line 51
+[warning 9.1] Overloaded free function : duplicateMe , on line 57
+[error 6.1] undeclared member function definition duplicateMe , on line 57
+[error 6.1] undeclared member function definition main , on line 61
+[error 15.3] duplicate main function main , on line 61
+[error 6.1] undeclared member function definition main , on line 66
+[error 15.3] duplicate main function main , on line 66

@@ -1,0 +1,7 @@
+function main() => void
+{
+localvar p    : float;
+localvar n    : integer;
+localvar k    : integer
+write(d);
+}

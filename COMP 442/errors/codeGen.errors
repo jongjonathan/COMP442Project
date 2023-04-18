@@ -1,0 +1,4 @@
+[error 8.4] multiply declared identifier in function : arr , on line 3
+[error 8.4] multiply declared identifier in function : arr , on line 4
+[error 11.5] Undeclared Class : id, line 4
+[error 6.1] undeclared member function definition main , on line 1

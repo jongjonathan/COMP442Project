@@ -1,0 +1,14 @@
+
+function main() => void
+{
+localvar p    : integer;
+localvar n    : integer;
+
+p = 4;
+n = 5;
+    if (p > n)
+      then {
+      write(p);
+      } else ;
+      write(n);
+}

@@ -1,0 +1,444 @@
+[PROG
+|    CLASS DECL
+|    |    [ID, SHAPE, 1]
+|    |    INHERLIST
+|    |    MEMBER VAR DECL
+|    |    |    [PUBLICKEYWORD, public, 2]
+|    |    |    [ID, a, 2]
+|    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PRIVATEKEYWORD, private, 3]
+|    |    |    [ID, b, 3]
+|    |    |    [FLOATKEYWORD, float, 3]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PRIVATEKEYWORD, private, 4]
+|    |    |    [ID, c, 4]
+|    |    |    [ID, id, 4]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PUBLICKEYWORD, public, 5]
+|    |    |    [ID, d, 5]
+|    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    ARR SIZE
+|    CLASS DECL
+|    |    [ID, SQUARE, 7]
+|    |    INHERLIST
+|    |    |    [ID, SHAPE, 7]
+|    |    MEMBER VAR DECL
+|    |    |    [PUBLICKEYWORD, public, 8]
+|    |    |    [ID, a, 8]
+|    |    |    [INTEGERKEYWORD, integer, 8]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PRIVATEKEYWORD, private, 9]
+|    |    |    [ID, b, 9]
+|    |    |    [FLOATKEYWORD, float, 9]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PRIVATEKEYWORD, private, 10]
+|    |    |    [ID, c, 10]
+|    |    |    [ID, id, 10]
+|    |    |    ARR SIZE
+|    |    MEMBER FUNC DECL
+|    |    |    [PUBLICKEYWORD, public, 12]
+|    |    |    [ID, evaluate, 12]
+|    |    |    FPARAMS
+|    |    |    |    [ID, x, 12]
+|    |    |    |    [FLOATKEYWORD, float, 12]
+|    |    |    [FLOATKEYWORD, float, 12]
+|    FUNC DEF
+|    |    [ID, LINEAR, 15]
+|    |    [ID, evaluate, 15]
+|    |    FPARAMS
+|    |    |    [ID, x, 15]
+|    |    |    [FLOATKEYWORD, float, 15]
+|    |    [FLOATKEYWORD, float, 15]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, result, 17]
+|    |    |    |    |    [FLOATKEYWORD, float, 17]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, result, 18]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 18]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [FLOAT, 0.0, 18]
+|    |    |    STAT
+|    |    |    |    [ID, result, 19]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 19]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, a, 19]
+|    |    |    |    |    |    |    MULT OP
+|    |    |    |    |    |    |    |    [MULTIPLY, *, 19]
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, x, 19]
+|    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    [ADD, +, 19]
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, b, 19]
+|    |    |    STAT
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, result, 20]
+|    |    |    STAT
+|    |    |    |    READ
+|    |    |    |    |    [ID, result, 21]
+|    |    |    STAT
+|    |    |    |    RETURN
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, result, 22]
+|    FUNC DEF
+|    |    [ID, doo1, 25]
+|    |    FPARAMS
+|    |    |    [ID, arr, 25]
+|    |    |    [INTEGERKEYWORD, integer, 25]
+|    |    |    [ID, size, 25]
+|    |    |    [INTEGERKEYWORD, integer, 25]
+|    |    [VOIDKEYWORD, void, 25]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, n, 27]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 27]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, i, 28]
+|    |    |    |    |    [FLOATKEYWORD, float, 28]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, j, 29]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 29]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, temp, 30]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 30]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, SQUARE, 31]
+|    |    |    |    |    [ID, SQUARE, 31]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 32]
+|    |    |    |    |    [ID, SQUARE, 32]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 8, 32]
+|    |    |    STAT
+|    |    |    |    [ID, n, 34]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 34]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, size, 34]
+|    |    |    STAT
+|    |    |    |    [ID, i, 35]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 35]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 0, 35]
+|    |    |    STAT
+|    |    |    |    [ID, j, 36]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 36]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 0, 36]
+|    |    |    STAT
+|    |    |    |    [ID, temp, 37]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 37]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 0, 37]
+|    |    |    STAT
+|    |    |    |    WHILE
+|    |    |    |    |    REL EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, i, 38]
+|    |    |    |    |    |    [LESSTHAN, <, 38]
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, n, 38]
+|    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    [SUBTRACT, -, 38]
+|    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    [INTEGER, 1, 38]
+|    |    |    |    |    WHILE
+|    |    |    |    |    |    REL EXPR
+|    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, j, 39]
+|    |    |    |    |    |    |    [LESSTHAN, <, 39]
+|    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, n, 39]
+|    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    [SUBTRACT, -, 39]
+|    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    [ID, i, 39]
+|    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    [SUBTRACT, -, 39]
+|    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 39]
+|    |    |    |    |    |    |    |    |    MULT OP
+|    |    |    |    |    |    |    |    |    |    [MULTIPLY, *, 39]
+|    |    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    |    [INTEGER, 5, 39]
+|    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    [ADD, +, 39]
+|    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    [ID, n, 39]
+|    |    |    |    |    |    IF
+|    |    |    |    |    |    |    REL EXPR
+|    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    [ID, arr, 40]
+|    |    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    |    |    [ID, j, 40]
+|    |    |    |    |    |    |    |    |    |    |    MULT OP
+|    |    |    |    |    |    |    |    |    |    |    |    [MULTIPLY, *, 40]
+|    |    |    |    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 40]
+|    |    |    |    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    |    |    |    [SUBTRACT, -, 40]
+|    |    |    |    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    |    |    |    [INTEGER, 5, 40]
+|    |    |    |    |    |    |    |    [GREATERTHAN, >, 40]
+|    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    [ID, arr, 40]
+|    |    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    |    |    [ID, j, 40]
+|    |    |    |    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    |    |    |    [ADD, +, 40]
+|    |    |    |    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 40]
+|    |    |    |    |    |    |    |    |    |    |    |    MULT OP
+|    |    |    |    |    |    |    |    |    |    |    |    |    [DIVIDE, /, 40]
+|    |    |    |    |    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    |    |    |    |    [INTEGER, 5, 40]
+|    FUNC DEF
+|    |    [ID, doo2, 48]
+|    |    [INLINECOMMENT, //free func, 48]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, n, 50]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 50]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, i, 51]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 51]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, n, 52]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 52]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, size, 52]
+|    |    |    STAT
+|    |    |    |    [ID, i, 53]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 53]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 0, 53]
+|    |    |    STAT
+|    |    |    |    WHILE
+|    |    |    |    |    REL EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, i, 54]
+|    |    |    |    |    |    [LESSTHAN, <, 54]
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, n, 54]
+|    |    |    |    |    WRITE
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, arr, 55]
+|    |    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    |    [ID, i, 55]
+|    |    |    |    |    [ID, i, 56]
+|    |    |    |    |    ASSIGN OP
+|    |    |    |    |    |    [EQUAL, =, 56]
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, i, 56]
+|    |    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    |    [ADD, +, 56]
+|    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 1, 56]
+|    FUNC DEF
+|    |    [ID, add, 62]
+|    |    FPARAMS
+|    |    |    [ID, one, 62]
+|    |    |    [INTEGERKEYWORD, integer, 62]
+|    |    |    [ID, two, 62]
+|    |    |    [INTEGERKEYWORD, integer, 62]
+|    |    [INTEGERKEYWORD, integer, 62]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, result, 63]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 63]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, result, 64]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 64]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, one, 64]
+|    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    [ADD, +, 64]
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, two, 64]
+|    |    |    STAT
+|    |    |    |    RETURN
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, result, 65]
+|    FUNC DEF
+|    |    [ID, main, 69]
+|    |    [INLINECOMMENT, //main func, 69]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 71]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 71]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 7, 71]
+|    |    |    |    |    |    [INTEGER, 6, 71]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 72]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 0, 72]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 0, 72]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 72]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 64, 72]
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, one, 73]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 73]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, two, 74]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 74]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, one, 75]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 75]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 1, 75]
+|    |    |    STAT
+|    |    |    |    [ID, two, 76]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 76]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 2, 76]
+|    |    |    STAT
+|    |    |    |    [ID, f1, 78]
+|    |    |    |    STAT ID NEST
+|    |    |    |    |    [ID, add, 78]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, one, 78]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, two, 78]
+|    |    |    STAT
+|    |    |    |    [ID, one, 79]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 79]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, arr, 79]
+|    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 0, 79]
+|    |    |    |    |    |    |    INDICE
+|    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    |    |    [INTEGER, 0, 79]
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, square, 80]
+|    |    |    |    |    [ID, SQUARE, 80]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, hello, 81]
+|    |    |    |    |    [ID, id, 81]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, square, 82]
+|    |    |    |    STAT ID NEST
+|    |    |    |    |    [ID, a, 82]
+|    |    |    |    |    STAT ID NEST
+|    |    |    |    |    |    [ID, b, 82]
+|    |    |    |    |    |    STAT ID NEST
+|    |    |    |    |    |    |    [ID, c, 82]
+|    |    |    |    |    |    |    ASSIGN OP
+|    |    |    |    |    |    |    |    [EQUAL, =, 82]
+|    |    |    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    |    |    [ID, hello, 82]
+]

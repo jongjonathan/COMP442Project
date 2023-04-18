@@ -1,0 +1,113 @@
+[PROG
+|    FUNC DEF
+|    |    [ID, main, 1]
+|    |    [VOIDKEYWORD, void, 1]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 3]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 3]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 6, 3]
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 4]
+|    |    |    |    |    [ID, id, 4]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 8, 4]
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, p, 5]
+|    |    |    |    |    [FLOATKEYWORD, float, 5]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, n, 6]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 6]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, k, 7]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 7]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, i, 8]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 8]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, d, 9]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 9]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, arr, 10]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 0, 10]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 10]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 6, 10]
+|    |    |    STAT
+|    |    |    |    [ID, k, 11]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 11]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 5, 11]
+|    |    |    STAT
+|    |    |    |    [ID, n, 12]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 12]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 9, 12]
+|    |    |    STAT
+|    |    |    |    [ID, i, 13]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 13]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, k, 13]
+|    |    |    |    |    |    |    ADD OP
+|    |    |    |    |    |    |    |    [ADD, +, 13]
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, n, 13]
+|    |    |    STAT
+|    |    |    |    [ID, d, 14]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 14]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, k, 14]
+|    |    |    |    |    |    |    MULT OP
+|    |    |    |    |    |    |    |    [MULTIPLY, *, 14]
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, n, 14]
+|    |    |    STAT
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, k, 15]
+|    |    |    STAT
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, i, 16]
+|    |    |    STAT
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, d, 17]
+]

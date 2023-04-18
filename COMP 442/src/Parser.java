@@ -210,7 +210,7 @@ public class Parser {
 
                     var tempLookahead = hash.get(top + "," + token.getTokenType());
 
-                    if (tempLookahead != null) {
+                    if (tempLookahead != null && tempLookahead!="") {
                         lookahead = tempLookahead.split("→")[1].trim().split(" ");
 
                     } else {

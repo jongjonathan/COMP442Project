@@ -1,0 +1,47 @@
+// invalid characters
+@ # $ ' \ ~
+
+// bad floats
+5.2250;
+06.82743,
+2.5e+ ;
+2.50e ;
+6.1e+
+7.1e023
+1.1e
+267.e
+089.50
+
+// bad int
+03412
+
+// bad id
+_rgdfaf;
+10a45;
+_1q2w3e45r,
+
+// good floats
+50.58e20
+3444.4e157
+555.01
+0.45
+3425.0e562
+543.1e+0
+543.1e-0
+543.1e0
+4.0
+0.0
+
+// good ints
+3123
+324
+55
+3
+
+// good id
+g6f;
+hello_world123
+ilikeu
+tacos
+dpoke123
+

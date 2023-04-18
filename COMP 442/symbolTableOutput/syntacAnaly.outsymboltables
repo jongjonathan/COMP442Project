@@ -1,0 +1,99 @@
+
+=====================================================
+| table: global           scope offset: 0           |
+=====================================================
+| class     | SHAPE                                 |
+|    =====================================================
+|    | table: SHAPE            scope offset: 0           |
+|    =====================================================
+|    | inherit   | none      |                           |
+|    | var       | a         | integer   | 4     | public|
+|    | var       | b         | float     | 8     | private|
+|    | var       | c         | id        | 4     | private|
+|    | var       | d         | integer   | 4     | public|
+|    =====================================================
+| class     | SQUARE                                |
+|    =====================================================
+|    | table: SQUARE           scope offset: 0           |
+|    =====================================================
+|    | inherit   | SHAPE     |                           |
+|    | var       | a         | integer   | 4     | public|
+|    | var       | b         | float     | 8     | private|
+|    | var       | c         | id        | 4     | private|
+|    | function  | evaluate  |           | (x, float) float| public    |
+|    |    =====================================================
+|    |    | table: evaluate         scope offset: 0           |
+|    |    =====================================================
+|    |    | PARAM     | x         | float     | 0     |       |
+|    |    =====================================================
+|    =====================================================
+| function  | LINEAR    |           | (float) float|           |
+|    =====================================================
+|    | table: LINEAR           scope offset: 0           |
+|    =====================================================
+|    | PARAM     | x         | float     | 0     |       |
+|    | var       | result    | float     | 8     |       |
+|    | litval    | t1        | FLOAT     | 0     |       |
+|    | ID        | a         | ID        | 0     |       |
+|    | ID        | x         | ID        | 0     |       |
+|    | tempvar   | t2        | id        | 0     |       |
+|    | ID        | b         | ID        | 0     |       |
+|    | tempvar   | t3        | id        | 0     |       |
+|    | ID        | result    | ID        | 0     |       |
+|    =====================================================
+| function  | doo1      |           | (integer, integer) void|           |
+|    =====================================================
+|    | table: doo1             scope offset: 0           |
+|    =====================================================
+|    | PARAM     | arr       | integer   | 0     |       |
+|    | PARAM     | size      | integer   | 0     |       |
+|    | var       | n         | integer   | 4     |       |
+|    | var       | i         | float     | 8     |       |
+|    | var       | j         | integer   | 4     |       |
+|    | var       | temp      | integer   | 4     |       |
+|    | var       | SQUARE    | SQUARE    | 0     |       |
+|    | var       | arr       | SQUARE    | 0     |       |
+|    | ID        | size      | ID        | 0     |       |
+|    | litval    | t4        | INTEGER   | 0     |       |
+|    | litval    | t5        | INTEGER   | 0     |       |
+|    | litval    | t6        | INTEGER   | 0     |       |
+|    =====================================================
+| function  | doo2      |           |           |           |
+|    =====================================================
+|    | table: doo2             scope offset: 0           |
+|    =====================================================
+|    | var       | n         | integer   | 4     |       |
+|    | var       | i         | integer   | 4     |       |
+|    | ID        | size      | ID        | 0     |       |
+|    | litval    | t7        | INTEGER   | 0     |       |
+|    =====================================================
+| function  | add       |           | (integer, integer) integer|           |
+|    =====================================================
+|    | table: add              scope offset: 0           |
+|    =====================================================
+|    | PARAM     | one       | integer   | 0     |       |
+|    | PARAM     | two       | integer   | 0     |       |
+|    | var       | result    | integer   | 4     |       |
+|    | ID        | one       | ID        | 0     |       |
+|    | ID        | two       | ID        | 0     |       |
+|    | tempvar   | t8        | id        | 0     |       |
+|    =====================================================
+| function  | main      |           |           |           |
+|    =====================================================
+|    | table: main             scope offset: 0           |
+|    =====================================================
+|    | var       | arr       | integer   | 168   |       |
+|    | litval    | t9        | INTEGER   | 0     |       |
+|    | litval    | t10       | INTEGER   | 0     |       |
+|    | litval    | t11       | INTEGER   | 0     |       |
+|    | var       | one       | integer   | 4     |       |
+|    | var       | two       | integer   | 4     |       |
+|    | litval    | t12       | INTEGER   | 0     |       |
+|    | litval    | t13       | INTEGER   | 0     |       |
+|    | ID        | arr       | ID        | 0     |       |
+|    | litval    | t14       | INTEGER   | 0     |       |
+|    | litval    | t15       | INTEGER   | 0     |       |
+|    | var       | square    | SQUARE    | 0     |       |
+|    | var       | hello     | id        | 4     |       |
+|    =====================================================
+=====================================================

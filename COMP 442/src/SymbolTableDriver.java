@@ -31,7 +31,7 @@ public class SymbolTableDriver {
             //created tables
 
             //Type checking
-            TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + p.getFilename() + ".outsemanticerrors");
+            TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/projectOutput/" + p.getFilename() + ".outsemanticerrors");
 //        Stack<AST> astCheck = typeCheckingVisitor.semanticCheck(sym);
             astTables.firstElement().accept(typeCheckingVisitor);
 
@@ -43,7 +43,7 @@ public class SymbolTableDriver {
             p.writeSymbolTable(astTables);
 
             //code generation
-            TagsBasedCodeGenerationVisitor  CGVisitor    = new TagsBasedCodeGenerationVisitor("COMP 442/inputOutput/" + p.getFilename() + ".m");
+            TagsBasedCodeGenerationVisitor  CGVisitor    = new TagsBasedCodeGenerationVisitor("COMP 442/moonOutput/" + p.getFilename() + ".m");
             astTables.firstElement().accept(CGVisitor);
 
 

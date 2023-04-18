@@ -1,0 +1,53 @@
+[PROG
+|    FUNC DEF
+|    |    [ID, main, 2]
+|    |    [VOIDKEYWORD, void, 2]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, p, 4]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 4]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, n, 5]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    [ID, p, 7]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 7]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 4, 7]
+|    |    |    STAT
+|    |    |    |    [ID, n, 8]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 8]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 5, 8]
+|    |    |    STAT
+|    |    |    |    IF
+|    |    |    |    |    REL EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, p, 9]
+|    |    |    |    |    |    [GREATERTHAN, >, 9]
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, n, 9]
+|    |    |    |    |    WRITE
+|    |    |    |    |    |    EXPR
+|    |    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    |    [ID, p, 11]
+|    |    |    STAT
+|    |    |    |    WRITE
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    ID
+|    |    |    |    |    |    |    |    [ID, n, 13]
+]
