@@ -1,0 +1,21 @@
+[warning 9.2] Overloaded member function : overload , on line 2
+[error 6.2] Undefined member function declaration type : overload method not found, on line 2
+[warning 9.2] Overloaded member function : overload , on line 3
+[error 6.2] Undefined member function declaration type : overload method not found, on line 3
+[error 8.3] multiply declared data member in class : eightThree , on line 5
+[error 8.3] multiply declared data member in class : eightThree , on line 6
+[error 6.1] undeclared member function definition duplicateMe , on line 9
+[error 8.2] multiply declared free function : duplicateMe , on line 9
+[warning 9.1] Overloaded free function : duplicateMe , on line 9
+[error 6.1] undeclared member function definition duplicateMe , on line 11
+[error 8.2] multiply declared free function : duplicateMe , on line 11
+[warning 9.1] Overloaded free function : duplicateMe , on line 11
+[error 8.4] multiply declared identifier in function : dupeA , on line 16
+[error 11.5] Undeclared Class : a, line 16
+[error 8.4] multiply declared identifier in function : dupeA , on line 17
+[error 11.5] Undeclared Class : a, line 17
+[error 11.5] Undeclared Class : undeclaredBclass, line 18
+[error 6.1] undeclared member function definition duplicateMe , on line 14
+[warning 9.1] Overloaded free function : duplicateMe , on line 14
+[error 15.3] duplicate main function main , on line 22
+[error 15.3] duplicate main function main , on line 27

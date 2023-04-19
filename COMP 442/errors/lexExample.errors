@@ -17,3 +17,31 @@ Lexical error: Invalid number: "03412": line 16.
 Lexical error: Invalid identifier: "_rgdfaf": line 19.
 Lexical error: Invalid identifier: "10a45": line 20.
 Lexical error: Invalid identifier: "_1q2w3e45r": line 21.
+Syntax error at line: 5 ;.
+Syntax error at line: 6 ,.
+Syntax error at line: 7 ;.
+Syntax error at line: 8 ;.
+Syntax error at line: 19 ;.
+Syntax error at line: 20 ;.
+Syntax error at line: 21 ,.
+Syntax error at line: 24 50.58e20.
+Syntax error at line: 25 3444.4e157.
+Syntax error at line: 26 555.01.
+Syntax error at line: 27 0.45.
+Syntax error at line: 28 3425.0e562.
+Syntax error at line: 29 543.1e+0.
+Syntax error at line: 30 543.1e-0.
+Syntax error at line: 31 543.1e0.
+Syntax error at line: 32 4.0.
+Syntax error at line: 33 0.0.
+Syntax error at line: 36 3123.
+Syntax error at line: 37 324.
+Syntax error at line: 38 55.
+Syntax error at line: 39 3.
+Syntax error at line: 42 g6f.
+Syntax error at line: 42 ;.
+Syntax error at line: 43 hello_world123.
+Syntax error at line: 44 ilikeu.
+Syntax error at line: 45 tacos.
+Syntax error at line: 46 dpoke123.
+[error 15.2] non-existing main function 

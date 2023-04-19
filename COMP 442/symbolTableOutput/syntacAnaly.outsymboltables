@@ -33,6 +33,7 @@
 |    =====================================================
 |    | PARAM     | x         | float     | 0     |       |
 |    | var       | result    | float     | 8     |       |
+|    | var       | result    | float     | 8     |       |
 |    | litval    | t1        | FLOAT     | 0     |       |
 |    | ID        | a         | ID        | 0     |       |
 |    | ID        | x         | ID        | 0     |       |
@@ -78,21 +79,35 @@
 |    | ID        | two       | ID        | 0     |       |
 |    | tempvar   | t8        | id        | 0     |       |
 |    =====================================================
+| function  | mult      |           | (integer, integer) integer|           |
+|    =====================================================
+|    | table: mult             scope offset: 0           |
+|    =====================================================
+|    | PARAM     | one       | integer   | 0     |       |
+|    | PARAM     | two       | integer   | 0     |       |
+|    | var       | result    | integer   | 4     |       |
+|    | ID        | one       | ID        | 0     |       |
+|    | ID        | two       | ID        | 0     |       |
+|    | tempvar   | t9        | id        | 0     |       |
+|    | ID        | result    | ID        | 0     |       |
+|    =====================================================
 | function  | main      |           |           |           |
 |    =====================================================
 |    | table: main             scope offset: 0           |
 |    =====================================================
 |    | var       | arr       | integer   | 168   |       |
-|    | litval    | t9        | INTEGER   | 0     |       |
 |    | litval    | t10       | INTEGER   | 0     |       |
 |    | litval    | t11       | INTEGER   | 0     |       |
+|    | litval    | t12       | INTEGER   | 0     |       |
 |    | var       | one       | integer   | 4     |       |
 |    | var       | two       | integer   | 4     |       |
-|    | litval    | t12       | INTEGER   | 0     |       |
 |    | litval    | t13       | INTEGER   | 0     |       |
-|    | ID        | arr       | ID        | 0     |       |
 |    | litval    | t14       | INTEGER   | 0     |       |
+|    | ID        | one       | ID        | 0     |       |
+|    | ID        | two       | ID        | 0     |       |
+|    | ID        | arr       | ID        | 0     |       |
 |    | litval    | t15       | INTEGER   | 0     |       |
+|    | litval    | t16       | INTEGER   | 0     |       |
 |    | var       | square    | SQUARE    | 0     |       |
 |    | var       | hello     | id        | 4     |       |
 |    =====================================================

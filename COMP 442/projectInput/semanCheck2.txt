@@ -1,0 +1,31 @@
+class POLYNOMIAL {
+  public function overload: (l: integer, v: id) => integer;
+  public function overload: (l: integer) => integer;
+
+  public attribute eightThree: integer;
+  public attribute eightThree: integer;
+};
+
+function duplicateMe(l: integer) => integer
+{
+}function duplicateMe(l: integer) => integer
+{
+}
+function duplicateMe(l: integer, v: id) => integer
+{
+ localvar dupeA: a;
+ localvar dupeA: a;
+ localvar b: undeclaredBclass;
+}
+
+
+function main() => void
+{
+localvar arr: integer[6];
+
+}
+function main() => void
+{
+localvar arr: integer[10];
+
+}

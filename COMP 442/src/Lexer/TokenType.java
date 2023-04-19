@@ -57,5 +57,6 @@ public enum TokenType {
     INVALIDNUM,
     EPSILON,
     EOF,
+    INVALIDCOMMENT,
 
 }

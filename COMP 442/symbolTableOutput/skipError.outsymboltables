@@ -6,26 +6,25 @@
 |    =====================================================
 |    | table: main             scope offset: 0           |
 |    =====================================================
-|    | var       | arr       | integer   | 24    |       |
-|    | var       | arrID     | id        | 32    |       |
-|    | var       | arrFloat  | float     | 16    |       |
 |    | var       | p         | float     | 8     |       |
 |    | var       | n         | integer   | 4     |       |
-|    | var       | k         | integer   | 4     |       |
+|    | var       | extraExtra| integer   | 4     |       |
 |    | var       | i         | integer   | 4     |       |
-|    | var       | d         | integer   | 4     |       |
+|    | var       | j         | integer   | 4     |       |
+|    | var       | arr       | integer   | 28    |       |
 |    | litval    | t1        | INTEGER   | 0     |       |
 |    | litval    | t2        | INTEGER   | 0     |       |
 |    | litval    | t3        | INTEGER   | 0     |       |
 |    | litval    | t4        | INTEGER   | 0     |       |
-|    | ID        | k         | ID        | 0     |       |
-|    | ID        | n         | ID        | 0     |       |
-|    | tempvar   | t5        | id        | 0     |       |
-|    | ID        | k         | ID        | 0     |       |
-|    | ID        | n         | ID        | 0     |       |
-|    | tempvar   | t6        | id        | 0     |       |
-|    | ID        | k         | ID        | 0     |       |
-|    | ID        | i         | ID        | 0     |       |
-|    | ID        | d         | ID        | 0     |       |
+|    | litval    | t5        | INTEGER   | 0     |       |
+|    | litval    | t6        | INTEGER   | 0     |       |
+|    | litval    | t7        | INTEGER   | 0     |       |
+|    | litval    | t8        | INTEGER   | 0     |       |
+|    | litval    | t9        | INTEGER   | 0     |       |
+|    | litval    | t10       | INTEGER   | 0     |       |
+|    | litval    | t11       | INTEGER   | 0     |       |
+|    | litval    | t12       | INTEGER   | 0     |       |
+|    | litval    | t13       | INTEGER   | 0     |       |
+|    | litval    | t14       | INTEGER   | 0     |       |
 |    =====================================================
 =====================================================

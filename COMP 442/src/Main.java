@@ -45,12 +45,15 @@ public class Main {
             }
             lex.getNextToken();
             pwTokens.close();
+            lex.setTokenCount(0);
 
             //parser
 
             Parser p = new Parser();
-            p.Parser(args[0]);
-            p.parse(args[0]);
+
+            p.setPrinterERRORS(pwError);
+            p.Parser(args[0], lex);
+            p.parse(args[0], lex);
 
             //AST generation
             p.writeAST();

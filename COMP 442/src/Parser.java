@@ -2,6 +2,7 @@ import AST.*;
 import Lexer.*;
 import java.io.*;
 import java.util.*;
+import java.util.regex.*;
 import Visitor.SemanticCheck.TypeCheckingVisitor;
 import Visitor.CodeGeneration.TagsBasedCodeGenerationVisitor;
 
@@ -24,9 +25,10 @@ public class Parser {
     FileWriter astOutput;
     Stack<AST> semStack = new Stack<>();
     String filename = "";
+    Boolean invalid2 = true;
 
 
-    Lexer lex;
+//    Lexer lex;
     String[] terminals = {
             "ID",
             "INTEGER",
@@ -81,7 +83,7 @@ public class Parser {
     };
 
 
-    public void Parser(String filename) {
+    public void Parser(String filename, Lexer lex) {
 
         addFirstFollow();
 
@@ -119,7 +121,11 @@ public class Parser {
 
     }
 
-    public void parse(String file) {
+    public void setPrinterERRORS(PrintWriter pw){
+        this.pwError =pw;
+    }
+
+    public void parse(String file, Lexer lex) {
         try {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/parse2.txt");
             FileInputStream fin = new FileInputStream("COMP 442/projectInput/" + file);
@@ -127,9 +133,9 @@ public class Parser {
 //            FileInputStream fin = new FileInputStream("COMP 442/inputOutput/example-polynomial.src");
             int noExtensionNameIndex = file.indexOf(".");
             filename  = file.substring(0,noExtensionNameIndex);
-            pwError = new PrintWriter(new File("COMP 442/errors/" + filename + ".errors"));
+//            pwError = new PrintWriter(new File("COMP 442/errors/" + filename + ".errors"));
             PrintWriter pwDerivations = new PrintWriter(new File("COMP 442/parserOutput/" + filename + ".outderivation"));
-            lex = new Lexer(fin, pwError);
+//            lex = new Lexer(fin, pwError);
 
             s1.push("$");//
             s1.push("START");
@@ -210,7 +216,7 @@ public class Parser {
 
                     var tempLookahead = hash.get(top + "," + token.getTokenType());
 
-                    if (tempLookahead != null && tempLookahead!="") {
+                    if (tempLookahead != null && !tempLookahead.equals("") ) {
                         lookahead = tempLookahead.split("→")[1].trim().split(" ");
 
                     } else {
@@ -234,9 +240,12 @@ public class Parser {
 
                         } else {
                             // handle error
-                            System.out.println("error");
-                            skipError(token);
-                            hasError = true;
+                            token = skipError(token, pwError, lex);
+                            if(invalid2 == true){
+                                token = lex.getNextToken();
+                                hasError = true;
+                            }
+
 
                         }
 
@@ -262,7 +271,7 @@ public class Parser {
                             tempLine += " " + i;
                         }
 
-                        line = line.replace(nT, tempLine).replace("&epsilon", "");
+                        line = line.replaceAll("\\b"+nT+"\\b", tempLine).replace("&epsilon", "").replaceAll("SEMACT"+"\\d+", "");
                         //write to file
 
                         output += "START => " + line + "\n";
@@ -270,9 +279,12 @@ public class Parser {
                     } else {
                         // handle error
 //                    System.out.println(token.getTokenType().name());
-                        System.out.println("Error:" + top);
-                        skipError(token);
-                        hasError = true;
+                        token = skipError(token, pwError, lex);
+                        if(invalid2 == true){
+                            token = lex.getNextToken();
+                            hasError = true;
+
+                        }
 
                     }
             }
@@ -426,22 +438,36 @@ public class Parser {
         return "";
     }
 
-    private Token skipError(Token lookahead) {
-        System.out.println("syntax error at " + lookahead.getPosition() + "\n");
-        pwError.write("syntax error at " + lookahead.getPosition() + "\n");
+    private Token skipError(Token lookahead, PrintWriter pwError, Lexer lex) {
+        if(lookahead.getTokenType() != TokenType.INVALIDCHAR && lookahead.getTokenType() !=TokenType.INVALIDID && lookahead.getTokenType() != TokenType.INVALIDNUM   ){
+            pwError.write("Syntax error at line: " + lookahead.getPosition() + " "+ lookahead.getLexeme() + "."+ "\n");
+        }
+
         String top = s1.peek();
         Token token = lookahead;
+        Boolean invalid = true;
+        invalid2 = invalid;
 
-        if (token.getTokenType() == TokenType.EOF || followSet.get(top).contains(token.getTokenType())) {
-            s1.pop();
-        } else {
-            while (!firstSet.get(top).contains(token.getTokenType())
-                    || (!(firstSet.get(top).contains("&epsilon")
-                    && followSet.get(top).contains(token.getTokenType()))
-                    && token.getTokenType() != TokenType.EOF)) {
-                token = lex.getNextToken();
+
+        if(token.getTokenType() == TokenType.INVALIDCHAR || token.getTokenType() == TokenType.INVALIDID ||token.getTokenType() == TokenType.INVALIDNUM  ){
+            token = lex.getNextToken();
+            invalid = false;
+            invalid2 = invalid;
+        }
+        if(invalid == true){
+            if ((token.getTokenType() == TokenType.EOF || followSet.get(top).contains(token.getTokenType()) )) {
+                s1.pop();
             }
         }
+
+
+//        else {
+//
+//            while (!followSet.get(top).contains(token.getTokenType() ))
+//                    {
+//                token = lex.getNextToken();
+//            }
+//        }
 
         return token;
     }
@@ -747,21 +773,6 @@ public class Parser {
             System.out.println(e.getMessage());
         }
     }
-//    public void writeMoonCode(Stack<AST> stack){
-//        FileWriter f;
-//        try {
-//            f = new FileWriter("COMP 442/inputOutput/" + filename + ".m");
-//            f.write(this.m_moonExecCode);
-//            f.write(this.m_moonDataCode);
-//        f.close();
-//
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public void writeSemanticErrors(Stack<AST> stack){
-//        TypeCheckingVisitor typeCheckingVisitor = new TypeCheckingVisitor("COMP 442/inputOutput/" + filename + ".outsemanticerrors");
-//    }
     public String getFilename(){
         return filename;
     }

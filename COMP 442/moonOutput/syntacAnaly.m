@@ -69,36 +69,56 @@
            % processing: result := t8
            lw r1,t8(r0)
            sw result(r0),r1
-           % processing: t9 := 0
-           addi r1,r0,0
+           % processing: t9 := one + two
+           lw r3,one(r0)
+           lw r2,two(r0)
+           add r1,r3,r2
            sw t9(r0),r1
+           % processing: result := t9
+           lw r1,t9(r0)
+           sw result(r0),r1
+           % processing: put(result)
+           lw r1,result(r0)
+           % put value on stack
+           sw -8(r14),r1
+           % link buffer to stack
+           addi r1,r0, buf
+           sw -12(r14),r1
+           % convert int to string for output
+           jl r15, intstr
+           sw -8(r14),r13
+           % output to console
+           jl r15, putstr
            % processing: t10 := 0
            addi r1,r0,0
            sw t10(r0),r1
-           % processing: t11 := 64
-           addi r1,r0,64
-           sw t11(r0),r1
-           % processing: arr := t11
-           lw r1,t11(r0)
-           sw arr(r0),r1
-           % processing: t12 := 1
-           addi r1,r0,1
-           sw t12(r0),r1
-           % processing: one := t12
-           lw r1,t12(r0)
-           sw one(r0),r1
-           % processing: t13 := 2
-           addi r1,r0,2
-           sw t13(r0),r1
-           % processing: two := t13
-           lw r1,t13(r0)
-           sw two(r0),r1
-           % processing: t14 := 0
+           % processing: t11 := 0
            addi r1,r0,0
+           sw t11(r0),r1
+           % processing: t12 := 64
+           addi r1,r0,64
+           sw t12(r0),r1
+           % processing: arr := t12
+           lw r1,t12(r0)
+           sw arr(r0),r1
+           % processing: t13 := 1
+           addi r1,r0,1
+           sw t13(r0),r1
+           % processing: one := t13
+           lw r1,t13(r0)
+           sw one(r0),r1
+           % processing: t14 := 2
+           addi r1,r0,2
            sw t14(r0),r1
+           % processing: two := t14
+           lw r1,t14(r0)
+           sw two(r0),r1
            % processing: t15 := 0
            addi r1,r0,0
            sw t15(r0),r1
+           % processing: t16 := 0
+           addi r1,r0,0
+           sw t16(r0),r1
            % processing: one := 
            lw r1,(r0)
            sw one(r0),r1
@@ -132,26 +152,30 @@ t7         res 4
 result res 4
            % space for one + two
 t8         res 4
+           % space for variable result
+result res 4
+           % space for one + two
+t9         res 4
            % space for variable arr
 arr res 4
            % space for constant 0
-t9         res 4
-           % space for constant 0
 t10        res 4
-           % space for constant 64
+           % space for constant 0
 t11        res 4
+           % space for constant 64
+t12        res 4
            % space for variable one
 one res 4
            % space for variable two
 two res 4
            % space for constant 1
-t12        res 4
-           % space for constant 2
 t13        res 4
-           % space for constant 0
+           % space for constant 2
 t14        res 4
            % space for constant 0
 t15        res 4
+           % space for constant 0
+t16        res 4
            % buffer space used for console output
 buf        res 20
 

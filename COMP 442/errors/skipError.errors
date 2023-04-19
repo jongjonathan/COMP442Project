@@ -1,0 +1,5 @@
+Lexical error: Invalid character: "#": line 3.
+Lexical error: Invalid character: "@": line 3.
+Syntax error at line: 3 function.
+Syntax error at line: 3 hello.
+Syntax error at line: 5 ;.

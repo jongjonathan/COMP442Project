@@ -65,6 +65,11 @@ function add(one: integer, two: integer) => integer{
     result = one + two;
     return(result);
 }
+function mult(one: integer, two: integer) => integer{
+    localvar result : integer;
+    result = one + two;
+    write(result);
+}
 
 // main func
 function main() => void             //main func
@@ -76,6 +81,7 @@ function main() => void             //main func
    one = 1;
    two = 2;
 
+    mult(one, two); //function as a statement
   f1.add(one,two);          //function statement, dot operator
   one = arr[0][0];              //arrays multi
   localvar square : SQUARE;

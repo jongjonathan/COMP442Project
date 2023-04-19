@@ -1,0 +1,89 @@
+[PROG
+|    CLASS DECL
+|    |    [ID, POLYNOMIAL, 1]
+|    |    INHERLIST
+|    |    MEMBER FUNC DECL
+|    |    |    [PUBLICKEYWORD, public, 2]
+|    |    |    [ID, overload, 2]
+|    |    |    FPARAMS
+|    |    |    |    [ID, l, 2]
+|    |    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    |    |    [ID, v, 2]
+|    |    |    |    [ID, id, 2]
+|    |    |    [INTEGERKEYWORD, integer, 2]
+|    |    MEMBER FUNC DECL
+|    |    |    [PUBLICKEYWORD, public, 3]
+|    |    |    [ID, overload, 3]
+|    |    |    FPARAMS
+|    |    |    |    [ID, l, 3]
+|    |    |    |    [INTEGERKEYWORD, integer, 3]
+|    |    |    [INTEGERKEYWORD, integer, 3]
+|    |    MEMBER VAR DECL
+|    |    |    [PUBLICKEYWORD, public, 5]
+|    |    |    [ID, eightThree, 5]
+|    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    ARR SIZE
+|    |    MEMBER VAR DECL
+|    |    |    [PUBLICKEYWORD, public, 6]
+|    |    |    [ID, eightThree, 6]
+|    |    |    [INTEGERKEYWORD, integer, 6]
+|    |    |    ARR SIZE
+|    FUNC DEF
+|    |    [ID, duplicateMe, 9]
+|    |    FPARAMS
+|    |    |    [ID, l, 9]
+|    |    |    [INTEGERKEYWORD, integer, 9]
+|    |    [INTEGERKEYWORD, integer, 9]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    FUNC DEF
+|    |    [ID, duplicateMe, 11]
+|    |    FPARAMS
+|    |    |    [ID, l, 11]
+|    |    |    [INTEGERKEYWORD, integer, 11]
+|    |    [INTEGERKEYWORD, integer, 11]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    FUNC DEF
+|    |    [ID, duplicateMe, 14]
+|    |    FPARAMS
+|    |    |    [ID, l, 14]
+|    |    |    [INTEGERKEYWORD, integer, 14]
+|    |    |    [ID, v, 14]
+|    |    |    [ID, id, 14]
+|    |    [INTEGERKEYWORD, integer, 14]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, dupeA, 16]
+|    |    |    |    |    [ID, a, 16]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, dupeA, 17]
+|    |    |    |    |    [ID, a, 17]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, b, 18]
+|    |    |    |    |    [ID, undeclaredBclass, 18]
+|    |    |    |    |    ARR SIZE
+|    FUNC DEF
+|    |    [ID, main, 22]
+|    |    [VOIDKEYWORD, void, 22]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 24]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 24]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 6, 24]
+|    FUNC DEF
+|    |    [ID, main, 27]
+|    |    [VOIDKEYWORD, void, 27]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 29]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 29]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 10, 29]
+]

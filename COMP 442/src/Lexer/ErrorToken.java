@@ -12,7 +12,10 @@ public class ErrorToken extends Token {
             this.errorPrint = "invalidnum";
         } else if (tokenType == TokenType.INVALIDID) {
             this.errorPrint = "invalidid";
+        }   else if (tokenType == TokenType.INVALIDCOMMENT) {
+            this.errorPrint = "invalidcomment";
         }
+
     }
     public String toString(){
         return "["+this.errorPrint+", "+super.getLexeme()+", "+ super.getPosition() +"]";

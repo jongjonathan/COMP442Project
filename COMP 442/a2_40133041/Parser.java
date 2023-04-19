@@ -161,7 +161,6 @@ public class Parser {
                     }else {
 
                         // handle error
-                        System.out.println("error");
                         skipError(token);
                         hasError = true;
                         return false;

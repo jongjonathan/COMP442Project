@@ -7,39 +7,18 @@
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
 |    | inherit   | none      |                           |
-|    | function  | overload  |           | (l, integer, v, id) integer| public    |
-|    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
-|    |    =====================================================
-|    |    | PARAM     | l         | integer   | 0     |       |
-|    |    | PARAM     | v         | id        | 0     |       |
-|    |    =====================================================
-|    | function  | overload  |           | (l, integer) integer| public    |
-|    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
-|    |    =====================================================
-|    |    | PARAM     | l         | integer   | 0     |       |
-|    |    =====================================================
-|    | var       | eightThree| integer   | 4     | public|
-|    | var       | eightThree| integer   | 4     | public|
 |    =====================================================
 | class     | POLYNOMIAL                            |
 |    =====================================================
 |    | table: POLYNOMIAL       scope offset: 0           |
 |    =====================================================
 |    | inherit   | none      |                           |
-|    | function  | overload  |           | (l, integer, v, id) integer| public    |
+|    | function  | over      |           | (l, integer, v, id) integer| public    |
 |    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
+|    |    | table: over             scope offset: 0           |
 |    |    =====================================================
 |    |    | PARAM     | l         | integer   | 0     |       |
 |    |    | PARAM     | v         | id        | 0     |       |
-|    |    =====================================================
-|    | function  | overload  |           | (l, integer) integer| public    |
-|    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
-|    |    =====================================================
-|    |    | PARAM     | l         | integer   | 0     |       |
 |    |    =====================================================
 |    =====================================================
 | class     | LINEAR                                |
@@ -47,18 +26,19 @@
 |    | table: LINEAR           scope offset: 0           |
 |    =====================================================
 |    | inherit   | POLYNOMIAL|                           |
-|    | function  | overload  |           | (l, integer, v, id) integer| public    |
+|    | function  | over      |           | (l, integer, v, id) integer| public    |
 |    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
+|    |    | table: over             scope offset: 0           |
 |    |    =====================================================
 |    |    | PARAM     | l         | integer   | 0     |       |
 |    |    | PARAM     | v         | id        | 0     |       |
 |    |    =====================================================
-|    | function  | overload  |           | (l, integer) integer| public    |
+|    | function  | over      |           | (l, integer, p, float) integer| public    |
 |    |    =====================================================
-|    |    | table: overload         scope offset: 0           |
+|    |    | table: over             scope offset: 0           |
 |    |    =====================================================
 |    |    | PARAM     | l         | integer   | 0     |       |
+|    |    | PARAM     | p         | float     | 0     |       |
 |    |    =====================================================
 |    =====================================================
 | class     | QUADRATIC                             |
@@ -83,47 +63,10 @@
 |    | var       | p         | integer   | 4     |       |
 |    | var       | size      | integer   | 28    |       |
 |    | ID        | size      | ID        | 0     |       |
-|    | ID        | f         | ID        | 0     |       |
+|    | litval    | t1        | INTEGER   | 0     |       |
 |    | ID        | size      | ID        | 0     |       |
 |    | ID        | helloworld| ID        | 0     |       |
 |    | ID        | size      | ID        | 0     |       |
-|    | litval    | t1        | INTEGER   | 0     |       |
-|    =====================================================
-| function  | duplicateMe|           | (integer, id) integer|           |
-|    =====================================================
-|    | table: duplicateMe      scope offset: 0           |
-|    =====================================================
-|    | PARAM     | l         | integer   | 0     |       |
-|    | PARAM     | v         | id        | 0     |       |
-|    | var       | arrDupe   | integer   | 28    |       |
-|    | var       | arrDupe   | integer   | 24    |       |
-|    =====================================================
-| function  | duplicateMe|           | (integer, id) integer|           |
-|    =====================================================
-|    | table: duplicateMe      scope offset: 0           |
-|    =====================================================
-|    | PARAM     | l         | integer   | 0     |       |
-|    | PARAM     | v         | id        | 0     |       |
-|    | var       | dupeA     | a         | 0     |       |
-|    | var       | dupeA     | a         | 0     |       |
-|    | var       | b         | undeclaredBclass| 0     |       |
-|    =====================================================
-| function  | duplicateMe|           | (integer) integer|           |
-|    =====================================================
-|    | table: duplicateMe      scope offset: 0           |
-|    =====================================================
-|    | PARAM     | l         | integer   | 0     |       |
-|    =====================================================
-| function  | main      |           |           |           |
-|    =====================================================
-|    | table: main             scope offset: 0           |
-|    =====================================================
-|    | var       | arr       | integer   | 24    |       |
-|    =====================================================
-| function  | main      |           |           |           |
-|    =====================================================
-|    | table: main             scope offset: 0           |
-|    =====================================================
-|    | var       | arr       | integer   | 40    |       |
+|    | litval    | t2        | INTEGER   | 0     |       |
 |    =====================================================
 =====================================================

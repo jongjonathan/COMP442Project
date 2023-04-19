@@ -1,0 +1,121 @@
+[PROG
+|    FUNC DEF
+|    |    [ID, main, 1]
+|    |    [VOIDKEYWORD, void, 1]
+|    |    FUNC BODY/LOCAL VAR STAT BLOCK
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, p, 3]
+|    |    |    |    |    [FLOATKEYWORD, float, 3]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, n, 4]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 4]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, extraExtra, 5]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 5]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, i, 7]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 7]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, j, 8]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 8]
+|    |    |    |    |    ARR SIZE
+|    |    |    STAT
+|    |    |    |    LOCAL VAR DECL
+|    |    |    |    |    [ID, arr, 9]
+|    |    |    |    |    [INTEGERKEYWORD, integer, 9]
+|    |    |    |    |    ARR SIZE
+|    |    |    |    |    |    [INTEGER, 7, 9]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 10]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 0, 10]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 10]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 64, 10]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 11]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 1, 11]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 11]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 34, 11]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 12]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 2, 12]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 12]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 25, 12]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 13]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 3, 13]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 13]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 12, 13]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 14]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 4, 14]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 14]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 22, 14]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 15]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 5, 15]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 15]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 11, 15]
+|    |    |    STAT
+|    |    |    |    [ID, arr, 16]
+|    |    |    |    INDICE
+|    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    [INTEGER, 6, 16]
+|    |    |    |    ASSIGN OP
+|    |    |    |    |    [EQUAL, =, 16]
+|    |    |    |    |    EXPR
+|    |    |    |    |    |    ARITH EXPR
+|    |    |    |    |    |    |    NUM
+|    |    |    |    |    |    |    |    [INTEGER, 90, 16]
+]

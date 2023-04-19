@@ -1,7 +1,8 @@
 function main() => void
 {
 localvar arr: integer[6];
-localvar arr: id[8];
+localvar arrID: id[8];
+localvar arrFloat: float[2];
 localvar p    : float;
 localvar n    : integer;
 localvar k    : integer;
@@ -9,7 +10,7 @@ localvar i    : integer;
 localvar d    : integer;
 arr[0] = 6;
 k = 5;
-n = 9;
+n = 10;
 i  = k + n;
 d = k * n;
 write(k);

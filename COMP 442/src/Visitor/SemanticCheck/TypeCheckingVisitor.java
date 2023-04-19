@@ -4,6 +4,7 @@ import Lexer.*;
 import Visitor.SymbolTable.SymbolTableCreationVisitor;
 import Visitor.Visitor;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.Stack;
 
@@ -37,8 +38,8 @@ public class TypeCheckingVisitor extends Visitor{
             if (!this.m_outputfilename.isEmpty()) {
                 File file = new File(this.m_outputfilename);
                 try {
-                    PrintWriter out = new PrintWriter(file);
-                    out.write(this.m_errors);
+                    PrintWriter out = new PrintWriter((new FileOutputStream(file, true)));
+                    out.append(this.m_errors);
                     out.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -204,6 +205,11 @@ public class TypeCheckingVisitor extends Visitor{
 
             }
         }
+        if(p_node.declared == false && !((Token) p_node.getChildNodes().get(0).concept).getLexeme().equals("main") ){
+            this.m_errors += "[error 6.1] undeclared member function definition "
+                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
+                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
+        }
         if(multFreeFunc>1){
             this.m_errors += "[error 8.2] multiply declared free function : "
                     + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
@@ -211,11 +217,6 @@ public class TypeCheckingVisitor extends Visitor{
         }
         if(overloadFunc>0){
             this.m_errors += "[warning 9.1] Overloaded free function : "
-                    + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
-                    +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
-        }
-        if(p_node.declared == false){
-            this.m_errors += "[error 6.1] undeclared member function definition "
                     + ((Token) p_node.getChildNodes().get(0).concept).getLexeme()
                     +" , on line "+((Token) p_node.getChildNodes().get(0).concept).getPosition()+"\n";
         }

@@ -15,8 +15,8 @@
            % processing: k := t3
            lw r1,t3(r0)
            sw k(r0),r1
-           % processing: t4 := 9
-           addi r1,r0,9
+           % processing: t4 := 10
+           addi r1,r0,10
            sw t4(r0),r1
            % processing: n := t4
            lw r1,t4(r0)
@@ -91,7 +91,7 @@ t1         res 4
 t2         res 4
            % space for constant 5
 t3         res 4
-           % space for constant 9
+           % space for constant 10
 t4         res 4
            % space for k + n
 t5         res 4

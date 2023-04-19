@@ -157,8 +157,16 @@ public class Lexer {
                         prevCharPoint = "/*";
                         boolean endComment = false;
                         //initial comment line
+                        int countI =1;
+                        boolean eof = false;
                         int firstRowCom = countLinePos;
-                        while(endComment == false){
+                        while(endComment == false && countI != 0){
+                            if(nextCharPoint == -1){
+                                eof = true;
+                                printErrorToken(prevCharPoint, "unEndComment", countLinePos);
+                                prevCharPoint ="";
+                                break;
+                            }
 
                             nextCharPoint = Fin.read();
                             if((char)(nextCharPoint)== '\r'){
@@ -170,21 +178,43 @@ public class Lexer {
                                 prevCharPoint+="\\n";
                                 continue;
                             }
+                            if((char) nextCharPoint == '/') {
+                                nextCharPoint = Fin.read();
+                                if((char) nextCharPoint == '*') {
+                                    prevCharPoint += "/*";
+                                    countI++;
+                                    continue;
+                                }
+                                else{
+                                    prevCharPoint += "/";
+
+                                    continue;
+                                }
+                            }
 
                             if((char)nextCharPoint == '*'){
                                 prevCharPoint += '*';
                                 nextCharPoint = Fin.read();
 
+
                                 //end of comment
                                 if((char)nextCharPoint == '/'){
-                                    endComment = true;
+
+                                    countI--;
+                                    continue;
 
                                 }
                             }
+
+
                             //append characters in comment
                             prevCharPoint+=(char)nextCharPoint;
 
                         }
+                        if(eof){
+                            break;
+                        }
+
                         tokenSequence.add(new Token(prevCharPoint, TokenType.BLOCKCOMMENT, new Position(firstRowCom)));
 //                        System.out.println("Block comment " + prevCharPoint);
                         prevCharPoint = "";
@@ -415,7 +445,7 @@ public class Lexer {
             }
 
             //Fin.close();
-            pwErrors.close();
+
             tokenSequence.add(new Token("eof", TokenType.EOF, new Position(countLinePos)));
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -594,9 +624,12 @@ public class Lexer {
 
     }
 
-
+public void setTokenCount(int count){
+        this.tokenCount = count;
+}
     public Token getNextToken(){
         Token tok = null;
+
         if(tokenCount!= tokenSequence.size()){
             tok = tokenSequence.get(tokenCount);
             tokenCount++;
@@ -619,6 +652,10 @@ public class Lexer {
             this.pwErrors.write("Lexical error: Invalid identifier: \"" + invLexeme+"\": line " + lineNum+".\n");
             tokenSequence.add(new ErrorToken(invLexeme,TokenType.INVALIDID, new Position(lineNum)));
 
+        }
+        else if(type.equals("unEndComment")){
+            this.pwErrors.write("Lexical error: Invalid Unending Block Comment error, missing '*/' : \"" + invLexeme + "\": line " + lineNum + ".\n");
+            tokenSequence.add(new ErrorToken(invLexeme, TokenType.INVALIDCOMMENT, new Position(lineNum)));
         }
     }
     public TokenType IDorNum (String prevCharPoint){
